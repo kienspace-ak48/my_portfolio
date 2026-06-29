@@ -1,7 +1,7 @@
-import express from 'express';
-import path from 'node:path';
-import fs from 'node:fs';
-import { DIST_PATH } from './configs/myPath.config.js';
+const express = require('express');
+const path = require('path');
+const fs = require('fs');
+const { DIST_PATH } = require('./configs/myPath.config');
 
 const app = express();
 
@@ -31,4 +31,4 @@ app.use(async (req, res, next) => {
   }
 });
 
-export default app;
+module.exports = app;

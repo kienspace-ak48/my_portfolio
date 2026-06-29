@@ -1,9 +1,11 @@
-import http from "http";
-import dotenv from "dotenv";
+const http = require('http');
+const app = require('./src/app');
+const dotenv = require('dotenv');
+const {ENV_PATH} = require('./src/configs/myPath.config');
 dotenv.config({
-  path: ".env",
+  path: ENV_PATH
 });
-import app from "./src/app.js";
+
 const HTTP_PORT = process.env.HTTP_PORT || 3000;
 
 const httpServer = http.createServer(app);
