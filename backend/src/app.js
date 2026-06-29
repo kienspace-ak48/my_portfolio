@@ -1,30 +1,34 @@
-// const express = require('express');
 import express from 'express';
-const app = express();
-import path from 'path';
-
+import path from 'node:path';
+import fs from 'node:fs';
 import { DIST_PATH } from './configs/myPath.config.js';
 
+const app = express();
+
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 
-// Serve frontend
+// API routes (prefix /api để không đụng SPA)
+app.get('/api/health', (req, res) => {
+  res.json({ success: true, message: 'Hello World' });
+});
+
+// Static assets từ build Vite
 app.use(express.static(DIST_PATH));
-let cachedIndexHtml = null;
-let cachedIndexMtimeMs = 0;
 
-async function loadSpaIndexHtml(){
-    const indexPath = path.join(DIST_PATH, 'index.html');
-    const stat = await fs.promises.stat(indexPath);
-  if (!cachedIndexHtml || stat.mtimeMs !== cachedIndexMtimeMs) {
-    cachedIndexHtml = await fs.promises.readFile(indexPath, 'utf8');
-    cachedIndexMtimeMs = stat.mtimeMs;
+// SPA fallback — mọi route không phải file/API đều trả index.html
+app.use(async (req, res, next) => {
+  if (req.method !== 'GET' && req.method !== 'HEAD') {
+    return next();
   }
-  return cachedIndexHtml;
-}
 
-app.get('/', (req, res)=>{
-    res.json({success: true, mess: "Hello World"})
-})
+  try {
+    const indexPath = path.join(DIST_PATH, 'index.html');
+    const html = await fs.promises.readFile(indexPath, 'utf8');
+    res.type('html').send(html);
+  } catch {
+    res.status(404).send('Frontend chưa được build. Chạy: cd frontend && pnpm build');
+  }
+});
 
 export default app;
