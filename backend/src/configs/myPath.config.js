@@ -5,6 +5,7 @@ const DIST_PATH = path.resolve(ROOT_PATH, 'dist');
 const SRC_PATH = path.resolve(ROOT_PATH, 'src');
 const PUBLIC_PATH = path.resolve(ROOT_PATH, 'public');
 const ENV_PATH = path.resolve(ROOT_PATH, '.env');
+const PRISMA_CLIENT = path.resolve(SRC_PATH, 'generated/prisma/client');
 
 module.exports = {
   ROOT_PATH,
@@ -12,4 +13,5 @@ module.exports = {
   SRC_PATH,
   PUBLIC_PATH,
   ENV_PATH,
+  PRISMA_CLIENT
 };

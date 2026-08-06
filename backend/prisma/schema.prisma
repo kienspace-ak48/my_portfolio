@@ -1,0 +1,93 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+// enum 
+enum Role{
+  ADMIN
+  USER
+}
+// Define model
+
+model User {
+  id Int @id @default(autoincrement())
+  name String
+  email String @unique
+  password String
+  role Role @default(USER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  stories Story[]
+  refreshTokens RefreshToken[]
+}
+
+model RefreshToken {
+  id        String   @id @default(uuid())
+  token     String   @unique
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+}
+
+model Project{
+  id Int @id @default(autoincrement())
+  slug String @unique
+  title String
+  sumary String? 
+  desc String?
+  longDesc String?
+  thumbnail String?
+  isDisplay Boolean @default(true)
+  finishedAt DateTime?
+  demoUrl String?
+  repoUrl String?
+  featured Boolean @default(false)
+
+  viewCount Int @default(50)
+}
+
+
+model Story {
+  id        String   @id @default(uuid())
+  userId    Int
+  mediaUrl  String
+  thumbnailUrl String?  // 👈 thêm — ảnh tĩnh đại diện, dùng cho video
+  mediaType MediaType @default(IMAGE) // IMAGE | VIDEO
+  createdAt DateTime @default(now())
+  expiresAt DateTime // createdAt + 24h
+
+  user      User @relation(fields: [userId], references: [id])
+  views     StoryView[]
+
+  @@index([userId, expiresAt])
+}
+
+model StoryView {
+  id        String   @id @default(uuid())
+  storyId   String
+  viewerId  String
+  viewedAt  DateTime @default(now())
+
+  story     Story @relation(fields: [storyId], references: [id])
+
+  @@unique([storyId, viewerId]) // 1 người chỉ tính view 1 lần
+}
+
+enum MediaType {
+  IMAGE
+  VIDEO
+}

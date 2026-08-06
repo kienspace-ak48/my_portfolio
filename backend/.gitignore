@@ -9,3 +9,6 @@ node_modules
 
 /backups
 
+
+/src/generated/prisma
+/docs

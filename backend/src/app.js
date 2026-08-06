@@ -2,14 +2,18 @@ const express = require('express');
 const path = require('path');
 const fs = require('fs');
 const { DIST_PATH } = require('./configs/myPath.config');
+const registerRoute = require('./routes');
 
 const app = express();
 const cors = require('cors');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+// app.use(registerRoute);
 //cors
 app.use(cors())
+// register route
+registerRoute(app);
 // API routes (prefix /api để không đụng SPA)
 app.get('/api/health', (req, res) => {
   res.json({ success: true, message: 'Hello World' });
