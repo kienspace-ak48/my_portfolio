@@ -8,7 +8,7 @@
     "dev": "pnpm exec prisma generate && nodemon --inspect server.js",
     "start": "node server.js",
     "seed": "node migration/seed.js",
-    "build:frontend": "npm install --prefix ../frontend && npm run build --prefix ../frontend"
+    "build:frontend": "pnpm install --dir ../frontend && pnpm --dir ../frontend run build"
   },
   "keywords": [],
   "author": "",
