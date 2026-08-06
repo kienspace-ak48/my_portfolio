@@ -1,5 +1,5 @@
 import { Search } from "lucide-react";
-import { SEARCH_PLACEHOLDER } from "../../constants/navItems";
+import { SEARCH_PLACEHOLDER } from "../../constants/clientNav";
 
 type SearchInputProps = {
   autoFocus?: boolean;

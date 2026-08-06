@@ -1,4 +1,5 @@
-export type Project = {
+/** Mock data cho trang public — khác model API `Project` trong types/project.ts */
+export type MockProject = {
   id: string;
   title: string;
   description: string;
@@ -13,7 +14,7 @@ export type Project = {
   features: string[];
 };
 
-export const SAMPLE_PROJECTS: Project[] = [
+export const SAMPLE_PROJECTS: MockProject[] = [
   {
     id: "devmarket",
     title: "DevMarket Platform",
@@ -126,6 +127,6 @@ export const SAMPLE_PROJECTS: Project[] = [
   },
 ];
 
-export function getProjectById(id: string): Project | undefined {
+export function getProjectById(id: string): MockProject | undefined {
   return SAMPLE_PROJECTS.find((project) => project.id === id);
 }

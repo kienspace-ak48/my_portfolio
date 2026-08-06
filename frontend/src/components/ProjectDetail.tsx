@@ -5,20 +5,20 @@ import {
   Code2,
   ExternalLink,
 } from "lucide-react";
-import type { Project } from "../data/projects";
+import type { MockProject } from "../data/projects";
 
 type ProjectDetailProps = {
-  project: Project;
+  project: MockProject;
   onBack: () => void;
 };
 
-const STATUS_LABEL: Record<Project["status"], string> = {
+const STATUS_LABEL: Record<MockProject["status"], string> = {
   completed: "Hoàn thành",
   "in-progress": "Đang phát triển",
   archived: "Lưu trữ",
 };
 
-const STATUS_COLOR: Record<Project["status"], string> = {
+const STATUS_COLOR: Record<MockProject["status"], string> = {
   completed: "bg-emerald-50 text-emerald-700",
   "in-progress": "bg-amber-50 text-amber-700",
   archived: "bg-slate-100 text-slate-600",

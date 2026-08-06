@@ -1,9 +1,7 @@
-import React from 'react'
+import NewsSection from "../components/NewsSection";
 
 function Home() {
-  return (
-    <div>Home</div>
-  )
+  return <NewsSection />;
 }
 
-export default Home
+export default Home;

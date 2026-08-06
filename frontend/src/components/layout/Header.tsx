@@ -1,5 +1,4 @@
 import { Search } from "lucide-react";
-import BrandIcon from "./BrandIcon";
 import SearchInput from "./SearchInput";
 
 type HeaderProps = {

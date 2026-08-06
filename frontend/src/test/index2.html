@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quỳnh Phạm Nails · Makeup · Gội đầu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,450;0,9..144,600;1,9..144,400;1,9..144,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FBF2E8;
+    --cream-deep:#F3E4D3;
+    --paper:#FFFCF8;
+    --rose:#7C3244;
+    --rose-soft:#A85064;
+    --blush:#EFC7C9;
+    --gold:#C5983F;
+    --gold-soft:#E4C888;
+    --ink:#2A211C;
+    --ink-soft:#5B4E45;
+    --sage:#8A9A73;
+    --max:1180px;
+    --ease: cubic-bezier(.22,.68,0,1);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Manrope',sans-serif;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--rose);color:var(--cream);}
+
+  h1,h2,h3,.display{
+    font-family:'Fraunces',serif;
+    font-weight:450;
+    letter-spacing:-0.01em;
+    line-height:1.02;
+    color:var(--ink);
+  }
+  .eyebrow{
+    font-family:'Manrope',sans-serif;
+    font-weight:700;
+    font-size:12px;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--rose);
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  section{position:relative;}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 32px;}
+
+  :focus-visible{outline:2px solid var(--rose);outline-offset:3px;}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    padding:22px 0;
+    transition:transform .5s var(--ease), background .4s ease, padding .4s ease;
+  }
+  header.scrolled{
+    background:rgba(251,242,232,.86);
+    backdrop-filter:blur(14px);
+    padding:14px 0;
+    box-shadow:0 1px 0 rgba(42,33,28,.08);
+  }
+  header.hide{transform:translateY(-110%);}
+  .nav-inner{
+    max-width:var(--max);margin:0 auto;padding:0 32px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .logo{
+    font-family:'Fraunces',serif;font-style:italic;font-weight:500;
+    font-size:20px;letter-spacing:.01em;
+  }
+  .logo span{color:var(--rose);font-style:normal;font-family:'Manrope',sans-serif;font-weight:800;font-size:10px;letter-spacing:.25em;display:block;margin-top:2px;}
+  nav ul{list-style:none;display:flex;gap:38px;}
+  nav a{
+    font-size:13px;font-weight:600;letter-spacing:.03em;
+    position:relative;padding-bottom:4px;
+  }
+  nav a::after{
+    content:'';position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--rose);
+    transition:width .35s var(--ease);
+  }
+  nav a:hover::after{width:100%;}
+  .nav-cta{
+    border:1px solid var(--ink);border-radius:100px;
+    padding:10px 22px;font-size:12.5px;font-weight:700;letter-spacing:.03em;
+    transition:all .35s var(--ease);
+  }
+  .nav-cta:hover{background:var(--ink);color:var(--cream);}
+  .nav-toggle{display:none;}
+
+  /* ---------- HERO (scroll-pinned cinematic scene) ---------- */
+  .hero-pin-wrap{
+    position:relative;
+    height:320vh; /* scroll distance that drives the animation */
+  }
+  .hero-pin{
+    position:sticky;top:0;height:100svh;
+    display:flex;align-items:center;
+    overflow:hidden;
+    background:radial-gradient(120% 90% at 75% 20%, #fdf7ef 0%, var(--cream) 55%);
+  }
+  .hero-bg-word{
+    position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);
+    font-family:'Fraunces',serif;font-weight:600;font-style:italic;
+    font-size:clamp(60px,11vw,168px);
+    color:transparent;
+    -webkit-text-stroke:1px rgba(124,50,68,.14);
+    white-space:nowrap;letter-spacing:-0.01em;
+    pointer-events:none;user-select:none;
+    text-align:center;
+  }
+  .hero-grid{
+    position:relative;z-index:2;
+    display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;
+    padding-top:64px;
+  }
+  .hero-eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:26px;}
+  .hero-eyebrow .line{width:38px;height:1px;background:var(--rose);}
+  .hero h1, .hero-text h1{
+    font-size:clamp(44px,6vw,80px);
+    margin-bottom:26px;
+  }
+  .hero-text h1 em{font-style:italic;color:var(--rose);font-weight:400;}
+  .hero-text p.lede{
+    font-size:17px;line-height:1.7;color:var(--ink-soft);
+    max-width:440px;margin-bottom:38px;
+  }
+  .hero-actions{display:flex;align-items:center;gap:26px;flex-wrap:wrap;}
+  .btn-primary{
+    background:var(--rose);color:var(--paper);
+    padding:16px 32px;border-radius:100px;
+    font-size:13.5px;font-weight:700;letter-spacing:.03em;
+    display:inline-flex;align-items:center;gap:10px;
+    transition:transform .4s var(--ease), box-shadow .4s var(--ease), background .4s ease;
+    box-shadow:0 14px 30px -12px rgba(124,50,68,.55);
+  }
+  .btn-primary:hover{transform:translateY(-3px);background:var(--ink);}
+  .btn-ghost{
+    font-size:13px;font-weight:700;letter-spacing:.03em;
+    display:inline-flex;align-items:center;gap:8px;
+    border-bottom:1px solid var(--ink);padding-bottom:3px;
+  }
+  .hero-stats{
+    display:flex;gap:34px;margin-top:56px;padding-top:32px;
+    border-top:1px solid rgba(42,33,28,.12);
+    max-width:460px;
+  }
+  .hero-stats div b{
+    display:block;font-family:'Fraunces',serif;font-size:26px;font-weight:500;color:var(--rose);
+  }
+  .hero-stats div span{font-size:11.5px;color:var(--ink-soft);letter-spacing:.02em;}
+  .scroll-hint{
+    display:flex;align-items:center;gap:10px;margin-top:46px;
+    font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);
+  }
+  .scroll-hint span{
+    width:1px;height:26px;background:var(--rose);position:relative;overflow:hidden;
+  }
+  .scroll-hint span::after{
+    content:'';position:absolute;left:0;top:-100%;width:100%;height:100%;background:var(--gold);
+    animation:hintDrop 1.8s ease-in-out infinite;
+  }
+  @keyframes hintDrop{ 50%{top:0;} 100%{top:100%;} }
+
+  /* --- 3D scene --- */
+  .scene{
+    position:relative;height:560px;
+    transform-style:preserve-3d;perspective:1400px;
+  }
+  .ring{
+    position:absolute;left:50%;top:50%;
+    width:420px;height:420px;margin:-210px 0 0 -210px;
+    border-radius:50%;
+    border:1px solid rgba(197,152,63,.4);
+  }
+  .ring.r2{width:330px;height:330px;margin:-165px 0 0 -165px;border-color:rgba(124,50,68,.25);}
+
+  .scene-spin{
+    position:absolute;left:50%;top:52%;width:190px;
+    transform-style:preserve-3d;will-change:transform;
+    transform:translate(-50%,-50%);
+  }
+  .bottle-cap{
+    width:58px;height:38px;margin:0 auto;border-radius:6px 6px 3px 3px;
+    background:linear-gradient(120deg,#8a6a2c,var(--gold) 45%,#e9d19a 70%,var(--gold));
+    box-shadow:inset -6px 0 10px rgba(0,0,0,.18);
+  }
+  .bottle-neck{width:20px;height:16px;margin:0 auto;background:linear-gradient(90deg,#5c2534,var(--rose) 60%,#a85064);}
+  .bottle-body{
+    width:150px;height:210px;margin:0 auto;border-radius:14px 14px 20px 20px;
+    background:
+      linear-gradient(120deg, rgba(255,255,255,.55), rgba(255,255,255,0) 30%),
+      linear-gradient(100deg,#5c2534 0%, var(--rose) 35%, var(--rose-soft) 55%, #8a3a4d 75%, #5c2534 100%);
+    box-shadow:0 40px 60px -20px rgba(124,50,68,.55), inset -14px 0 24px rgba(0,0,0,.16), inset 10px 0 18px rgba(255,255,255,.12);
+    position:relative;
+  }
+  .bottle-body::after{
+    content:'';position:absolute;left:14px;top:14px;width:24px;bottom:20px;
+    background:linear-gradient(180deg,rgba(255,255,255,.5),rgba(255,255,255,0));
+    border-radius:20px;filter:blur(1px);
+    will-change:transform;
+  }
+  .bottle-shadow{
+    position:absolute;left:50%;bottom:-38px;width:170px;height:26px;margin-left:-85px;
+    background:radial-gradient(ellipse, rgba(42,33,28,.32), transparent 70%);
+    filter:blur(2px);
+  }
+  .bottle-label{
+    position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-1deg);
+    color:var(--cream);text-align:center;
+  }
+  .bottle-label .lb1{font-family:'Fraunces',serif;font-style:italic;font-size:17px;display:block;}
+  .bottle-label .lb2{font-size:8.5px;letter-spacing:.22em;text-transform:uppercase;opacity:.85;}
+
+  /* drifting decorative elements: JS moves these via translateX/Y + rotate as scroll progresses */
+  .drift{position:absolute;will-change:transform;}
+  .petal{
+    border-radius:50% 50% 50% 4%;
+    background:radial-gradient(circle at 32% 30%, #fff, var(--blush) 55%, var(--rose-soft) 100%);
+    box-shadow:0 12px 20px -8px rgba(124,50,68,.35);
+  }
+  .petal.gold{background:radial-gradient(circle at 32% 30%,#fff,var(--gold-soft) 55%,var(--gold) 100%);}
+  .leaf-spr{width:64px;height:64px;position:relative;}
+  .leaf-spr::before,.leaf-spr::after{
+    content:'';position:absolute;width:16px;height:30px;background:var(--sage);
+    border-radius:0 100% 0 100%;opacity:.9;
+  }
+  .leaf-spr::before{left:10px;top:0;transform:rotate(-20deg);}
+  .leaf-spr::after{left:26px;top:14px;transform:rotate(24deg);}
+  .sparkle{font-size:28px;color:var(--gold);opacity:.8;}
+
+  .float-chip.drift{
+    background:var(--paper);
+    border-radius:16px;padding:14px 18px;
+    box-shadow:0 20px 40px -18px rgba(42,33,28,.35);
+    display:flex;align-items:center;gap:10px;
+    font-size:12px;font-weight:700;
+  }
+  .drift.chip{
+    background:var(--paper);
+    border-radius:16px;padding:14px 18px;
+    box-shadow:0 20px 40px -18px rgba(42,33,28,.35);
+    display:flex;align-items:center;gap:10px;
+    font-size:12px;font-weight:700;
+  }
+  .drift.chip .dot{width:8px;height:8px;border-radius:50%;background:var(--sage);}
+
+  /* ---------- SECTION HEADS ---------- */
+  .sec-head{max-width:640px;margin:0 auto 64px;text-align:center;}
+  .sec-head .eyebrow{justify-content:center;display:flex;align-items:center;gap:12px;margin-bottom:18px;}
+  .sec-head .eyebrow .line{width:30px;height:1px;background:var(--rose);}
+  .sec-head h2{font-size:clamp(32px,4.4vw,50px);}
+  .sec-head p{margin-top:18px;color:var(--ink-soft);font-size:16px;line-height:1.7;}
+
+  .reveal{opacity:0;transform:perspective(1000px) translateY(46px) rotateX(-10deg);transform-origin:bottom center;transition:opacity .9s var(--ease), transform .9s var(--ease);}
+  .reveal.in{opacity:1;transform:perspective(1000px) translateY(0) rotateX(0deg);}
+  .reveal.d1{transition-delay:.08s;}
+  .reveal.d2{transition-delay:.16s;}
+  .reveal.d3{transition-delay:.24s;}
+
+  /* ---------- SCROLL RIBBON DIVIDER ---------- */
+  .divider{height:150px;position:relative;overflow:hidden;}
+  .divider svg{position:absolute;left:0;top:0;width:100%;height:100%;}
+
+  /* ---------- ABOUT ---------- */
+  .about{padding:130px 0;background:var(--paper);}
+  .about-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:70px;align-items:center;}
+  .about-visual{
+    position:relative;height:460px;border-radius:26px;overflow:hidden;
+    background:
+      radial-gradient(120% 90% at 20% 15%, #fff6ee 0%, transparent 55%),
+      linear-gradient(155deg, var(--blush) 0%, var(--cream-deep) 45%, var(--rose-soft) 100%);
+    transform-style:preserve-3d;
+  }
+  .about-visual .grain{position:absolute;inset:0;background:
+      repeating-linear-gradient(115deg, rgba(255,255,255,.12) 0 2px, transparent 2px 6px);
+      mix-blend-mode:overlay;}
+  .about-visual .frame-plant{
+    position:absolute;right:10%;top:10%;width:120px;height:120px;
+  }
+  .about-visual .stem{position:absolute;width:2px;background:var(--sage);border-radius:2px;}
+  .about-visual .leaf{position:absolute;width:20px;height:12px;background:var(--sage);border-radius:0 100% 0 100%;opacity:.85;}
+  .about-visual .quote{
+    position:absolute;left:34px;bottom:34px;right:34px;
+    color:var(--paper);
+  }
+  .about-visual .quote .display{font-size:23px;font-style:italic;line-height:1.35;}
+  .about-copy .eyebrow{margin-bottom:20px;}
+  .about-copy h2{font-size:clamp(30px,3.8vw,44px);margin-bottom:22px;}
+  .about-copy p{color:var(--ink-soft);font-size:16px;line-height:1.85;margin-bottom:18px;max-width:520px;}
+  .about-list{margin-top:30px;display:flex;flex-direction:column;gap:16px;}
+  .about-list li{list-style:none;display:flex;gap:14px;align-items:flex-start;font-size:14.5px;color:var(--ink-soft);}
+  .about-list b{color:var(--ink);}
+  .about-list .num{
+    font-family:'Fraunces',serif;font-style:italic;color:var(--rose);font-size:17px;flex:none;width:26px;
+  }
+
+  /* ---------- SERVICES ---------- */
+  .services{padding:120px 0 100px;}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;perspective:1600px;}
+  .card{
+    background:var(--paper);border-radius:22px;padding:38px 30px 34px;
+    transform-style:preserve-3d;
+    transition:transform .5s var(--ease), box-shadow .5s var(--ease);
+    box-shadow:0 18px 40px -26px rgba(42,33,28,.35);
+    border:1px solid rgba(42,33,28,.06);
+  }
+  .card:hover{box-shadow:0 34px 60px -24px rgba(124,50,68,.4);}
+  .card .icon{
+    width:56px;height:56px;border-radius:16px;margin-bottom:26px;
+    display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(135deg,var(--blush),var(--gold-soft));
+  }
+  .card h3{font-size:23px;margin-bottom:12px;}
+  .card p{color:var(--ink-soft);font-size:14.5px;line-height:1.7;margin-bottom:20px;}
+  .card ul{list-style:none;display:flex;flex-direction:column;gap:9px;}
+  .card li{font-size:13px;color:var(--ink-soft);display:flex;gap:9px;align-items:center;}
+  .card li::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--rose);flex:none;}
+  .card .price{
+    margin-top:22px;padding-top:18px;border-top:1px dashed rgba(42,33,28,.16);
+    display:flex;justify-content:space-between;align-items:baseline;
+  }
+  .card .price b{font-family:'Fraunces',serif;font-size:20px;color:var(--rose);}
+  .card .price span{font-size:11px;color:var(--ink-soft);letter-spacing:.03em;}
+
+  /* ---------- SPACE / GALLERY ---------- */
+  .space-sec{padding:110px 0 130px;background:var(--ink);color:var(--cream);}
+  .space-sec .eyebrow{color:var(--gold-soft);}
+  .space-sec .sec-head h2{color:var(--cream);}
+  .space-sec .sec-head p{color:rgba(251,242,232,.68);}
+  .gallery{
+    display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:110px;gap:14px;
+  }
+  .g-item{
+    border-radius:18px;position:relative;overflow:hidden;
+    transform-style:preserve-3d; transition:transform .6s var(--ease);
+  }
+  .g-item:hover{transform:translateY(-6px);}
+  .g-item span{
+    position:absolute;left:16px;bottom:14px;font-size:11px;font-weight:700;
+    letter-spacing:.05em;color:rgba(255,255,255,.92);
+    text-transform:uppercase;
+  }
+  .g1{grid-column:span 3;grid-row:span 3;background:linear-gradient(150deg,var(--rose) 0%, #4a1c28 100%);}
+  .g2{grid-column:span 3;grid-row:span 2;background:linear-gradient(150deg,var(--gold) 0%, #7a5c26 100%);}
+  .g3{grid-column:span 3;grid-row:span 2;background:linear-gradient(150deg,var(--sage) 0%, #4c5a3c 100%);}
+  .g4{grid-column:span 2;grid-row:span 2;background:linear-gradient(150deg,var(--blush) 0%, #a85064 100%);}
+  .g5{grid-column:span 2;grid-row:span 2;background:linear-gradient(150deg,#5c2534 0%, var(--rose-soft) 100%);}
+  .g6{grid-column:span 2;grid-row:span 2;background:linear-gradient(150deg,#7a5c26 0%, var(--gold-soft) 100%);}
+
+  /* ---------- OPENING OFFER ---------- */
+  .offer{padding:130px 0;position:relative;overflow:hidden;}
+  .offer-panel{
+    background:linear-gradient(135deg,var(--rose) 0%, #58212e 100%);
+    border-radius:32px;padding:80px 60px;color:var(--cream);
+    position:relative;overflow:hidden;
+    transform-style:preserve-3d;
+  }
+  .offer-panel::before{
+    content:'';position:absolute;right:-120px;top:-120px;width:340px;height:340px;border-radius:50%;
+    background:radial-gradient(circle,rgba(255,255,255,.14),transparent 70%);
+  }
+  .offer-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:50px;align-items:center;position:relative;}
+  .offer h2{color:var(--cream);font-size:clamp(30px,4vw,46px);margin-bottom:18px;}
+  .offer p{color:rgba(251,242,232,.78);font-size:16px;line-height:1.75;max-width:460px;margin-bottom:10px;}
+  .offer-badge{
+    display:inline-flex;align-items:center;gap:10px;
+    background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.28);
+    padding:9px 18px;border-radius:100px;font-size:12px;font-weight:700;letter-spacing:.04em;margin-bottom:24px;
+  }
+  .offer-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--gold-soft);}
+  .offer-cta{margin-top:26px;display:flex;gap:18px;flex-wrap:wrap;}
+  .offer .btn-primary{background:var(--cream);color:var(--rose);box-shadow:none;}
+  .offer .btn-primary:hover{background:var(--gold-soft);color:var(--ink);}
+  .offer-note{color:rgba(251,242,232,.55);font-size:12px;margin-top:14px;}
+
+  .offer-visual{position:relative;height:280px;}
+  .offer-ticket{
+    position:absolute;inset:0;background:var(--paper);color:var(--ink);
+    border-radius:22px;padding:34px;
+    display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
+    box-shadow:0 40px 70px -20px rgba(0,0,0,.5);
+  }
+  .offer-ticket .big{font-family:'Fraunces',serif;font-style:italic;font-size:64px;color:var(--rose);line-height:1;}
+  .offer-ticket .cap{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);margin-top:10px;}
+  .offer-ticket .cut{position:absolute;width:26px;height:26px;background:var(--rose);border-radius:50%;}
+  .offer-ticket .cut.top{top:-13px;left:50%;margin-left:-13px;background:var(--rose);}
+  .offer-ticket .cut.bot{bottom:-13px;left:50%;margin-left:-13px;background:var(--rose);}
+
+  /* ---------- BOOKING ---------- */
+  .booking{padding:130px 0;}
+  .booking-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;}
+  .booking-copy h2{font-size:clamp(30px,3.8vw,44px);margin-bottom:20px;}
+  .booking-copy p{color:var(--ink-soft);font-size:16px;line-height:1.8;max-width:440px;margin-bottom:34px;}
+  .contact-line{display:flex;align-items:center;gap:16px;padding:18px 0;border-top:1px solid rgba(42,33,28,.12);}
+  .contact-line:last-child{border-bottom:1px solid rgba(42,33,28,.12);}
+  .contact-line .ico{
+    width:38px;height:38px;border-radius:50%;background:var(--blush);
+    display:flex;align-items:center;justify-content:center;flex:none;font-size:15px;
+  }
+  .contact-line b{display:block;font-size:14px;}
+  .contact-line span{font-size:13px;color:var(--ink-soft);}
+
+  form.book{
+    background:var(--paper);border-radius:24px;padding:42px;
+    box-shadow:0 30px 60px -30px rgba(42,33,28,.4);
+  }
+  form.book .row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
+  form.book label{display:block;font-size:11.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:8px;}
+  form.book input, form.book select, form.book textarea{
+    width:100%;border:1px solid rgba(42,33,28,.18);background:var(--cream);
+    border-radius:12px;padding:13px 14px;font-family:'Manrope',sans-serif;font-size:14px;color:var(--ink);
+  }
+  form.book input:focus, form.book select:focus, form.book textarea:focus{border-color:var(--rose);outline:none;}
+  form.book .field{margin-bottom:16px;}
+  form.book button{
+    width:100%;margin-top:8px;background:var(--rose);color:var(--paper);
+    padding:16px;border:none;border-radius:12px;font-family:'Manrope',sans-serif;
+    font-size:14px;font-weight:700;letter-spacing:.02em;cursor:pointer;
+    transition:background .3s ease, transform .3s ease;
+  }
+  form.book button:hover{background:var(--ink);transform:translateY(-2px);}
+  .form-note{font-size:11.5px;color:var(--ink-soft);margin-top:14px;text-align:center;}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--ink);color:rgba(251,242,232,.7);padding:70px 0 30px;}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;margin-bottom:60px;}
+  .foot-logo{font-family:'Fraunces',serif;font-style:italic;font-size:24px;color:var(--cream);margin-bottom:14px;}
+  .foot-grid p{font-size:13.5px;line-height:1.8;max-width:280px;}
+  .foot-col h4{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-soft);margin-bottom:18px;}
+  .foot-col ul{list-style:none;display:flex;flex-direction:column;gap:11px;}
+  .foot-col a{font-size:13.5px;transition:color .3s ease;}
+  .foot-col a:hover{color:var(--cream);}
+  .foot-bottom{
+    border-top:1px solid rgba(251,242,232,.14);padding-top:26px;
+    display:flex;justify-content:space-between;font-size:12px;flex-wrap:wrap;gap:10px;
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media(max-width:980px){
+    nav{display:none;}
+    .nav-cta{display:none;}
+    .hero-pin-wrap{height:260vh;}
+    .hero-grid{grid-template-columns:1fr;padding-top:20px;}
+    .hero-text{order:1;}
+    .scene{height:360px;order:0;}
+    .scroll-hint{display:none;}
+    .about-grid, .booking-grid, .offer-grid{grid-template-columns:1fr;}
+    .about-visual{height:340px;}
+    .cards{grid-template-columns:1fr;}
+    .gallery{grid-template-columns:repeat(2,1fr);}
+    .g1,.g2,.g3,.g4,.g5,.g6{grid-column:span 1;grid-row:span 2;}
+    .foot-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media(max-width:560px){
+    .wrap, .hero-grid, .nav-inner{padding-left:20px;padding-right:20px;}
+    .hero-pin-wrap{height:230vh;}
+    .offer-panel{padding:50px 28px;}
+    form.book{padding:28px;}
+    form.book .row{grid-template-columns:1fr;}
+    .foot-grid{grid-template-columns:1fr;}
+    .hero-stats{gap:22px;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+  }
+
+  .tilt-scroll{transform-style:preserve-3d;will-change:transform;}
+  .about, .space-sec, .offer{perspective:1600px;}
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <div class="nav-inner">
+    <a href="#top" class="logo">Quỳnh Phạm<span>NAILS · MAKEUP · GỘI ĐẦU</span></a>
+    <nav>
+      <ul>
+        <li><a href="#about">Giới thiệu</a></li>
+        <li><a href="#services">Dịch vụ</a></li>
+        <li><a href="#space">Không gian</a></li>
+        <li><a href="#offer">Ưu đãi</a></li>
+      </ul>
+    </nav>
+    <a href="#booking" class="nav-cta">Đặt lịch</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero-pin-wrap" id="heroPinWrap">
+    <div class="hero-pin">
+      <div class="hero-bg-word" aria-hidden="true">QUỲNH&nbsp;PHẠM&nbsp;·&nbsp;QUỲNH&nbsp;PHẠM</div>
+
+      <div class="wrap hero-grid">
+        <div class="hero-text">
+          <div class="hero-eyebrow"><span class="line"></span><span class="eyebrow">Tưng bừng khai trương</span></div>
+          <h1>Chạm vào<br><em>vẻ đẹp</em><br>trọn vẹn của bạn</h1>
+          <p class="lede">Sau nhiều ngày chuẩn bị, Quỳnh Phạm Nails – Makeup – Gội đầu chính thức mở cửa, sẵn sàng chào đón những vị khách đầu tiên đến với không gian làm đẹp riêng của phái đẹp.</p>
+          <div class="hero-actions">
+            <a href="#booking" class="btn-primary">Đặt lịch ngay ✦</a>
+            <a href="#services" class="btn-ghost">Xem bảng dịch vụ →</a>
+          </div>
+          <div class="hero-stats">
+            <div><b>03</b><span>Dịch vụ cốt lõi</span></div>
+            <div><b>100%</b><span>Sản phẩm tuyển chọn</span></div>
+            <div><b>1:1</b><span>Chăm sóc riêng biệt</span></div>
+          </div>
+          <div class="scroll-hint"><span></span>Cuộn xuống</div>
+        </div>
+
+        <div class="scene" id="scene">
+          <div class="ring"></div>
+          <div class="ring r2"></div>
+
+          <!-- product: rotates left/right driven purely by scroll progress -->
+          <div class="scene-spin" id="spinBottle">
+            <div class="bottle-cap"></div>
+            <div class="bottle-neck"></div>
+            <div class="bottle-body">
+              <div class="bottle-label">
+                <span class="lb1">Quỳnh Phạm</span>
+                <span class="lb2">Est. 2026</span>
+              </div>
+            </div>
+            <div class="bottle-shadow"></div>
+          </div>
+
+          <!-- drifting elements: each crosses the scene at its own speed/direction as you scroll -->
+          <div class="drift" data-x="-260" data-rot="-140" data-y="-40" style="left:6%;top:10%;">
+            <div class="petal lg" style="width:74px;height:62px;"></div>
+          </div>
+          <div class="drift" data-x="220" data-rot="180" data-y="30" style="right:2%;top:16%;">
+            <div class="petal gold" style="width:46px;height:40px;"></div>
+          </div>
+          <div class="drift" data-x="-180" data-rot="220" data-y="60" style="left:-4%;bottom:14%;">
+            <div class="leaf-spr"></div>
+          </div>
+          <div class="drift" data-x="240" data-rot="-160" data-y="-30" style="right:-2%;bottom:8%;">
+            <div class="petal sm" style="width:34px;height:30px;"></div>
+          </div>
+          <div class="drift chip" data-x="-140" data-rot="0" data-y="20" style="left:-8%;top:42%;">
+            <span class="dot"></span> Nail Art thủ công
+          </div>
+          <div class="drift chip" data-x="160" data-rot="0" data-y="-20" style="right:-10%;bottom:30%;">
+            <span class="dot"></span> Gội đầu dưỡng sinh
+          </div>
+          <div class="drift" data-x="120" data-rot="300" data-y="-70" style="left:46%;top:4%;">
+            <div class="sparkle">✦</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider">
+    <svg viewBox="0 0 1200 150" preserveAspectRatio="none">
+      <path d="M0,90 C 200,20 400,150 600,80 C 800,10 1000,140 1200,60 L1200,150 L0,150 Z" fill="#FFFCF8"/>
+    </svg>
+  </div>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="wrap about-grid">
+      <div class="about-visual reveal tilt-scroll">
+        <div class="grain"></div>
+        <div class="frame-plant" aria-hidden="true">
+          <div class="stem" style="left:20px;top:10px;height:70px;"></div>
+          <div class="leaf" style="left:8px;top:14px;transform:rotate(-30deg);"></div>
+          <div class="leaf" style="left:24px;top:6px;transform:rotate(20deg);"></div>
+          <div class="stem" style="left:60px;top:0;height:90px;"></div>
+          <div class="leaf" style="left:50px;top:10px;transform:rotate(-24deg);"></div>
+        </div>
+        <div class="quote">
+          <span class="display">"Không gian nhỏ, chăm chút lớn — nơi mỗi khách đến đều được lắng nghe."</span>
+        </div>
+      </div>
+      <div class="about-copy">
+        <span class="eyebrow">Về Quỳnh Phạm</span>
+        <h2 class="reveal">Một tiệm làm đẹp được dựng nên từ sự chỉn chu, từng góc nhỏ một</h2>
+        <p class="reveal d1">Quỳnh Phạm ra đời sau nhiều tháng chuẩn bị kỹ lưỡng — từ việc lựa chọn từng lọ sơn, từng dòng mỹ phẩm, đến cách bài trí không gian sao cho mỗi khách bước vào đều cảm thấy thư thái như ở nhà.</p>
+        <p class="reveal d1">Chúng tôi tin làm đẹp không chỉ là một dịch vụ, mà là khoảnh khắc bạn dành riêng cho chính mình.</p>
+        <ul class="about-list">
+          <li class="reveal d2"><span class="num">01</span><span><b>Sản phẩm tuyển chọn</b><br>Ưu tiên chất lượng, an toàn cho da và móng tay.</span></li>
+          <li class="reveal d2"><span class="num">02</span><span><b>Không gian riêng tư</b><br>Bố trí ấm cúng, phù hợp để thư giãn trọn buổi.</span></li>
+          <li class="reveal d3"><span class="num">03</span><span><b>Đội ngũ tận tâm</b><br>Lắng nghe nhu cầu, tư vấn đúng với từng khách hàng.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow"><span class="line"></span>Dịch vụ<span class="line"></span></div>
+        <h2 class="reveal">Ba trải nghiệm cốt lõi</h2>
+        <p class="reveal d1">Từ đôi tay, gương mặt đến mái tóc — mỗi dịch vụ được thực hiện riêng biệt, không vội vàng.</p>
+      </div>
+
+      <div class="cards">
+        <div class="card reveal tilt">
+          <div class="icon">💅</div>
+          <h3>Nails</h3>
+          <p>Chăm sóc và tạo hình móng theo phong cách riêng của bạn, từ tối giản đến chi tiết thủ công.</p>
+          <ul>
+            <li>Dưỡng da & cắt tỉa móng</li>
+            <li>Sơn gel, nail art thủ công</li>
+            <li>Đắp móng theo yêu cầu</li>
+          </ul>
+          <div class="price"><b>Từ 150.000₫</b><span>/ lượt</span></div>
+        </div>
+
+        <div class="card reveal d1 tilt">
+          <div class="icon">💄</div>
+          <h3>Makeup</h3>
+          <p>Trang điểm tự nhiên hoặc dự tiệc, tôn nét riêng thay vì phủ lấp gương mặt bạn.</p>
+          <ul>
+            <li>Trang điểm đi làm, dạo phố</li>
+            <li>Trang điểm dự tiệc, chụp ảnh</li>
+            <li>Tư vấn phong cách riêng</li>
+          </ul>
+          <div class="price"><b>Từ 250.000₫</b><span>/ lượt</span></div>
+        </div>
+
+        <div class="card reveal d2 tilt">
+          <div class="icon">🌿</div>
+          <h3>Gội đầu</h3>
+          <p>Gội dưỡng sinh kết hợp massage đầu – vai – gáy, dành cho những phút thật sự nghỉ ngơi.</p>
+          <ul>
+            <li>Gội dưỡng sinh thảo dược</li>
+            <li>Massage đầu – vai – gáy</li>
+            <li>Ủ tóc phục hồi hư tổn</li>
+          </ul>
+          <div class="price"><b>Từ 100.000₫</b><span>/ lượt</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPACE -->
+  <section class="space-sec" id="space">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow"><span class="line"></span>Không gian<span class="line"></span></div>
+        <h2 class="reveal">Từng góc nhỏ, đều được chăm chút</h2>
+        <p class="reveal d1">Ghế thư giãn êm ái, kệ mỹ phẩm gọn gàng, hoa tươi ngày khai trương — một không gian được dựng nên bằng sự tỉ mỉ.</p>
+      </div>
+      <div class="gallery">
+        <div class="g-item g1 reveal tilt-scroll"><span>Góc hoa khai trương</span></div>
+        <div class="g-item g2 reveal d1 tilt-scroll"><span>Kệ mỹ phẩm & dụng cụ</span></div>
+        <div class="g-item g3 reveal d2 tilt-scroll"><span>Góc gội đầu dưỡng sinh</span></div>
+        <div class="g-item g4 reveal tilt-scroll"><span>Ghế thư giãn</span></div>
+        <div class="g-item g5 reveal d1 tilt-scroll"><span>Bàn trang điểm</span></div>
+        <div class="g-item g6 reveal d2 tilt-scroll"><span>Góc cây xanh</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OFFER -->
+  <section class="offer" id="offer">
+    <div class="wrap">
+      <div class="offer-panel reveal tilt-scroll">
+        <div class="offer-grid">
+          <div>
+            <div class="offer-badge"><span class="dot"></span> Ưu đãi ngày khai trương</div>
+            <h2>Chào đón vị khách đầu tiên của Quỳnh Phạm</h2>
+            <p>Đặt lịch trong tuần khai trương để nhận ưu đãi đặc biệt dành riêng cho những khách hàng đầu tiên — số lượng ưu đãi có giới hạn.</p>
+            <div class="offer-cta">
+              <a href="#booking" class="btn-primary">Nhận ưu đãi ngay ✦</a>
+            </div>
+            <p class="offer-note">* Áp dụng theo chương trình khai trương hiện hành, liên hệ trực tiếp để biết chi tiết ưu đãi.</p>
+          </div>
+          <div class="offer-visual">
+            <div class="offer-ticket">
+              <span class="cut top"></span>
+              <span class="big">Mới</span>
+              <span class="cap">Khách hàng khai trương</span>
+              <span class="cut bot"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKING -->
+  <section class="booking" id="booking">
+    <div class="wrap booking-grid">
+      <div class="booking-copy">
+        <span class="eyebrow">Đặt lịch</span>
+        <h2 class="reveal">Giữ chỗ cho buổi làm đẹp của bạn</h2>
+        <p class="reveal d1">Để lại thông tin, đội ngũ Quỳnh Phạm sẽ liên hệ xác nhận lịch hẹn trong thời gian sớm nhất.</p>
+
+        <div class="contact-line reveal d1">
+          <div class="ico">📍</div>
+          <div><b>Địa chỉ</b><span>Điền địa chỉ salon của bạn tại đây</span></div>
+        </div>
+        <div class="contact-line reveal d2">
+          <div class="ico">📞</div>
+          <div><b>Hotline / Zalo</b><span>Điền số điện thoại liên hệ</span></div>
+        </div>
+        <div class="contact-line reveal d3">
+          <div class="ico">🕐</div>
+          <div><b>Giờ mở cửa</b><span>Điền khung giờ hoạt động</span></div>
+        </div>
+      </div>
+
+      <form class="book reveal d1" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Đã gửi — cảm ơn bạn ✓';">
+        <div class="row">
+          <div class="field">
+            <label for="name">Họ tên</label>
+            <input id="name" type="text" placeholder="Nguyễn Thị A" required>
+          </div>
+          <div class="field">
+            <label for="phone">Số điện thoại</label>
+            <input id="phone" type="tel" placeholder="09xx xxx xxx" required>
+          </div>
+        </div>
+        <div class="field">
+          <label for="service">Dịch vụ quan tâm</label>
+          <select id="service">
+            <option>Nails</option>
+            <option>Makeup</option>
+            <option>Gội đầu</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="note">Ghi chú</label>
+          <textarea id="note" rows="3" placeholder="Khung giờ mong muốn, yêu cầu riêng..."></textarea>
+        </div>
+        <button type="submit">Gửi yêu cầu đặt lịch</button>
+        <p class="form-note">Mẫu này demo tại chỗ — kết nối Zalo/Google Form khi triển khai thật.</p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-logo">Quỳnh Phạm</div>
+        <p>Nails · Makeup · Gội đầu — không gian làm đẹp trọn vẹn, chỉn chu từ những điều nhỏ nhất.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Khám phá</h4>
+        <ul>
+          <li><a href="#about">Giới thiệu</a></li>
+          <li><a href="#services">Dịch vụ</a></li>
+          <li><a href="#space">Không gian</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Kết nối</h4>
+        <ul>
+          <li><a href="#">Facebook</a></li>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">Zalo</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Liên hệ</h4>
+        <ul>
+          <li><a href="#booking">Đặt lịch</a></li>
+          <li><a href="#">Điền hotline</a></li>
+          <li><a href="#">Điền địa chỉ</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Quỳnh Phạm Nails · Makeup · Gội đầu</span>
+      <span>Thiết kế với ♥ cho ngày khai trương</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Header hide/show + blur on scroll
+  const header = document.getElementById('siteHeader');
+  let lastY = window.scrollY;
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    header.classList.toggle('scrolled', y > 40);
+    if (y > lastY && y > 160) header.classList.add('hide');
+    else header.classList.remove('hide');
+    lastY = y;
+  }, { passive: true });
+
+  // Reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.18 });
+  revealEls.forEach(el => io.observe(el));
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ---- Cinematic hero: pinned scroll drives product rotation + drifting flora ----
+  const heroWrap = document.getElementById('heroPinWrap');
+  const spinBottle = document.getElementById('spinBottle');
+  const rings = document.querySelectorAll('.hero-pin .ring');
+  const driftEls = Array.from(document.querySelectorAll('.drift'));
+  const bgWord = document.querySelector('.hero-bg-word');
+
+  let heroProgress = 0; // 0 → 1 across the whole pinned scroll distance
+
+  function computeHeroProgress() {
+    if (!heroWrap) return 0;
+    const rect = heroWrap.getBoundingClientRect();
+    const scrollable = rect.height - window.innerHeight;
+    if (scrollable <= 0) return 0;
+    const p = -rect.top / scrollable;
+    return Math.min(Math.max(p, 0), 1);
+  }
+
+  function renderHero() {
+    heroProgress = computeHeroProgress();
+    const p = heroProgress;
+
+    if (spinBottle) {
+      // rotates back and forth left/right several times as you scroll through the section
+      const swing = Math.sin(p * Math.PI * 2.4) * 46;   // side-to-side rotation
+      const tilt = Math.sin(p * Math.PI * 1.3) * 8;
+      const rise = -p * 40;                              // slight lift as it turns
+      spinBottle.style.transform =
+        `translate(-50%,-50%) translateY(${rise}px) rotateY(${swing}deg) rotateX(${tilt}deg)`;
+    }
+
+    rings.forEach((ring, i) => {
+      ring.style.transform = `rotate(${p * (i % 2 === 0 ? 180 : -180)}deg)`;
+    });
+
+    driftEls.forEach(el => {
+      const dx = parseFloat(el.dataset.x || 0);
+      const dy = parseFloat(el.dataset.y || 0);
+      const drot = parseFloat(el.dataset.rot || 0);
+      el.style.transform =
+        `translate3d(${p * dx}px, ${p * dy}px, 0) rotate(${p * drot}deg)`;
+      el.style.opacity = 0.35 + Math.sin(p * Math.PI) * 0.65;
+    });
+
+    if (bgWord) {
+      bgWord.style.transform = `translate(${-p * 90}px,-50%)`;
+    }
+  }
+
+  window.addEventListener('scroll', () => requestAnimationFrame(renderHero), { passive: true });
+  window.addEventListener('resize', () => requestAnimationFrame(renderHero));
+  renderHero();
+
+  // Card tilt on hover (Dịch vụ)
+  document.querySelectorAll('.card.tilt').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      if (reduceMotion) return;
+      const r = card.getBoundingClientRect();
+      const px = (e.clientX - r.left) / r.width - 0.5;
+      const py = (e.clientY - r.top) / r.height - 0.5;
+      card.style.transform = `perspective(900px) rotateX(${-py * 8}deg) rotateY(${px * 10}deg) translateY(-4px)`;
+    });
+    card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+  });
+
+  // Whole-page scroll-linked 3D tilt: gallery tiles, about visual, offer panel
+  // tilts based on each element's position relative to the viewport center —
+  // so rotation visibly changes purely from scrolling, no mouse needed.
+  const tiltEls = Array.from(document.querySelectorAll('.tilt-scroll'));
+  function scrollTilt() {
+    if (!reduceMotion) {
+      const vh = window.innerHeight || 800;
+      tiltEls.forEach(el => {
+        const r = el.getBoundingClientRect();
+        const centerOffset = (r.top + r.height / 2 - vh / 2) / vh; // ~ -0.6 .. 0.6 while in view
+        const clamped = Math.max(-0.6, Math.min(0.6, centerOffset));
+        const rotX = clamped * -16;   // tilt on X as it enters/leaves
+        const rotY = clamped * 8;
+        el.style.transform = `perspective(1200px) rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+      });
+    }
+    requestAnimationFrame(scrollTilt);
+  }
+  requestAnimationFrame(scrollTilt);
+</script>
+
+</body>
+</html>

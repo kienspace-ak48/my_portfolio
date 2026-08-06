@@ -21,7 +21,7 @@ const MainTemplate = () => {
       )}
 
       <Sidebar activeId={activeId} onNavigate={setActiveId} />
-      <BottomNav activeId={activeId} onNavigate={setActiveId} />
+      <BottomNav />
       <MainContent activeItem={activeItem} />
     </div>
   );

@@ -1,18 +1,172 @@
-@import url('https://fonts.googleapis.com/css2?family=Sora:wght@700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap");
 @import "tailwindcss";
 
+/*
+  Design tokens — chỉnh font / màu tại đây (một nguồn duy nhất).
+  :root     → dùng var(--token) trong CSS thuần hoặc inline style
+  @theme    → sinh utility Tailwind: font-sans, bg-brand, text-ink…
+*/
+
+:root {
+  /* Font — một family duy nhất */
+  --font-family: "Be Vietnam Pro", system-ui, sans-serif;
+
+  /* Surfaces */
+  --color-app: #f8f9fb;
+  --color-surface: #ffffff;
+  --color-hover: #f3f4f6;
+
+  /* Borders */
+  --color-border: #e7e9ee;
+  --color-border-strong: #d8dce3;
+
+  /* Text */
+  --color-ink: #101322;
+  --color-muted: #667085;
+  --color-subtle: #98a1b3;
+  --color-body: #475069;
+
+  /* Brand — client (orange) */
+  --color-brand: #ea580c;
+  --color-brand-hover: #c2410c;
+  --color-brand-soft: #fff7ed;
+  --color-brand-border: #fed7aa;
+
+  /* LoadingKit — map primary → brand */
+  --loading-kit-primary: var(--color-brand);
+  --color-primary: var(--color-brand);
+
+  /* Accent — admin (amber) */
+  --color-accent: #b45309;
+  --color-accent-tint: #fff7e8;
+  --color-accent-gold: #f2b84b;
+
+  /* Misc */
+  --color-badge: #eef0f3;
+  --color-danger: #dc2626;
+
+  /* Footer */
+  --color-footer-bg: #181821;
+  --color-footer-muted: #a9a9b3;
+  --color-footer-subtle: #6b6b78;
+  --color-footer-border: #2a2a35;
+  --color-footer-badge: #1f1f28;
+  --color-footer-social: #252530;
+
+  /* Chiều cao bottom bar — sidebar terminal ↔ footer copyright bar */
+  --shell-bottom-bar-height: 4.5rem;
+}
+
+@theme inline {
+  /* font-sans / font-display / font-mono-ui đều trỏ cùng Be Vietnam Pro */
+  --font-sans: var(--font-family);
+  --font-display: var(--font-family);
+  --font-mono-ui: var(--font-family);
+  --font-headline: var(--font-family);
+
+  --color-primary: var(--color-brand);
+  --color-on-surface: var(--color-ink);
+  --color-on-surface-variant: var(--color-muted);
+  --color-surface-container: var(--color-hover);
+
+  --color-app: var(--color-app);
+  --color-surface: var(--color-surface);
+  --color-hover: var(--color-hover);
+  --color-border: var(--color-border);
+  --color-border-strong: var(--color-border-strong);
+  --color-ink: var(--color-ink);
+  --color-muted: var(--color-muted);
+  --color-subtle: var(--color-subtle);
+  --color-body: var(--color-body);
+  --color-brand: var(--color-brand);
+  --color-brand-hover: var(--color-brand-hover);
+  --color-brand-soft: var(--color-brand-soft);
+  --color-brand-border: var(--color-brand-border);
+  --color-accent: var(--color-accent);
+  --color-accent-tint: var(--color-accent-tint);
+  --color-accent-gold: var(--color-accent-gold);
+  --color-badge: var(--color-badge);
+  --color-danger: var(--color-danger);
+  --color-footer: var(--color-footer-bg);
+  --color-footer-muted: var(--color-footer-muted);
+  --color-footer-subtle: var(--color-footer-subtle);
+  --color-footer-border: var(--color-footer-border);
+  --color-footer-badge: var(--color-footer-badge);
+  --color-footer-social: var(--color-footer-social);
+}
+
 @layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
   body {
-    font-family: 'Inter', sans-serif;
+    @apply font-sans text-ink bg-surface;
   }
 }
 
 @layer utilities {
-  .font-display {
-    font-family: 'Sora', sans-serif;
+  /* Padding content client — desktop 40px (lg+) */
+  .page-content {
+    width: 100%;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
   }
 
-  .font-mono-ui {
-    font-family: 'JetBrains Mono', monospace;
+  @media (min-width: 640px) {
+    .page-content {
+      padding-top: 1.25rem;
+      padding-bottom: 1.25rem;
+      padding-left: max(1.25rem, env(safe-area-inset-left));
+      padding-right: max(1.25rem, env(safe-area-inset-right));
+    }
+  }
+
+  @media (min-width: 768px) {
+    .page-content {
+      padding-top: 1.5rem;
+      padding-bottom: 1.5rem;
+      padding-left: max(2rem, env(safe-area-inset-left));
+      padding-right: max(2rem, env(safe-area-inset-right));
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .page-content {
+      padding-top: 1.5rem;
+      padding-bottom: 1.5rem;
+      padding-left: max(2.5rem, env(safe-area-inset-left));
+      padding-right: max(2.5rem, env(safe-area-inset-right));
+    }
+  }
+
+  /* Footer — padding 40px đồng bộ page-content (lg+) */
+  .footer-content {
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    .footer-content {
+      padding-top: 2.5rem;
+      padding-bottom: 2.5rem;
+    }
+  }
+
+  .footer-content--bar {
+    min-height: var(--shell-bottom-bar-height);
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+  }
+
+  /* Sidebar terminal — cùng chiều cao footer bar để border-top thẳng hàng */
+  .sidebar-terminal {
+    display: flex;
+    min-height: var(--shell-bottom-bar-height);
+    flex-direction: column;
+    justify-content: flex-end;
   }
 }
