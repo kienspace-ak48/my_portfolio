@@ -22,7 +22,9 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
     title: "Về Kien's Space",
     links: [
       { label: "Giới thiệu", to: "/" },
+      { label: "Resume / Hồ sơ", to: "/resume" },
       { label: "Dự án của tôi", to: "/projects" },
+      { label: "Blog", to: "/blog" },
       { label: "Bản tin dev", to: "/news" },
       { label: "Liên hệ", to: "mailto:kien.dev@gmail.com", external: true },
     ],

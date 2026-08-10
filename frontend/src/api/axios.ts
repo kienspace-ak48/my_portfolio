@@ -1,4 +1,5 @@
 import axios from "axios";
+import { handleAuthFailure, isAuthErrorStatus } from "../utils/authSession";
 
 const BASE_API = import.meta.env.VITE_API_URL ?? "http://localhost:8080/api";
 
@@ -61,7 +62,7 @@ api.interceptors.response.use(
     const status = error.response?.status;
 
     if (
-      status !== 401 ||
+      !isAuthErrorStatus(status ?? 0) ||
       !originalRequest ||
       originalRequest._retry ||
       originalRequest.url?.includes("/auth/login") ||
@@ -84,6 +85,7 @@ api.interceptors.response.use(
       return api(originalRequest);
     } catch {
       clearAuthTokens();
+      handleAuthFailure();
       return Promise.reject(error);
     }
   },

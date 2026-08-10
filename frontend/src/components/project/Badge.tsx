@@ -1,7 +1,7 @@
 import React from "react";
 
 interface BadgeProps {
-  tone: "green" | "gray" | "amber";
+  tone: "green" | "gray" | "amber" | "blue";
   children: React.ReactNode;
 }
 
@@ -9,6 +9,7 @@ const tones = {
   green: "bg-emerald-50 text-emerald-700 ring-emerald-600/20",
   gray: "bg-gray-50 text-gray-600 ring-gray-500/20",
   amber: "bg-amber-50 text-amber-700 ring-amber-600/20",
+  blue: "bg-sky-50 text-sky-700 ring-sky-600/20",
 };
 
 export default function Badge({ tone, children }: BadgeProps) {

@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap");
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 /*
   Design tokens — chỉnh font / màu tại đây (một nguồn duy nhất).
@@ -168,5 +169,27 @@
     min-height: var(--shell-bottom-bar-height);
     flex-direction: column;
     justify-content: flex-end;
+  }
+
+  /* Resume — recruiter brief layout */
+  .resume-brief {
+    --resume-ink: #101322;
+  }
+}
+
+@layer components {
+  /* Rich text longDesc — @tailwindcss/typography + brand tokens */
+  .prose-article {
+    @apply prose prose-sm max-w-none text-body
+      prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-ink
+      prose-h2:mt-8 prose-h2:mb-3 prose-h2:text-xl sm:prose-h2:text-2xl
+      prose-h3:mt-6 prose-h3:mb-2 prose-h3:text-lg
+      prose-p:leading-[1.85]
+      prose-a:font-medium prose-a:text-brand prose-a:no-underline hover:prose-a:underline
+      prose-strong:font-semibold prose-strong:text-ink
+      prose-blockquote:border-brand prose-blockquote:text-body
+      prose-code:rounded prose-code:bg-app prose-code:px-1.5 prose-code:py-0.5 prose-code:text-ink
+      prose-pre:rounded-xl prose-pre:border prose-pre:border-border prose-pre:bg-[#101322]
+      prose-img:rounded-xl;
   }
 }

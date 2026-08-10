@@ -10,11 +10,12 @@ function useStories() {
     async function fetchStories() {
         try {
             setLoading(true);
+            setError(null);
             const res = await storyApi.getStories();
-            console.log(res.data);
-            setStories(res.data.data);
+            setStories(Array.isArray(res.data) ? res.data : []);
         } catch (err) {
             setError(err);
+            setStories([]);
         } finally {
             setLoading(false);
         }

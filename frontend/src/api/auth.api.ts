@@ -1,4 +1,5 @@
 import api, { clearAuthTokens, setAuthTokens } from "./axios";
+import { isAccessTokenValid } from "../utils/authSession";
 
 export type AuthUser = {
   id: number;
@@ -38,4 +39,4 @@ export const logout = async () => {
 
 export const getMe = () => api.get<{ data: AuthUser }>("/auth/me");
 
-export const isAuthenticated = () => !!localStorage.getItem("accessToken");
+export const isAuthenticated = () => isAccessTokenValid();

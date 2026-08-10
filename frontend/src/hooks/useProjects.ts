@@ -1,20 +1,26 @@
 import { useCallback, useEffect, useState } from "react";
+import { apiFetch } from "../api/fetchApi";
 import * as projectApi from "../api/project.api";
 import type { Project } from "../types/project";
 
 function useProjects() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<unknown>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const fetchProjects = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
-      const res = await projectApi.getProjects();
-      setProjects(res.data.data);
+      const json = await apiFetch<Project[]>("/projects/admin", undefined, {
+        auth: true,
+      });
+      setProjects(Array.isArray(json.data) ? json.data : []);
     } catch (err) {
-      setError(err);
+      const message =
+        err instanceof Error ? err.message : "Không tải được danh sách dự án";
+      setError(message);
+      setProjects([]);
     } finally {
       setLoading(false);
     }

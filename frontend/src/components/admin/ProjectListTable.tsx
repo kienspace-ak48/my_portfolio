@@ -4,6 +4,7 @@ import { Link2, Package, Eye, Pencil, Trash2, Search, Plus, ChevronLeft, Chevron
 import Badge from "../project/Badge";
 import DeleteModal from "../project/DeleteModal";
 import type { Project } from "../../types/project";
+import { projectStatusLabel } from "../../types/project";
 import { InlineLoading } from "../LoadingKit";
 
 interface ProjectListTableProps {
@@ -246,6 +247,9 @@ export default function ProjectListTable({
                     <td className="px-5 py-4">
 
                       <div className="flex flex-wrap gap-2">
+                        <Badge tone="blue">
+                          {projectStatusLabel(project.status)}
+                        </Badge>
 
                         <Badge
                           tone={

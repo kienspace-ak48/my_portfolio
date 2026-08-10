@@ -44,7 +44,17 @@ const NewsSection: React.FC = () => {
         )}
         {!!error && <p className="text-sm text-red-500">Không tải được stories</p>}
 
-        {!loading && !error && (
+        {!loading && !error && storyGroups.length === 0 && (
+          <p className="text-sm text-muted">
+            Chưa có story đang hoạt động. Chạy{" "}
+            <code className="rounded bg-hover px-1.5 py-0.5 text-xs">
+              pnpm run seed
+            </code>{" "}
+            ở backend để tạo dữ liệu mẫu.
+          </p>
+        )}
+
+        {!loading && !error && storyGroups.length > 0 && (
           <div className="flex gap-4 overflow-x-auto pb-2">
             {storyGroups.map((group, index) => (
                 <button
