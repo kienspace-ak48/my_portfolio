@@ -13,14 +13,16 @@ function usePublicProjects(params?: ProjectQuery) {
     try {
       setLoading(true);
       setError(null);
-      const url = new URL(`${BASE_API}/projects`);
-      if (params?.q) url.searchParams.set("q", params.q);
-      if (params?.status) url.searchParams.set("status", params.status);
-      if (params?.tag) url.searchParams.set("tag", params.tag);
-      if (params?.featured) url.searchParams.set("featured", params.featured);
-      if (params?.sort) url.searchParams.set("sort", params.sort);
+      const searchParams = new URLSearchParams();
+      if (params?.q) searchParams.set("q", params.q);
+      if (params?.status) searchParams.set("status", params.status);
+      if (params?.tag) searchParams.set("tag", params.tag);
+      if (params?.featured) searchParams.set("featured", params.featured);
+      if (params?.sort) searchParams.set("sort", params.sort);
 
-      const res = await fetch(url.toString());
+      const qs = searchParams.toString();
+      const url = `${BASE_API}/projects${qs ? `?${qs}` : ""}`;
+      const res = await fetch(url);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const json = await res.json();
       setProjects(Array.isArray(json.data) ? json.data : []);
