@@ -1,219 +1,234 @@
-const { Role, MediaType } =require('../src/generated/prisma');
-const prisma = require('../src/configs/prisma.config');
-const bcrypt = require('bcrypt');
+const { Role, MediaType, ProjectStatus } = require("../src/generated/prisma");
+const prisma = require("../src/configs/prisma.config");
+const bcrypt = require("bcrypt");
+const { slugify } = require("../src/utils/slug.util");
 
+async function upsertTag(name) {
+  const tagSlug = slugify(name);
+  return prisma.tag.upsert({
+    where: { slug: tagSlug },
+    update: { name },
+    create: { name, slug: tagSlug },
+  });
+}
 
-// prisma/seed.ts
-
+async function linkTags(projectId, tagNames) {
+  for (const name of tagNames) {
+    const tag = await upsertTag(name);
+    await prisma.projectTag.upsert({
+      where: {
+        projectId_tagId: { projectId, tagId: tag.id },
+      },
+      update: {},
+      create: { projectId, tagId: tag.id },
+    });
+  }
+}
 
 async function main() {
-  console.log('🌱 Bắt đầu seed dữ liệu...');
+  console.log("🌱 Bắt đầu seed dữ liệu...");
 
-  // ────────────────────────────────
-  // 1. USERS
-  // ────────────────────────────────
-  const passwordHash = await bcrypt.hash('123456', 10);
+  const passwordHash = await bcrypt.hash("123456", 10);
 
   const admin = await prisma.user.upsert({
-    where: { email: 'admin@devmarket.vn' },
+    where: { email: "admin@devmarket.vn" },
     update: {},
     create: {
-      name: 'Vũ Văn Kiên',
-      email: 'admin@devmarket.vn',
+      name: "Vũ Văn Kiên",
+      email: "admin@devmarket.vn",
       password: passwordHash,
       role: Role.ADMIN,
     },
   });
 
-  const user1 = await prisma.user.upsert({
-    where: { email: 'minh.tran@devmarket.vn' },
+  await prisma.user.upsert({
+    where: { email: "minh.tran@devmarket.vn" },
     update: {},
     create: {
-      name: 'Trần Minh',
-      email: 'minh.tran@devmarket.vn',
+      name: "Trần Minh",
+      email: "minh.tran@devmarket.vn",
       password: passwordHash,
       role: Role.USER,
     },
   });
 
-  const user2 = await prisma.user.upsert({
-    where: { email: 'lan.nguyen@devmarket.vn' },
+  await prisma.user.upsert({
+    where: { email: "lan.nguyen@devmarket.vn" },
     update: {},
     create: {
-      name: 'Nguyễn Lan',
-      email: 'lan.nguyen@devmarket.vn',
+      name: "Nguyễn Lan",
+      email: "lan.nguyen@devmarket.vn",
       password: passwordHash,
       role: Role.USER,
     },
   });
 
-  const user3 = await prisma.user.upsert({
-    where: { email: 'hung.pham@devmarket.vn' },
+  await prisma.user.upsert({
+    where: { email: "hung.pham@devmarket.vn" },
     update: {},
     create: {
-      name: 'Phạm Hùng',
-      email: 'hung.pham@devmarket.vn',
+      name: "Phạm Hùng",
+      email: "hung.pham@devmarket.vn",
       password: passwordHash,
       role: Role.USER,
     },
   });
 
-  console.log(`✅ Đã tạo ${4} users`);
+  console.log("✅ Đã tạo users");
 
-  // ────────────────────────────────
-  // 2. PROJECTS
-  // ────────────────────────────────
   const projectsData = [
     {
-      slug: 'devmarket-source-marketplace',
-      title: 'DevMarket - Source Code Marketplace',
-      sumary: 'Nền tảng mua bán source code cho lập trình viên',
-      desc: 'Chợ source code với hệ thống thanh toán VNPay/MoMo, quản lý dự án, tag lọc.',
+      slug: "devmarket-source-marketplace",
+      title: "DevMarket - Source Code Marketplace",
+      badge: "Full-stack",
+      sumary: "Nền tảng mua bán source code cho lập trình viên",
+      desc: "Chợ source code với hệ thống thanh toán VNPay/MoMo, quản lý dự án, tag lọc.",
       longDesc:
-        'DevMarket là nền tảng cho phép developer đăng bán source code, quản lý bằng Prisma + MySQL, admin dashboard xây bằng React + CoreUI.',
-      thumbnail: 'https://cdn.devmarket.vn/projects/devmarket-thumb.jpg',
+        "<p>DevMarket là nền tảng cho phép developer đăng bán source code, quản lý bằng Prisma + MySQL, admin dashboard xây bằng React.</p><p>Hệ thống hỗ trợ tìm kiếm, phân loại theo tech stack và quản lý portfolio người bán.</p>",
+      thumbnail: "https://picsum.photos/seed/devmarket/1200/750",
+      status: ProjectStatus.COMPLETED,
       isDisplay: true,
-      finishedAt: new Date('2026-06-15'),
-      demoUrl: 'https://devmarket.vn',
-      repoUrl: 'https://github.com/kien/devmarket',
+      finishedAt: new Date("2026-06-15"),
+      demoUrl: "https://devmarket.vn",
+      repoUrl: "https://github.com/kien/devmarket",
       featured: true,
       viewCount: 1240,
+      features: [
+        "Tìm kiếm và lọc dự án theo ngôn ngữ, framework",
+        "Thanh toán VNPay / MoMo",
+        "Quản lý dự án và tag",
+        "Dashboard admin React",
+      ],
+      tags: ["React", "Node.js", "Prisma", "MariaDB"],
     },
     {
-      slug: 'cherry-house-booking',
-      title: 'Cherry House - Booking Platform',
-      sumary: 'Nền tảng đặt phòng đa chi nhánh',
-      desc: 'Hệ thống Brand → Property → Branch → Room → Booking, tích hợp VNPay và MoMo.',
+      slug: "cherry-house-booking",
+      title: "Cherry House - Booking Platform",
+      badge: "Full-stack",
+      sumary: "Nền tảng đặt phòng đa chi nhánh",
+      desc: "Hệ thống Brand → Property → Branch → Room → Booking, tích hợp VNPay và MoMo.",
       longDesc:
-        'Cherry House quản lý booking nhiều cơ sở lưu trú, có ví hoàn tiền với xử lý race condition bằng SELECT FOR UPDATE.',
-      thumbnail: 'https://cdn.devmarket.vn/projects/cherry-house-thumb.jpg',
+        "<p>Cherry House quản lý booking nhiều cơ sở lưu trú với mô hình phân cấp rõ ràng.</p><p>Ví hoàn tiền xử lý race condition bằng SELECT FOR UPDATE.</p>",
+      thumbnail: "https://picsum.photos/seed/cherry-house/1200/750",
+      status: ProjectStatus.COMPLETED,
       isDisplay: true,
-      finishedAt: new Date('2026-03-20'),
-      demoUrl: 'https://cherryhouse.vn',
-      repoUrl: 'https://github.com/kien/cherry-house',
+      finishedAt: new Date("2026-03-20"),
+      demoUrl: "https://cherryhouse.vn",
+      repoUrl: "https://github.com/kien/cherry-house",
       featured: true,
       viewCount: 856,
+      features: [
+        "Brand → Property → Branch → Room → Booking",
+        "Tích hợp VNPay và MoMo",
+        "Ví hoàn tiền an toàn",
+        "Admin quản lý đa chi nhánh",
+      ],
+      tags: ["React", "Express", "Prisma", "Tailwind"],
     },
     {
-      slug: 'accessrace-checkin',
-      title: 'AccessRace Checkin',
-      sumary: 'Hệ thống check-in sự kiện bằng QR',
-      desc: 'Check-in JWT/RBAC, quét QR, gửi email SendGrid, xử lý hàng đợi BullMQ.',
-      longDesc: null,
-      thumbnail: 'https://cdn.devmarket.vn/projects/accessrace-thumb.jpg',
+      slug: "accessrace-checkin",
+      title: "AccessRace Checkin",
+      badge: "Backend",
+      sumary: "Hệ thống check-in sự kiện bằng QR",
+      desc: "Check-in JWT/RBAC, quét QR, gửi email SendGrid, xử lý hàng đợi BullMQ.",
+      longDesc:
+        "<p>Hệ thống check-in sự kiện với phân quyền JWT/RBAC và quét mã QR realtime.</p>",
+      thumbnail: "https://picsum.photos/seed/accessrace/1200/750",
+      status: ProjectStatus.COMPLETED,
       isDisplay: true,
-      finishedAt: new Date('2025-11-10'),
+      finishedAt: new Date("2025-11-10"),
       demoUrl: null,
-      repoUrl: 'https://github.com/kien/accessrace-checkin',
+      repoUrl: "https://github.com/kien/accessrace-checkin",
       featured: false,
       viewCount: 312,
+      features: [
+        "JWT + RBAC",
+        "Quét QR check-in",
+        "Email SendGrid",
+        "Hàng đợi BullMQ",
+      ],
+      tags: ["Node.js", "JWT", "BullMQ", "SendGrid"],
     },
     {
-      slug: 'toppicare-cms',
-      title: 'Toppicare - No-code CMS',
-      sumary: 'React SPA kèm admin panel no-code',
-      desc: 'Hệ thống quản trị nội dung không cần code, bảo vệ bằng Cloudflare Turnstile.',
-      longDesc: null,
-      thumbnail: null,
-      isDisplay: false,
+      slug: "personal-portfolio",
+      title: "Personal Portfolio",
+      badge: "React",
+      sumary: "Website portfolio cá nhân full-stack",
+      desc: "React + Vite frontend, Express + Prisma backend, trang admin quản lý project và story.",
+      longDesc:
+        "<p>Portfolio cá nhân tích hợp blog, dự án, resume và stories.</p><p>Monorepo với admin dashboard CRUD và deploy VPS.</p>",
+      thumbnail: "https://picsum.photos/seed/portfolio/1200/750",
+      status: ProjectStatus.IN_PROGRESS,
+      isDisplay: true,
       finishedAt: null,
       demoUrl: null,
-      repoUrl: 'https://github.com/kien/toppicare',
-      featured: false,
-      viewCount: 50,
+      repoUrl: "https://github.com/kien/personal-portfolio",
+      featured: true,
+      viewCount: 128,
+      features: [
+        "Trang public catalog dự án",
+        "Admin CRUD project + story",
+        "JWT auth + refresh token",
+        "Deploy monorepo Express + Vite",
+      ],
+      tags: ["React", "Vite", "Express", "Prisma"],
     },
   ];
 
-  for (const p of projectsData) {
-    await prisma.project.upsert({
-      where: { slug: p.slug },
-      update: {},
-      create: p,
+  await prisma.projectTag.deleteMany();
+  await prisma.tag.deleteMany();
+  await prisma.project.deleteMany();
+
+  for (const item of projectsData) {
+    const { tags, features, ...projectData } = item;
+    const project = await prisma.project.create({
+      data: {
+        ...projectData,
+        features,
+      },
     });
+    await linkTags(project.id, tags);
   }
 
   console.log(`✅ Đã tạo ${projectsData.length} projects`);
 
-  // ────────────────────────────────
-  // 3. STORIES
-  // ────────────────────────────────
+  await prisma.storyView.deleteMany();
+  await prisma.story.deleteMany();
+
   const now = new Date();
-  const in24h = (base) => new Date(base.getTime() + 24 * 60 * 60 * 1000);
+  const inDays = (base, days) =>
+    new Date(base.getTime() + days * 24 * 60 * 60 * 1000);
 
   const storiesData = [
     {
       userId: admin.id,
-      mediaUrl: 'https://cdn.devmarket.vn/stories/admin_photo1.jpg',
+      mediaUrl: "https://picsum.photos/seed/story-admin/900/1600",
       mediaType: MediaType.IMAGE,
       createdAt: now,
-      expiresAt: in24h(now),
+      expiresAt: inDays(now, 7),
     },
     {
-      userId: user1.id,
-      mediaUrl: 'https://cdn.devmarket.vn/stories/user1_video1.mp4',
+      userId: admin.id,
+      mediaUrl:
+        "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+      thumbnailUrl: "https://picsum.photos/seed/story-user1-thumb/900/1600",
       mediaType: MediaType.VIDEO,
       createdAt: now,
-      expiresAt: in24h(now),
-    },
-    {
-      userId: user2.id,
-      mediaUrl: 'https://cdn.devmarket.vn/stories/user2_photo1.jpg',
-      mediaType: MediaType.IMAGE,
-      createdAt: new Date(now.getTime() - 3 * 60 * 60 * 1000), // 3h trước
-      expiresAt: in24h(new Date(now.getTime() - 3 * 60 * 60 * 1000)),
-    },
-    {
-      // story đã hết hạn, để test filter query
-      userId: user3.id,
-      mediaUrl: 'https://cdn.devmarket.vn/stories/user3_photo1.jpg',
-      mediaType: MediaType.IMAGE,
-      createdAt: new Date(now.getTime() - 25 * 60 * 60 * 1000),
-      expiresAt: new Date(now.getTime() - 1 * 60 * 60 * 1000),
+      expiresAt: inDays(now, 7),
     },
   ];
 
-  const createdStories = [];
   for (const s of storiesData) {
-    const story = await prisma.story.create({ data: s });
-    createdStories.push(story);
+    await prisma.story.create({ data: s });
   }
 
-  console.log(`✅ Đã tạo ${createdStories.length} stories`);
-
-  // ────────────────────────────────
-  // 4. STORY VIEWS
-  // ────────────────────────────────
-  // Lưu ý: viewerId không có relation tới User trong schema,
-  // nên ở đây chỉ seed dạng string id giả lập (ví dụ userId dạng string).
-  const storyViewsData = [
-    { storyId: createdStories[0].id, viewerId: String(user1.id) },
-    { storyId: createdStories[0].id, viewerId: String(user2.id) },
-    { storyId: createdStories[1].id, viewerId: String(admin.id) },
-    { storyId: createdStories[1].id, viewerId: String(user3.id) },
-    { storyId: createdStories[2].id, viewerId: String(user1.id) },
-  ];
-
-  for (const v of storyViewsData) {
-    await prisma.storyView.upsert({
-      where: {
-        storyId_viewerId: {
-          storyId: v.storyId,
-          viewerId: v.viewerId,
-        },
-      },
-      update: {},
-      create: v,
-    });
-  }
-
-  console.log(`✅ Đã tạo ${storyViewsData.length} story views`);
-
-  console.log('🎉 Seed hoàn tất!');
+  console.log(`✅ Đã tạo ${storiesData.length} stories`);
+  console.log("🎉 Seed hoàn tất!");
 }
 
 main()
   .catch((e) => {
-    console.error('❌ Seed thất bại:', e);
+    console.error("❌ Seed thất bại:", e);
     process.exit(1);
   })
   .finally(async () => {

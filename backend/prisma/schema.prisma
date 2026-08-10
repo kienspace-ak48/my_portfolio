@@ -12,82 +12,137 @@ datasource db {
   provider = "mysql"
 }
 
-// enum 
-enum Role{
+// Quy ước DB (MariaDB/Linux): snake_case — @@map cho bảng, @map cho cột
+enum Role {
   ADMIN
   USER
 }
-// Define model
 
 model User {
-  id Int @id @default(autoincrement())
-  name String
-  email String @unique
-  password String
-  role Role @default(USER)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String
+  role      Role     @default(USER)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
-  stories Story[]
+  stories       Story[]
   refreshTokens RefreshToken[]
+
+  @@map("user")
 }
 
 model RefreshToken {
   id        String   @id @default(uuid())
   token     String   @unique
-  userId    Int
+  userId    Int      @map("user_id")
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  expiresAt DateTime
-  createdAt DateTime @default(now())
+  expiresAt DateTime @map("expires_at")
+  createdAt DateTime @default(now()) @map("created_at")
 
   @@index([userId])
+  @@map("refresh_token")
 }
 
-model Project{
-  id Int @id @default(autoincrement())
-  slug String @unique
-  title String
-  sumary String? 
-  desc String?
-  longDesc String?
-  thumbnail String?
-  isDisplay Boolean @default(true)
-  finishedAt DateTime?
-  demoUrl String?
-  repoUrl String?
-  featured Boolean @default(false)
-
-  viewCount Int @default(50)
+enum ProjectStatus {
+  COMPLETED
+  IN_PROGRESS
+  ARCHIVED
 }
 
+model Project {
+  id         Int            @id @default(autoincrement())
+  slug       String         @unique
+  title      String
+  badge      String?
+  sumary     String?
+  desc       String?        @db.Text
+  longDesc   String?        @map("long_desc") @db.Text
+  thumbnail  String?
+  status     ProjectStatus  @default(IN_PROGRESS)
+  isDisplay  Boolean        @default(true) @map("is_display")
+  finishedAt DateTime?      @map("finished_at")
+  demoUrl    String?        @map("demo_url")
+  repoUrl    String?        @map("repo_url")
+  featured   Boolean        @default(false)
+  viewCount  Int            @default(0) @map("view_count")
+  features   Json?
+  createdAt  DateTime       @default(now()) @map("created_at")
+  updatedAt  DateTime       @updatedAt @map("updated_at")
+
+  tags ProjectTag[]
+
+  @@map("project")
+}
+
+model Tag {
+  id       Int          @id @default(autoincrement())
+  name     String       @unique
+  slug     String       @unique
+  projects ProjectTag[]
+
+  @@map("tag")
+}
+
+model ProjectTag {
+  projectId Int     @map("project_id")
+  tagId     Int     @map("tag_id")
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  tag       Tag     @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([projectId, tagId])
+  @@map("project_tag")
+}
 
 model Story {
-  id        String   @id @default(uuid())
-  userId    Int
-  mediaUrl  String
-  thumbnailUrl String?  // 👈 thêm — ảnh tĩnh đại diện, dùng cho video
-  mediaType MediaType @default(IMAGE) // IMAGE | VIDEO
-  createdAt DateTime @default(now())
-  expiresAt DateTime // createdAt + 24h
+  id           String    @id @default(uuid())
+  userId       Int       @map("user_id")
+  mediaUrl     String    @map("media_url")
+  thumbnailUrl String?   @map("thumbnail_url")
+  mediaType    MediaType @default(IMAGE) @map("media_type")
+  createdAt    DateTime  @default(now()) @map("created_at")
+  expiresAt    DateTime  @map("expires_at")
 
-  user      User @relation(fields: [userId], references: [id])
-  views     StoryView[]
+  user  User        @relation(fields: [userId], references: [id])
+  views StoryView[]
 
   @@index([userId, expiresAt])
+  @@map("story")
 }
 
 model StoryView {
-  id        String   @id @default(uuid())
-  storyId   String
-  viewerId  String
-  viewedAt  DateTime @default(now())
+  id       String   @id @default(uuid())
+  storyId  String   @map("story_id")
+  viewerId String   @map("viewer_id")
+  viewedAt DateTime @default(now()) @map("viewed_at")
 
-  story     Story @relation(fields: [storyId], references: [id])
+  story Story @relation(fields: [storyId], references: [id])
 
-  @@unique([storyId, viewerId]) // 1 người chỉ tính view 1 lần
+  @@unique([storyId, viewerId])
+  @@map("story_view")
 }
 
 enum MediaType {
   IMAGE
   VIDEO
+}
+
+model GalleryAsset {
+  id           String    @id @default(uuid())
+  title        String?
+  alt          String?
+  mediaUrl     String    @map("media_url")
+  thumbnailUrl String?   @map("thumbnail_url")
+  publicId     String?   @map("public_id")
+  mediaType    MediaType @default(IMAGE) @map("media_type")
+  folder       String?
+  fileSize     Int?      @map("file_size")
+  width        Int?
+  height       Int?
+  createdAt    DateTime  @default(now()) @map("created_at")
+  updatedAt    DateTime  @updatedAt @map("updated_at")
+
+  @@index([mediaType, createdAt])
+  @@map("gallery_asset")
 }

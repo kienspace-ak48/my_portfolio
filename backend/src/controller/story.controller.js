@@ -10,8 +10,14 @@ const StoryController = () => {
         const list = await storyRepo.findAll2();
         response.success(res, list);
       } catch (error) {
-        console.log(CNAME + error.message);
-        response.fail(res);
+        console.error(CNAME, error);
+        response.fail(
+          res,
+          process.env.NODE_ENV === "production"
+            ? "Không thể tải stories"
+            : error.message,
+          500,
+        );
       }
     },
     AdminIndex: async (req, res) => {

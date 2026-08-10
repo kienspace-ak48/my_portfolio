@@ -13,7 +13,7 @@ function authenticateToken(req, res, next) {
     req.user = jwt.verifyAccessToken(token);
     next();
   } catch {
-    return response.fail(res, "Token không hợp lệ hoặc hết hạn", 403);
+    return response.fail(res, "Token không hợp lệ hoặc hết hạn", 401);
   }
 }
 

@@ -1,29 +1,29 @@
 -- CreateTable
-CREATE TABLE `Story` (
+CREATE TABLE `story` (
     `id` VARCHAR(191) NOT NULL,
-    `userId` INTEGER NOT NULL,
-    `mediaUrl` VARCHAR(191) NOT NULL,
-    `mediaType` ENUM('IMAGE', 'VIDEO') NOT NULL DEFAULT 'IMAGE',
-    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `expiresAt` DATETIME(3) NOT NULL,
+    `user_id` INTEGER NOT NULL,
+    `media_url` VARCHAR(191) NOT NULL,
+    `media_type` ENUM('IMAGE', 'VIDEO') NOT NULL DEFAULT 'IMAGE',
+    `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `expires_at` DATETIME(3) NOT NULL,
 
-    INDEX `Story_userId_expiresAt_idx`(`userId`, `expiresAt`),
+    INDEX `story_user_id_expires_at_idx`(`user_id`, `expires_at`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `StoryView` (
+CREATE TABLE `story_view` (
     `id` VARCHAR(191) NOT NULL,
-    `storyId` VARCHAR(191) NOT NULL,
-    `viewerId` VARCHAR(191) NOT NULL,
-    `viewedAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `story_id` VARCHAR(191) NOT NULL,
+    `viewer_id` VARCHAR(191) NOT NULL,
+    `viewed_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 
-    UNIQUE INDEX `StoryView_storyId_viewerId_key`(`storyId`, `viewerId`),
+    UNIQUE INDEX `story_view_story_id_viewer_id_key`(`story_id`, `viewer_id`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- AddForeignKey
-ALTER TABLE `Story` ADD CONSTRAINT `Story_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `story` ADD CONSTRAINT `story_user_id_fkey` FOREIGN KEY (`user_id`) REFERENCES `user`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `StoryView` ADD CONSTRAINT `StoryView_storyId_fkey` FOREIGN KEY (`storyId`) REFERENCES `Story`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `story_view` ADD CONSTRAINT `story_view_story_id_fkey` FOREIGN KEY (`story_id`) REFERENCES `story`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
