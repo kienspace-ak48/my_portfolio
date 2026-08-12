@@ -41,11 +41,11 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
   {
     title: "Công cụ",
     links: [
-      { label: "JSON Formatter", to: "#" },
-      { label: "Regex Tester", to: "#" },
-      { label: "Base64 Encode/Decode", to: "#" },
-      { label: "CSS Gradient Generator", to: "#" },
-      { label: "Snippet Generator", to: "#" },
+      { label: "Công cụ miễn phí", to: "/tools" },
+      { label: "Base64 Encode/Decode", to: "/tools/base64" },
+      { label: "IP của tôi là gì?", to: "/tools/ip" },
+      { label: "Tạo mật khẩu", to: "/tools/password" },
+      { label: "Meta Tag Generator", to: "/tools/meta-tag" },
     ],
   },
 ];

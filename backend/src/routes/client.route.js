@@ -5,6 +5,7 @@ const StoryController = require("../controller/story.controller")();
 const projectController = require("../controller/project.controller")();
 const galleryController = require("../controller/gallery.controller")();
 const userController = require("../controller/user.controller")();
+const metaCrawlController = require("../controller/meta-crawl.controller")();
 const upload = require("../configs/multer.config");
 const authenticateToken = require("../middleware/auth.middleware");
 const requireRole = require("../middleware/role.middleware");
@@ -46,5 +47,8 @@ router.delete("/api/gallery/:id", ...admin, galleryController.Remove);
 
 // [users]
 router.get("/api/users", ...admin, userController.Index);
+
+// [tools] — public meta crawl proxy (SSR fetch)
+router.get("/api/tools/meta-crawl", metaCrawlController.Crawl);
 
 module.exports = router;

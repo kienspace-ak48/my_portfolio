@@ -31,6 +31,18 @@ type EditorInstance = {
   focus: () => void;
 };
 
+type TinyMceSetupEditor = EditorInstance & {
+  ui: {
+    registry: {
+      addButton: (
+        name: string,
+        spec: { text: string; tooltip: string; onAction: () => void },
+      ) => void;
+    };
+  };
+  on: (event: "paste", handler: (e: ClipboardEvent) => void) => void;
+};
+
 type EditorSurfaceProps = {
   value: string;
   onChange: (html: string) => void;
@@ -113,7 +125,7 @@ function EditorSurface({
           smart_paste: true,
           paste_as_text: false,
           content_style: editorContentStyle,
-          setup: (editor) => {
+          setup: (editor: TinyMceSetupEditor) => {
             editor.ui.registry.addButton("galleryimage", {
               text: "Ảnh",
               tooltip: "Chèn ảnh từ Gallery / Upload Cloudinary",
@@ -126,7 +138,7 @@ function EditorSurface({
               onAction: () => openPasteHtmlRef.current(),
             });
 
-            editor.on("paste", (e) => {
+            editor.on("paste", (e: ClipboardEvent) => {
               const clipboard = e.clipboardData;
               if (!clipboard) return;
 

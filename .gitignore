@@ -11,6 +11,9 @@ build/
 .env.*
 !.env.example
 
+# DB export snapshot (có password hash — không commit)
+backend/migration/data/db-export.json
+
 # Logs
 logs/
 *.log

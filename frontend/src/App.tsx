@@ -8,6 +8,11 @@ import ProjectDetailPage from "./pages/ProjectDetailPage";
 import Resume from "./pages/Resume";
 import Blog from "./pages/Blog";
 import BlogPostPage from "./pages/BlogPost";
+import ToolsIndex from "./pages/tools/ToolsIndex";
+import Base64ToolPage from "./pages/tools/Base64ToolPage";
+import IpLookupToolPage from "./pages/tools/IpLookupToolPage";
+import PasswordGeneratorToolPage from "./pages/tools/PasswordGeneratorToolPage";
+import MetaTagToolPage from "./pages/tools/MetaTagToolPage";
 import AdminLayout from "./layouts/AdminLayout";
 import AdminDashboard from "./pages/admin/Dashboard";
 import ProjectsPage from "./pages/admin/ProjectsPage";
@@ -31,6 +36,11 @@ function App() {
           <Route path="/resume" element={<Resume />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPostPage />} />
+          <Route path="/tools" element={<ToolsIndex />} />
+          <Route path="/tools/base64" element={<Base64ToolPage />} />
+          <Route path="/tools/ip" element={<IpLookupToolPage />} />
+          <Route path="/tools/password" element={<PasswordGeneratorToolPage />} />
+          <Route path="/tools/meta-tag" element={<MetaTagToolPage />} />
         </Route>
 
         <Route path="/admin/login" element={<LoginPage />} />
