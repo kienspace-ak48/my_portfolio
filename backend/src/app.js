@@ -110,21 +110,30 @@ async function sendSpaDocument(req, res, next) {
   }
 }
 
-app.use(express.static(DIST_PATH));
+// SEO inject phải chạy TRƯỚC express.static — static mặc định serve index.html cho "/"
+// và bỏ qua middleware replace __TITLE__, __DESCRIPTION__, …
 app.use(sendSpaDocument);
+app.use(express.static(DIST_PATH, { index: false }));
 
 app.use(async (req, res, next) => {
   if (req.method !== 'GET' && req.method !== 'HEAD') {
     return next();
   }
+  if (!shouldServeSpaDocument(req)) {
+    return next();
+  }
 
   try {
-    const html = await loadSpaIndexHtml();
+    const [html, meta] = await Promise.all([
+      loadSpaIndexHtml(),
+      seoService.resolveSpaMeta(req),
+    ]);
+    const output = applySeoPlaceholders(html, meta);
     if (req.method === 'HEAD') {
       res.type('html');
       return res.status(200).end();
     }
-    res.type('html').send(html);
+    res.type('html').send(output);
   } catch {
     res.status(404).send('Frontend chưa được build. Chạy: cd frontend && pnpm build');
   }
