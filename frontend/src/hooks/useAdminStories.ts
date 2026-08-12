@@ -28,11 +28,26 @@ function useAdminStories() {
     [fetchStories],
   );
 
+  const togglePin = useCallback(
+    async (id: string, isPinned: boolean) => {
+      setStories((prev) =>
+        prev.map((s) => (s.id === id ? { ...s, isPinned } : s)),
+      );
+      try {
+        await storyApi.updateStoryPin(id, isPinned);
+      } catch (err) {
+        await fetchStories();
+        throw err;
+      }
+    },
+    [fetchStories],
+  );
+
   useEffect(() => {
     fetchStories();
   }, [fetchStories]);
 
-  return { stories, loading, error, fetchStories, deleteStory };
+  return { stories, loading, error, fetchStories, deleteStory, togglePin };
 }
 
 export default useAdminStories;

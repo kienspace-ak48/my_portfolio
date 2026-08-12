@@ -5,7 +5,7 @@ import type { LucideIcon } from "lucide-react";
 import {
   LayoutDashboard, Boxes, CircleDot, Images, Users, Settings,
   Search, Bell, ChevronDown, ChevronLeft, Menu, X, LogOut, HelpCircle,
-  CircleUserRound,
+  CircleUserRound, FileUser,
 } from "lucide-react";
 
 /* ---------- token system → xem frontend/src/index.css (:root + @theme) ---------- */
@@ -57,7 +57,8 @@ const NAV: { section: string; items: NavItemConfig[] }[] = [
     section: "quản trị",
     items: [
       { to: "/admin/users", label: "Người dùng", icon: Users, end: true },
-      { to: "/admin/settings", label: "Cấu hình", icon: Settings, end: true },
+      { to: "/admin/resume", label: "Resume", icon: FileUser, end: true },
+      { to: "/admin/seo", label: "SEO", icon: Settings, end: true },
     ],
   },
 ];
@@ -335,7 +336,7 @@ export default function AdminLayout() {
               {"</>"}
             </div>
             {!collapsed && (
-              <span className="text-[15px] font-semibold text-ink">devmarket</span>
+              <span className="text-[15px] font-semibold text-ink">Kien's Space</span>
             )}
           </div>
           <button className="md:hidden ml-auto mr-3 p-1" onClick={() => setMobileOpen(false)}>
@@ -443,11 +444,11 @@ export default function AdminLayout() {
                   <CircleUserRound size={15} /> Hồ sơ
                 </button>
                 <button
-                  onClick={() => navigate("/admin/settings")}
+                  onClick={() => navigate("/admin/seo")}
                   className="w-full flex items-center gap-2 px-3 py-2 text-sm"
                   style={{ color: "#475069" }}
                 >
-                  <Settings size={15} /> Cấu hình
+                  <Settings size={15} /> SEO
                 </button>
                 <div className="h-px my-1" style={{ background: "#E7E9EE" }} />
                 <button

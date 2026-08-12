@@ -10,6 +10,7 @@ export interface Story {
   mediaUrl: string;
   thumbnailUrl?: string | null;
   mediaType: "IMAGE" | "VIDEO";
+  isPinned: boolean;
   createdAt: string;
   expiresAt: string;
   user: StoryUser;

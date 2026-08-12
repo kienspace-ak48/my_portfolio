@@ -3,6 +3,14 @@ const storyRepo = require("../repositories/story.repository.js");
 const response = require("../utils/response.util");
 const cloudinary = require("../configs/cloudinary.config.js");
 
+function parseBoolean(value) {
+  return value === true || value === "true" || value === "1";
+}
+
+function videoThumbnailUrl(secureUrl) {
+  return secureUrl.replace(/\.(mp4|mov|webm|avi|mkv)(\?.*)?$/i, ".jpg");
+}
+
 const StoryController = () => {
   return {
     Index: async (req, res) => {
@@ -31,37 +39,51 @@ const StoryController = () => {
     },
     Add: async (req, res) => {
       try {
-        const { userId, mediaType } = req.body;
-        if (!req.file) {
-          return response.fail(res, "Thieu file media", 400);
+        const { userId, mediaType, mediaUrl, thumbnailUrl } = req.body;
+        const isPinned = parseBoolean(req.body.isPinned);
+        const type = mediaType === "VIDEO" ? "VIDEO" : "IMAGE";
+
+        let resolvedMediaUrl = mediaUrl?.trim() || "";
+        let resolvedThumbnailUrl = thumbnailUrl?.trim() || null;
+
+        if (!resolvedMediaUrl) {
+          if (!req.file) {
+            return response.fail(res, "Thiếu file media hoặc mediaUrl từ gallery", 400);
+          }
+
+          const uploadResult = await new Promise((resolve, reject) => {
+            const stream = cloudinary.uploader.upload_stream(
+              {
+                resource_type: type === "VIDEO" ? "video" : "image",
+                folder: "stories",
+              },
+              (err, result) => (err ? reject(err) : resolve(result)),
+            );
+            stream.end(req.file.buffer);
+          });
+
+          resolvedMediaUrl = uploadResult.secure_url;
+          resolvedThumbnailUrl =
+            type === "VIDEO" ? videoThumbnailUrl(uploadResult.secure_url) : null;
+        } else if (type === "VIDEO" && !resolvedThumbnailUrl) {
+          resolvedThumbnailUrl = videoThumbnailUrl(resolvedMediaUrl);
         }
-        const uploadResult = await new Promise((resolve, reject) => {
-          const stream = cloudinary.uploader.upload_stream(
-            {
-              resource_type: mediaType === "VIDEO" ? "video" : "image",
-              folder: "stories",
-            },
-            (err, result) => (err ? reject(err) : resolve(result)),
-          );
-          stream.end(req.file.buffer);
-        });
-        const thumbnailUrl =
-          mediaType === "VIDEO"
-            ? uploadResult.secure_url.replace(/\.(mp4|mov|webm)$/, ".jpg")
-            : null;
+
         const now = new Date();
         const data = {
           userId: Number(userId || req.user?.id),
-          mediaUrl: uploadResult.secure_url,
-          thumbnailUrl,
-          mediaType,
+          mediaUrl: resolvedMediaUrl,
+          thumbnailUrl: resolvedThumbnailUrl,
+          mediaType: type,
+          isPinned,
           expiresAt: new Date(now.getTime() + 24 * 60 * 60 * 1000),
         };
+
         const story = await storyRepo.create(data);
         response.success(res, story, null, 201);
       } catch (error) {
         console.log(CNAME, error.message);
-        response.fail(res);
+        response.fail(res, error.message, 500);
       }
     },
     Delete: async (req, res) => {
@@ -72,6 +94,17 @@ const StoryController = () => {
       } catch (error) {
         console.log(CNAME + error.message);
         response.fail(res);
+      }
+    },
+    UpdatePin: async (req, res) => {
+      try {
+        const { id } = req.params;
+        const isPinned = parseBoolean(req.body.isPinned);
+        const story = await storyRepo.update(id, { isPinned });
+        response.success(res, story, isPinned ? "Đã ghim story" : "Đã bỏ ghim story");
+      } catch (error) {
+        console.log(CNAME + error.message);
+        response.fail(res, error.message, 500);
       }
     },
   };

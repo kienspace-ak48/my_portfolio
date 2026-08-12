@@ -9,9 +9,12 @@ class StoryRepository extends BaseRepository{
     }
     
     async findAll2(){
+        const now = new Date();
         return prisma.story.findMany({
-            where: {expiresAt: {gt: new Date()}},
-            orderBy: {createdAt: 'desc'},
+            where: {
+                OR: [{ isPinned: true }, { expiresAt: { gt: now } }],
+            },
+            orderBy: [{ isPinned: 'desc' }, { createdAt: 'desc' }],
             include: {
                 user: {
                     select:{id: true, name: true},

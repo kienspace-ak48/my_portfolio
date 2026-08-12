@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { ArrowLeft, Clock } from "lucide-react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import BlogCommentsSection from "../components/blog/BlogCommentsSection";
@@ -8,6 +9,7 @@ import BlogRelatedPosts from "../components/blog/BlogRelatedPosts";
 import BlogShareBar from "../components/blog/BlogShareBar";
 import BlogTableOfContents from "../components/blog/BlogTableOfContents";
 import { BLOG_POSTS, getBlogAuthor } from "../data/blogPosts";
+import usePageSeo from "../hooks/usePageSeo";
 import { BLOG_CATEGORY_LABELS } from "../types/blog";
 import {
   formatBlogDate,
@@ -18,6 +20,32 @@ import {
 function BlogPostPage() {
   const { slug } = useParams<{ slug: string }>();
   const post = slug ? getPostBySlug(BLOG_POSTS, slug) : undefined;
+
+  const seoVars = useMemo(
+    () =>
+      post
+        ? {
+            blogTitle: post.title,
+            blogExcerpt: post.excerpt,
+            blogAuthor: getBlogAuthor(post.authorId)?.name,
+            ogImage: post.coverUrl,
+          }
+        : {},
+    [post],
+  );
+
+  const seoBreadcrumbs = useMemo(
+    () =>
+      post
+        ? [
+            { name: "Blog", path: "/blog" },
+            { name: post.title, path: `/blog/${post.slug}` },
+          ]
+        : [],
+    [post],
+  );
+
+  usePageSeo(seoVars, seoBreadcrumbs);
 
   if (!post) {
     return <Navigate to="/blog" replace />;

@@ -9,8 +9,6 @@
     "start": "node server.js",
     "seed": "node migration/seed.js",
     "db:export": "node migration/export-db.js",
-    "db:seed:export": "node migration/seed-from-export.js",
-    "db:rebuild": "node migration/rebuild-dev-db.js",
     "build:frontend": "pnpm install --dir ../frontend && pnpm --dir ../frontend run build"
   },
   "keywords": [],

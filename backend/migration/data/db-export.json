@@ -1,0 +1,801 @@
+{
+  "version": 1,
+  "exportedAt": "2026-08-12T17:49:54.470Z",
+  "users": [
+    {
+      "id": 1,
+      "name": "Vũ Văn Kiên",
+      "email": "admin@devmarket.vn",
+      "password": "$2b$10$zHcD1oa2eReVnRmjntVgx.vfBuB.PsOStSLYsSe.8qAzz0uMC4Bpi",
+      "role": "ADMIN",
+      "createdAt": "2026-08-07T05:45:41.367Z",
+      "updatedAt": "2026-08-07T05:45:41.367Z"
+    },
+    {
+      "id": 2,
+      "name": "Trần Minh",
+      "email": "minh.tran@devmarket.vn",
+      "password": "$2b$10$zHcD1oa2eReVnRmjntVgx.vfBuB.PsOStSLYsSe.8qAzz0uMC4Bpi",
+      "role": "USER",
+      "createdAt": "2026-08-07T05:45:41.401Z",
+      "updatedAt": "2026-08-07T05:45:41.401Z"
+    },
+    {
+      "id": 3,
+      "name": "Nguyễn Lan",
+      "email": "lan.nguyen@devmarket.vn",
+      "password": "$2b$10$zHcD1oa2eReVnRmjntVgx.vfBuB.PsOStSLYsSe.8qAzz0uMC4Bpi",
+      "role": "USER",
+      "createdAt": "2026-08-07T05:45:41.416Z",
+      "updatedAt": "2026-08-07T05:45:41.416Z"
+    },
+    {
+      "id": 4,
+      "name": "Phạm Hùng",
+      "email": "hung.pham@devmarket.vn",
+      "password": "$2b$10$zHcD1oa2eReVnRmjntVgx.vfBuB.PsOStSLYsSe.8qAzz0uMC4Bpi",
+      "role": "USER",
+      "createdAt": "2026-08-07T05:45:41.439Z",
+      "updatedAt": "2026-08-07T05:45:41.439Z"
+    }
+  ],
+  "tags": [
+    {
+      "id": 1,
+      "name": "React",
+      "slug": "react"
+    },
+    {
+      "id": 2,
+      "name": "Node.js",
+      "slug": "node-js"
+    },
+    {
+      "id": 3,
+      "name": "Prisma",
+      "slug": "prisma"
+    },
+    {
+      "id": 4,
+      "name": "MariaDB",
+      "slug": "mariadb"
+    },
+    {
+      "id": 5,
+      "name": "Express",
+      "slug": "express"
+    },
+    {
+      "id": 6,
+      "name": "Tailwind",
+      "slug": "tailwind"
+    },
+    {
+      "id": 7,
+      "name": "JWT",
+      "slug": "jwt"
+    },
+    {
+      "id": 8,
+      "name": "BullMQ",
+      "slug": "bullmq"
+    },
+    {
+      "id": 9,
+      "name": "SendGrid",
+      "slug": "sendgrid"
+    },
+    {
+      "id": 10,
+      "name": "Vite",
+      "slug": "vite"
+    }
+  ],
+  "projects": [
+    {
+      "id": 6,
+      "slug": "cherry-house-booking",
+      "title": "Cherry House - Booking Platform",
+      "badge": "Full-stack",
+      "sumary": "Nền tảng đặt phòng đa chi nhánh",
+      "desc": "Website đặt phòng trực tiếp cho chuỗi homestay/mini hotel: catalog đa chi nhánh, checkout VNPay/MoMo, ví hoàn tiền, admin CMS.",
+      "longDesc": "<p class=\"ui-markdown__paragraph ui-z80ra4 ui-uu7i3w ui-1nhcn8o ui-j7cesy ui-13faqbe ui-14l7nz5 ui-zboxd6\"><span class=\"font-semibold\" data-streamdown=\"strong\">Vấn đề / bối cảnh</span></p>\n<p class=\"ui-markdown__paragraph ui-z80ra4 ui-uu7i3w ui-1nhcn8o ui-j7cesy ui-13faqbe ui-14l7nz5 ui-zboxd6\">Homestay v&agrave; mini hotel vận h&agrave;nh theo m&ocirc; h&igrave;nh chuỗi nhỏ thường gặp c&ugrave;ng một nh&oacute;m kh&oacute; khăn: phụ thuộc OTA (hoa hồng cao, kh&ocirc;ng sở hữu dữ liệu kh&aacute;ch), quản l&yacute; tồn ph&ograve;ng rời rạc qua Zalo hoặc Excel dễ tr&ugrave;ng đặt, v&agrave; thiếu một cửa thương hiệu thống nhất khi mở rộng sang tỉnh mới.</p>\n<p class=\"ui-markdown__paragraph ui-z80ra4 ui-uu7i3w ui-1nhcn8o ui-j7cesy ui-13faqbe ui-14l7nz5 ui-zboxd6\">Cherry House l&agrave; dự &aacute;n x&acirc;y website đặt ph&ograve;ng trực tiếp &mdash; từ t&igrave;m kiếm theo địa điểm v&agrave; ng&agrave;y, chọn ph&ograve;ng, thanh to&aacute;n online, đến quản trị catalog v&agrave; vận h&agrave;nh booking &mdash; thay v&igrave; dựng marketplace hay channel manager phức tạp.</p>\n<p class=\"ui-markdown__paragraph ui-z80ra4 ui-uu7i3w ui-1nhcn8o ui-j7cesy ui-13faqbe ui-14l7nz5 ui-zboxd6\">Mục ti&ecirc;u kỹ thuật l&agrave; hệ thống triển khai được tr&ecirc;n VPS thật: một nguồn dữ liệu cho catalog v&agrave; booking, admin tự cập nhật nội dung kh&ocirc;ng cần dev, v&agrave; luồng kh&aacute;ch chịu được khi hai người c&ugrave;ng đặt một ph&ograve;ng trong c&ugrave;ng khoảng ng&agrave;y.</p>\n<p class=\"ui-markdown__paragraph ui-z80ra4 ui-uu7i3w ui-1nhcn8o ui-j7cesy ui-13faqbe ui-14l7nz5 ui-zboxd6\"><span class=\"font-semibold\" data-streamdown=\"strong\">Giải ph&aacute;p &amp; kiến tr&uacute;c</span></p>\n<p class=\"ui-markdown__paragraph ui-z80ra4 ui-uu7i3w ui-1nhcn8o ui-j7cesy ui-13faqbe ui-14l7nz5 ui-zboxd6\">Repo tổ chức dạng monorepo: frontend React SPA, backend Express (API + admin), mobile Flutter demo. Production chạy một process Node &mdash; Express phục vụ API tại /api, admin tại /admin, upload ảnh tại /uploads, v&agrave; build React phục vụ tại /. Nginx reverse proxy SSL ph&iacute;a trước; PM2 giữ process tr&ecirc;n VPS.</p>\n<p class=\"ui-markdown__paragraph ui-z80ra4 ui-uu7i3w ui-1nhcn8o ui-j7cesy ui-13faqbe ui-14l7nz5 ui-zboxd6\">M&ocirc; h&igrave;nh dữ liệu catalog: Property &rarr; Branch &rarr; RoomType &rarr; InventoryRoom &rarr; Booking. Mỗi booking lưu snapshot (t&ecirc;n cơ sở, chi nh&aacute;nh, m&atilde; ph&ograve;ng, gi&aacute;, tổng tiền) tại thời điểm đặt để lịch sử kh&ocirc;ng sai khi admin chỉnh gi&aacute; sau n&agrave;y. MySQL/MariaDB qua Prisma ORM; deploy production chỉ chạy migrate, kh&ocirc;ng reset dữ liệu.</p>\n<p class=\"ui-markdown__paragraph ui-z80ra4 ui-uu7i3w ui-1nhcn8o ui-j7cesy ui-13faqbe ui-14l7nz5 ui-zboxd6\">Kh&aacute;ch d&ugrave;ng JWT access ngắn + refresh token (c&oacute; revoke). Đăng k&yacute; email qua OTP; Google OAuth cho đăng nhập nhanh. Admin v&agrave; staff d&ugrave;ng session cookie ri&ecirc;ng. Staff gắn chi nh&aacute;nh &mdash; truy vấn booking v&agrave; catalog được lọc theo phạm vi đ&oacute;; Super Admin v&agrave; Admin c&oacute; quyền to&agrave;n hệ thống.</p>\n<p class=\"ui-markdown__paragraph ui-z80ra4 ui-uu7i3w ui-1nhcn8o ui-j7cesy ui-13faqbe ui-14l7nz5 ui-zboxd6\"><span class=\"font-semibold\" data-streamdown=\"strong\">Availability &amp; chống tr&ugrave;ng ph&ograve;ng</span></p>\n<p class=\"ui-markdown__paragraph ui-z80ra4 ui-uu7i3w ui-1nhcn8o ui-j7cesy ui-13faqbe ui-14l7nz5 ui-zboxd6\">Hai giai đoạn kiểm tra ph&ograve;ng trống. Khi duyệt danh s&aacute;ch, API occupancy đọc real-time từ bookings v&agrave; map trạng th&aacute;i UI (sẵn s&agrave;ng / đang giữ / đ&atilde; đặt). Khi checkout, server chạy overlap check: hai booking active tr&ugrave;ng ph&ograve;ng v&agrave; ng&agrave;y th&igrave; từ chối. Booking chờ thanh to&aacute;n giữ ph&ograve;ng 15 ph&uacute;t; hết giờ th&igrave; ph&ograve;ng mở lại cho kh&aacute;ch mới d&ugrave; bản ghi đơn cũ vẫn c&ograve;n để admin dọn.</p>\n<p class=\"ui-markdown__paragraph ui-z80ra4 ui-uu7i3w ui-1nhcn8o ui-j7cesy ui-13faqbe ui-14l7nz5 ui-zboxd6\"><span class=\"font-semibold\" data-streamdown=\"strong\">Thanh to&aacute;n &amp; v&iacute; nội bộ</span></p>\n<p class=\"ui-markdown__paragraph ui-z80ra4 ui-uu7i3w ui-1nhcn8o ui-j7cesy ui-13faqbe ui-14l7nz5 ui-zboxd6\">Checkout t&iacute;ch hợp VNPay v&agrave; MoMo (sandbox, verify chữ k&yacute; return URL v&agrave; IPN). Thanh to&aacute;n th&agrave;nh c&ocirc;ng chuyển booking sang đ&atilde; x&aacute;c nhận; callback tr&ugrave;ng vẫn xử l&yacute; an to&agrave;n. C&oacute; V&iacute; Cherry House: số dư nội bộ, sổ c&aacute;i giao dịch bất biến, ho&agrave;n tiền hủy đơn theo policy &mdash; 100% nếu hủy trước 24 giờ so với 14:00 ng&agrave;y nhận ph&ograve;ng; 0% nếu hủy trong v&ograve;ng 24 giờ.</p>\n<p class=\"ui-markdown__paragraph ui-z80ra4 ui-uu7i3w ui-1nhcn8o ui-j7cesy ui-13faqbe ui-14l7nz5 ui-zboxd6\"><span class=\"font-semibold\" data-streamdown=\"strong\">Stack c&ocirc;ng nghệ</span></p>\n<p class=\"ui-markdown__paragraph ui-z80ra4 ui-uu7i3w ui-1nhcn8o ui-j7cesy ui-13faqbe ui-14l7nz5 ui-zboxd6\">Frontend public: React 19, Vite, React Router, Tailwind CSS 4 &mdash; design token, layout responsive, loading kit custom. Data fetching qua Axios; booking context giữ tham số t&igrave;m kiếm xuy&ecirc;n suốt luồng t&igrave;m ph&ograve;ng &rarr; chi tiết &rarr; checkout.</p>\n<p class=\"ui-markdown__paragraph ui-z80ra4 ui-uu7i3w ui-1nhcn8o ui-j7cesy ui-13faqbe ui-14l7nz5 ui-zboxd6\">Backend Express 5 chia module theo domain: catalog, booking, checkout, auth, wallet, chatbot. Admin CMS render EJS + CoreUI: CRUD property/branch/room, media library, SEO, homepage, m&atilde; giảm gi&aacute;. Chatbot AI (Gemini) gọi tool đọc catalog v&agrave; occupancy thật từ DB.</p>\n<p class=\"ui-markdown__paragraph ui-z80ra4 ui-uu7i3w ui-1nhcn8o ui-j7cesy ui-13faqbe ui-14l7nz5 ui-zboxd6\"><span class=\"font-semibold\" data-streamdown=\"strong\">Luồng đặt ph&ograve;ng &amp; thanh to&aacute;n</span></p>\n<p class=\"ui-markdown__paragraph ui-z80ra4 ui-uu7i3w ui-1nhcn8o ui-j7cesy ui-13faqbe ui-14l7nz5 ui-zboxd6\">Kh&aacute;ch chọn địa điểm v&agrave; ng&agrave;y, hệ thống load catalog rồi overlay occupancy theo ng&agrave;y. Checkout y&ecirc;u cầu đăng nhập; sau login/OAuth quay lại checkout kh&ocirc;ng mất context ph&ograve;ng v&agrave; ng&agrave;y. Server validate m&atilde; giảm, kiểm tra overlap, tạo booking + payment, redirect VNPay/MoMo hoặc trừ v&iacute;. Return URL x&aacute;c minh chữ k&yacute; trước khi mark paid; email x&aacute;c nhận gửi bất đồng bộ.</p>\n<p class=\"ui-markdown__paragraph ui-z80ra4 ui-uu7i3w ui-1nhcn8o ui-j7cesy ui-13faqbe ui-14l7nz5 ui-zboxd6\"><span class=\"font-semibold\" data-streamdown=\"strong\">Luồng hủy đơn &amp; ho&agrave;n v&iacute;</span></p>\n<p class=\"ui-markdown__paragraph ui-z80ra4 ui-uu7i3w ui-1nhcn8o ui-j7cesy ui-13faqbe ui-14l7nz5 ui-zboxd6\">Profile liệt k&ecirc; đơn theo t&agrave;i khoản hoặc email kh&aacute;ch. Trước hủy, API preview trả ch&iacute;nh s&aacute;ch ho&agrave;n tiền; x&aacute;c nhận th&igrave; booking chuyển đ&atilde; hủy, ghi audit refund, v&agrave; credit v&iacute; nếu đủ điều kiện. UX quan trọng: ph&acirc;n biệt r&otilde; &ldquo;đ&atilde; thanh to&aacute;n VNPay&rdquo; với &ldquo;được ho&agrave;n v&agrave;o v&iacute;&rdquo; theo mốc 24 giờ trước check-in.</p>\n<p class=\"ui-markdown__paragraph ui-z80ra4 ui-uu7i3w ui-1nhcn8o ui-j7cesy ui-13faqbe ui-14l7nz5 ui-zboxd6\"><span class=\"font-semibold\" data-streamdown=\"strong\">Th&aacute;ch thức &amp; c&aacute;ch xử l&yacute;</span></p>\n<p class=\"ui-markdown__paragraph ui-z80ra4 ui-uu7i3w ui-1nhcn8o ui-j7cesy ui-13faqbe ui-14l7nz5 ui-zboxd6\">Tr&ugrave;ng ph&ograve;ng khi concurrent checkout: kiểm tra overlap ngay trước khi tạo đơn; người sau nhận lỗi, kh&ocirc;ng tạo bản ghi mới.</p>\n<p class=\"ui-markdown__paragraph ui-z80ra4 ui-uu7i3w ui-1nhcn8o ui-j7cesy ui-13faqbe ui-14l7nz5 ui-zboxd6\">Auth giữa checkout v&agrave; login: stash URL checkout đầy đủ trước redirect; sau đăng nhập navigate về đ&uacute;ng trang.</p>\n<p class=\"ui-markdown__paragraph ui-z80ra4 ui-uu7i3w ui-1nhcn8o ui-j7cesy ui-13faqbe ui-14l7nz5 ui-zboxd6\">Hold hết hạn vs đơn chờ thanh to&aacute;n c&ograve;n trong DB: availability bỏ qua hold qu&aacute; 15 ph&uacute;t; admin dọn đơn thủ c&ocirc;ng &mdash; trade-off MVP.</p>\n<p class=\"ui-markdown__paragraph ui-z80ra4 ui-uu7i3w ui-1nhcn8o ui-j7cesy ui-13faqbe ui-14l7nz5 ui-zboxd6\">Triển khai kh&ocirc;ng mất data: pull code &rarr; install &rarr; migrate &rarr; build frontend &rarr; restart PM2; kh&ocirc;ng ghi đ&egrave; file env v&agrave; thư mục upload.</p>\n<p class=\"ui-markdown__paragraph ui-z80ra4 ui-uu7i3w ui-1nhcn8o ui-j7cesy ui-13faqbe ui-14l7nz5 ui-zboxd6\"><span class=\"font-semibold\" data-streamdown=\"strong\">Kết quả &amp; học được</span></p>\n<p class=\"ui-markdown__paragraph ui-z80ra4 ui-uu7i3w ui-1nhcn8o ui-j7cesy ui-13faqbe ui-14l7nz5 ui-zboxd6\">MVP full-stack vận h&agrave;nh thật: catalog tập trung, booking end-to-end với cổng thanh to&aacute;n Việt Nam, admin CMS tự phục vụ nội dung, deploy một Node + MySQL + Nginx. Pattern đ&aacute;ng nhớ: domain model c&oacute; snapshot, availability hai tầng (duyệt vs checkout), payment idempotency &mdash; lặp lại ở hầu hết hệ thống booking.</p>",
+      "thumbnail": "https://picsum.photos/seed/cherry-house/1200/750",
+      "status": "COMPLETED",
+      "isDisplay": true,
+      "finishedAt": "2026-03-20T00:00:00.000Z",
+      "demoUrl": "https://cherryhouse.vn",
+      "repoUrl": "https://github.com/kien/cherry-house",
+      "featured": true,
+      "viewCount": 885,
+      "features": [
+        "Brand → Property → Branch → Room → Booking",
+        "Tích hợp VNPay và MoMo",
+        "Ví hoàn tiền an toàn",
+        "Admin quản lý đa chi nhánh"
+      ],
+      "createdAt": "2026-08-08T06:37:43.443Z",
+      "updatedAt": "2026-08-12T17:16:02.403Z"
+    },
+    {
+      "id": 8,
+      "slug": "personal-portfolio",
+      "title": "Personal Portfolio",
+      "badge": "React",
+      "sumary": "Website portfolio cá nhân full-stack",
+      "desc": "React + Vite frontend, Express + Prisma backend, trang admin quản lý project và story.",
+      "longDesc": "<p>Portfolio cá nhân tích hợp blog, dự án, resume và stories.</p><p>Monorepo với admin dashboard CRUD và deploy VPS.</p>",
+      "thumbnail": "https://picsum.photos/seed/portfolio/1200/750",
+      "status": "IN_PROGRESS",
+      "isDisplay": true,
+      "finishedAt": null,
+      "demoUrl": null,
+      "repoUrl": "https://github.com/kien/personal-portfolio",
+      "featured": true,
+      "viewCount": 131,
+      "features": [
+        "Trang public catalog dự án",
+        "Admin CRUD project + story",
+        "JWT auth + refresh token",
+        "Deploy monorepo Express + Vite"
+      ],
+      "createdAt": "2026-08-08T06:37:43.692Z",
+      "updatedAt": "2026-08-12T17:15:58.828Z"
+    },
+    {
+      "id": 9,
+      "slug": "toppicare",
+      "title": "Toppicare",
+      "badge": null,
+      "sumary": null,
+      "desc": "Nền tảng web full-stack cho thương hiệu chăm sóc sức khỏe: React SPA + Express CMS, SEO động, form liên hệ có Cloudflare Turnstile. Production tại toppicare.vn.",
+      "longDesc": "<h2>vấn đề / bối cảnh</h2>\n<p>toppicare l&agrave; thương hiệu chăm s&oacute;c sức khỏe tại việt nam, cần một nền tảng web vừa mang t&iacute;nh thương hiệu (giới thiệu dịch vụ, tin tức, tuyển dụng kỹ thuật vi&ecirc;n), vừa hỗ trợ vận h&agrave;nh h&agrave;ng ng&agrave;y m&agrave; kh&ocirc;ng phụ thuộc qu&aacute; nhiều v&agrave;o developer mỗi khi đổi banner, slogan hay b&agrave;i viết mới. trước khi x&acirc;y dựng hệ thống n&agrave;y, team marketing thường gặp c&aacute;c hạn chế: nội dung rải r&aacute;c, cập nhật trang phải qua dev, form li&ecirc;n hệ dễ bị spam bot, v&agrave; spa thuần kh&oacute; tối ưu seo khi chia sẻ link l&ecirc;n mạng x&atilde; hội.</p>\n<p>mục ti&ecirc;u của dự &aacute;n l&agrave; triển khai một website production thực tế &mdash; kh&ocirc;ng chỉ l&agrave; landing page tĩnh &mdash; với khả năng mở rộng module (blog, trung t&acirc;m hỗ trợ, quản l&yacute; dịch vụ, form li&ecirc;n hệ) v&agrave; bảo mật cơ bản cho khu vực quản trị. sản phẩm cuối c&ugrave;ng được vận h&agrave;nh tại <a href=\"https://toppicare.vn\" target=\"_blank\" rel=\"noopener noreferrer\">toppicare.vn</a>.</p>\n<!-- IMAGE: screenshot trang chủ toppicare — hero banner, menu và cta chính -->\n<h2>giải ph&aacute;p &amp; kiến tr&uacute;c</h2>\n<p>t&ocirc;i thiết kế kiến tr&uacute;c <strong>hybrid full-stack</strong>: ph&iacute;a người d&ugrave;ng l&agrave; react spa (vite build, deploy dưới dạng static bundle), ph&iacute;a server l&agrave; express.js đảm nhiệm ba vai tr&ograve; song song &mdash; phục vụ rest api cho frontend, render admin panel server-side (ejs + coreui), v&agrave; xử l&yacute; spa fallback với seo meta được inject động từ mongodb trước khi trả html shell về tr&igrave;nh duyệt.</p>\n<p>codebase được tổ chức theo m&ocirc; h&igrave;nh <strong>client / server</strong> trong c&ugrave;ng monorepo. server tu&acirc;n thủ ph&acirc;n lớp r&otilde; r&agrave;ng: <em>routes &rarr; controllers &rarr; services &rarr; models</em>, gi&uacute;p t&aacute;ch biệt http layer, business logic v&agrave; persistence. mongodb (mongoose) lưu trữ khoảng 15 collection: cấu h&igrave;nh trang (<code>pageconfig</code>), blog, dịch vụ &amp; g&oacute;i dịch vụ, help center, gallery ảnh, tin li&ecirc;n hệ, t&agrave;i khoản admin, v.v.</p>\n<p>điểm cốt l&otilde;i của giải ph&aacute;p l&agrave; <strong>cms cấu h&igrave;nh theo section</strong>: thay v&igrave; hard-code nội dung trong component react, mỗi block tr&ecirc;n trang chủ, trang giới thiệu, dịch vụ, đ&agrave;o tạo, tin tức, li&ecirc;n hệ hay tuyển kỹ thuật vi&ecirc;n đều map với schema linh hoạt trong <code>pageconfig</code>. admin chỉnh sửa qua form tr&ecirc;n panel &rarr; api lưu db &rarr; react fetch lại khi render &mdash; kh&ocirc;ng cần build lại frontend.</p>\n<p>với khu vực quản trị, t&ocirc;i chọn ssr bằng ejs thay v&igrave; react admin ri&ecirc;ng để r&uacute;t ngắn thời gian ph&aacute;t triển form crud phức tạp (gallery, blog tinymce, export dữ liệu). x&aacute;c thực d&ugrave;ng jwt lưu trong <strong>httponly cookie</strong>, kết hợp bcrypt hash mật khẩu v&agrave; ph&acirc;n quyền theo role (<code>super_admin</code>, <code>admin</code>). middleware kiểm tra token, trạng th&aacute;i t&agrave;i khoản v&agrave; quyền truy cập trước mọi route <code>/admin/*</code>.</p>\n<!-- IMAGE: sơ đồ kiến trúc — react spa ↔ express api ↔ mongodb, nhánh admin ejs -->\n<h2>stack c&ocirc;ng nghệ</h2>\n<p>frontend public site được x&acirc;y bằng react 19 v&agrave; vite 7, routing qua react router 7, styling với tailwind css 4. data fetching d&ugrave;ng axios v&agrave; custom hooks (<code>usepageconfig</code>, <code>useservices</code>, <code>usenews</code>) để t&aacute;ch logic gọi api khỏi component ui. một số trang như tra cứu bảo h&agrave;nh hay help center c&oacute; css module ri&ecirc;ng để giữ trải nghiệm đọc tốt tr&ecirc;n mobile.</p>\n<p>backend chạy node.js với express 5. admin panel d&ugrave;ng ejs template, layout coreui, rich text editor tinymce 8 cho blog v&agrave; b&agrave;i viết help center. upload ảnh qua multer (memory storage), gallery quản l&yacute; theo folder tr&ecirc;n filesystem + metadata trong db. bảo mật bổ sung gồm helmet (csp c&oacute; thể bật theo m&ocirc;i trường), cors whitelist domain production, v&agrave; express-rate-limit tr&ecirc;n endpoint đăng nhập admin.</p>\n<p>triển khai container h&oacute;a bằng docker compose; biến m&ocirc;i trường quản l&yacute; jwt secret, mongodb uri, cloudflare turnstile secret. frontend build ra static files, server đọc <code>index.html</code> l&agrave;m template v&agrave; thay thế placeholder seo (<code>__title__</code>, <code>__description__</code>, og image) bằng dữ liệu từ <code>pageconfig.customize</code> mỗi request &mdash; đ&acirc;y l&agrave; trade-off c&oacute; chủ đ&iacute;ch giữa spa ux v&agrave; khả năng index/share link.</p>\n<h2>luồng nghiệp vụ ch&iacute;nh</h2>\n<h3>luồng 1 &mdash; cập nhật nội dung trang qua cms</h3>\n<p>admin đăng nhập qua form <code>/auth/admin/login</code> &rarr; server verify bcrypt, ph&aacute;t jwt v&agrave;o httponly cookie &rarr; redirect v&agrave;o dashboard. từ đ&acirc;y admin v&agrave;o mục page config (v&iacute; dụ: section trang chủ, customize seo) &rarr; submit form put &rarr; controller validate v&agrave; ghi v&agrave;o document <code>pageconfig</code> trong mongodb.</p>\n<p>ph&iacute;a client, khi người d&ugrave;ng truy cập trang chủ, hook <code>usepageconfig</code> gọi <code>get /api/pageconfigs</code>, nhận json cấu h&igrave;nh v&agrave; render banner, slogan, faq, th&ocirc;ng tin li&ecirc;n hệ động. đồng thời, mọi route spa đi qua middleware fallback: server đọc seo từ db, escape html an to&agrave;n, inject v&agrave;o shell react trước khi response &mdash; gi&uacute;p link preview tr&ecirc;n facebook/zalo hiển thị đ&uacute;ng title v&agrave; m&ocirc; tả m&agrave; kh&ocirc;ng cần chuyển sang next.js hay ssr to&agrave;n bộ app.</p>\n<!-- IMAGE: admin page config — form chỉnh section trang chủ hoặc customize seo -->\n<h3>luồng 2 &mdash; form li&ecirc;n hệ &amp; chống spam bot</h3>\n<p>người d&ugrave;ng điền form tại trang li&ecirc;n hệ hoặc tuyển kỹ thuật vi&ecirc;n. frontend load script cloudflare turnstile, hiển thị widget challenge; khi người d&ugrave;ng x&aacute;c minh th&agrave;nh c&ocirc;ng, callback g&aacute;n token v&agrave;o state form. submit gửi post <code>/api/contact</code> k&egrave;m token.</p>\n<p>server gọi api <code>challenges.cloudflare.com/turnstile/v0/siteverify</code> với secret key &mdash; chỉ khi <code>success: true</code> mới tiếp tục validate input v&agrave; lưu document v&agrave;o collection <code>contact</code> (ph&acirc;n loại <code>customer</code> hoặc <code>partner</code>). admin xem danh s&aacute;ch tr&ecirc;n panel, đổi trạng th&aacute;i xử l&yacute;, export excel/csv phục vụ team sales/hr. luồng n&agrave;y giảm đ&aacute;ng kể spam so với form kh&ocirc;ng c&oacute; x&aacute;c minh, đồng thời t&aacute;ch biệt r&otilde; public api v&agrave; khu vực quản trị c&oacute; rate limit ri&ecirc;ng cho login.</p>\n<!-- IMAGE: form liên hệ với widget cloudflare turnstile + trang admin danh sách contact -->\n<h2>th&aacute;ch thức &amp; c&aacute;ch xử l&yacute;</h2>\n<p><strong>seo cho single page application.</strong> react router xử l&yacute; routing ph&iacute;a client n&ecirc;n crawler v&agrave; social preview kh&ocirc;ng thấy meta tag động nếu chỉ serve file tĩnh. giải ph&aacute;p: express catch-all route đọc template html, query seo từ mongodb theo path, replace placeholder v&agrave; trả về &mdash; client vẫn hydrate spa b&igrave;nh thường. h&agrave;m <code>escapehtml</code> được d&ugrave;ng khi inject để tr&aacute;nh xss từ dữ liệu admin nhập.</p>\n<p><strong>cms linh hoạt nhưng kh&ocirc;ng qu&aacute; generic.</strong> schema <code>pageconfig</code> nested s&acirc;u (homepage, about, service, training, news, contact, technician&hellip;). thay v&igrave; x&acirc;y page builder phức tạp, t&ocirc;i map từng section với form admin ri&ecirc;ng &mdash; đ&aacute;nh đổi giữa flexibility v&agrave; thời gian ship. mỗi section c&oacute; endpoint put ri&ecirc;ng, dễ debug v&agrave; kh&ocirc;ng ph&aacute; section kh&aacute;c khi lưu.</p>\n<p><strong>bảo mật admin tr&ecirc;n production.</strong> cookie jwt cấu h&igrave;nh <code>secure</code> v&agrave; <code>samesite</code> theo m&ocirc;i trường; login rate limit 10 lần / 15 ph&uacute;t; middleware auth verify token mỗi request admin v&agrave; redirect c&oacute; l&yacute; do (<code>expired</code>, <code>disabled</code>, <code>forbidden</code>) thay v&igrave; json error &mdash; ph&ugrave; hợp flow ssr form-based.</p>\n<p><strong>quản l&yacute; media quy m&ocirc; vừa.</strong> gallery hỗ trợ folder, upload ajax, x&oacute;a ảnh đồng bộ db + filesystem. sharp từng được d&ugrave;ng convert webp; hiện giữ extension gốc để tương th&iacute;ch nội dung cũ &mdash; minh họa việc refactor c&oacute; chủ đ&iacute;ch khi y&ecirc;u cầu thực tế thay đổi.</p>\n<h2>kết quả &amp; b&agrave;i học</h2>\n<p>hệ thống đ&atilde; l&ecirc;n production, phục vụ website thương hiệu thực tế với đầy đủ module nội dung, form li&ecirc;n hệ c&oacute; chống bot, v&agrave; admin panel cho team nội bộ tự vận h&agrave;nh. kiến tr&uacute;c hybrid cho ph&eacute;p tận dụng react cho ux ph&iacute;a kh&aacute;ch h&agrave;ng trong khi giữ chi ph&iacute; ph&aacute;t triển admin thấp nhờ ejs + coreui.</p>\n<p>về mặt kỹ thuật, dự &aacute;n củng cố kinh nghiệm thiết kế api rest c&oacute; tổ chức, modeling mongodb cho cms, v&agrave; c&acirc;n bằng trade-off spa vs seo. về mặt sản phẩm, b&agrave;i học lớn nhất l&agrave; <strong>ưu ti&ecirc;n luồng vận h&agrave;nh thực tế</strong> (admin sửa nội dung trong 5 ph&uacute;t, export contact cho sales) hơn l&agrave; chase c&ocirc;ng nghệ mới &mdash; v&iacute; dụ kh&ocirc;ng cần admin react ri&ecirc;ng khi ejs + tinymce đ&aacute;p ứng đủ nhu cầu crud.</p>\n<p>nếu mở rộng tiếp, hướng đi hợp l&yacute; gồm: th&ecirc;m queue gửi email th&ocirc;ng b&aacute;o khi c&oacute; contact mới, bật helmet csp đầy đủ tr&ecirc;n production, v&agrave; t&aacute;ch upload media sang object storage (s3/cloudinary) thay v&igrave; local disk &mdash; những phần n&agrave;y chưa triển khai trong phi&ecirc;n bản hiện tại nhưng kiến tr&uacute;c api/service layer đ&atilde; sẵn s&agrave;ng để gắn th&ecirc;m.</p>\n<!-- IMAGE: lighthouse / pagespeed hoặc analytics gtm nếu có — minh chứng production -->",
+      "thumbnail": "https://res.cloudinary.com/dk5vnzify/image/upload/v1786249362/gallery/nzvz3ulq7xgvz1onqqjw.jpg",
+      "status": "COMPLETED",
+      "isDisplay": true,
+      "finishedAt": null,
+      "demoUrl": "https://toppicare.vn",
+      "repoUrl": null,
+      "featured": false,
+      "viewCount": 178,
+      "features": [],
+      "createdAt": "2026-08-09T05:12:11.518Z",
+      "updatedAt": "2026-08-12T17:15:55.006Z"
+    },
+    {
+      "id": 10,
+      "slug": "accessrace-tool",
+      "title": "AccessRace Tool",
+      "badge": "Runner",
+      "sumary": null,
+      "desc": "Hệ thống quản lý giải chạy end-to-end cho BTC: import VĐV, QR check-in bảo mật, gửi email hàng loạt và cấp e-certificate. Đã vận hành thực tế tại Anessa Run To Shine với gần 1.000 runner.",
+      "longDesc": "<h2>Vấn đề / bối cảnh</h2>\n<p>Giải chạy quy m&ocirc; trung b&igrave;nh&ndash;lớn kh&ocirc;ng chỉ cần một đường đua v&agrave; bảng xếp hạng. Ph&iacute;a ban tổ chức (BTC) phải xử l&yacute; h&agrave;ng trăm đến h&agrave;ng ngh&igrave;n vận động vi&ecirc;n (VĐV) qua nhiều giai đoạn: nhận danh s&aacute;ch đăng k&yacute;, g&aacute;n số BIB, gửi th&ocirc;ng tin check-in, vận h&agrave;nh quầy nhận bib tại hiện trường, v&agrave; cấp chứng nhận sau sự kiện. Với <strong>Anessa Run To Shine</strong> &mdash; giải chạy 5km do thương hiệu chống nắng Anessa tổ chức tại khu đ&ocirc; thị Sala (TP.HCM), thu h&uacute;t gần <strong>1.000 runner</strong> &mdash; c&aacute;c c&ocirc;ng việc n&agrave;y nếu l&agrave;m thủ c&ocirc;ng bằng Excel v&agrave; email rời rạc sẽ dễ ph&aacute;t sinh sai s&oacute;t, chậm trễ v&agrave; kh&oacute; kiểm so&aacute;t trong ng&agrave;y diễn ra sự kiện.</p>\n<p><strong>Access Race</strong> ra đời như một nền tảng vận h&agrave;nh tập trung cho BTC: quản l&yacute; sự kiện, danh s&aacute;ch VĐV, m&atilde; QR check-in bảo mật, gửi email h&agrave;ng loạt, c&ugrave;ng c&aacute;c module phụ trợ như chứng nhận điện tử (e-certificate) v&agrave; quản l&yacute; t&igrave;nh nguyện vi&ecirc;n. Hệ thống được thiết kế ưu ti&ecirc;n <strong>độ tin cậy trong ng&agrave;y race</strong> v&agrave; khả năng xử l&yacute; khối lượng dữ liệu lớn trong thời gian ngắn, thay v&igrave; x&acirc;y dựng một cổng đăng k&yacute; c&ocirc;ng khai phức tạp.</p>\n<p><!-- IMAGE: Ảnh tổng quan khu vực check-in hoặc giao diện admin dashboard trong ngày sự kiện --></p>\n<h2>Giải ph&aacute;p &amp; kiến tr&uacute;c</h2>\n<p>Access Race được x&acirc;y dựng theo m&ocirc; h&igrave;nh <strong>ứng dụng web server-side rendering (SSR)</strong> tr&ecirc;n Node.js, kết hợp lớp service t&aacute;ch biệt khỏi controller để dễ bảo tr&igrave; khi quy m&ocirc; sự kiện tăng. To&agrave;n bộ codebase nằm trong một repository duy nhất, tổ chức theo domain: admin panel, public site, models MongoDB, v&agrave; c&aacute;c service nghiệp vụ (event, athlete, mail, QR, certificate).</p>\n<p><strong>Luồng dữ liệu cốt l&otilde;i</strong> bắt đầu từ việc BTC tạo sự kiện tr&ecirc;n admin panel, import danh s&aacute;ch VĐV từ file Excel (mapping hơn 20 cột: BIB, chip, EPC, th&ocirc;ng tin c&aacute; nh&acirc;n, cự ly, size &aacute;o, trạng th&aacute;i thanh to&aacute;n&hellip;), sau đ&oacute; hệ thống sinh m&atilde; QR ri&ecirc;ng cho từng VĐV v&agrave; gửi qua email. Ng&agrave;y sự kiện, nh&acirc;n vi&ecirc;n tại quầy check-in qu&eacute;t QR bằng camera hoặc thiết bị di động; backend giải m&atilde;, x&aacute;c thực chữ k&yacute; v&agrave; thời hạn, rồi cập nhật trạng th&aacute;i <code>checkin</code> trong database. Song song, module e-certificate v&agrave; volunteer certificate cho ph&eacute;p render chứng nhận server-side từ template ảnh v&agrave; cấu h&igrave;nh vị tr&iacute; text.</p>\n<p>Kiến tr&uacute;c routing ph&acirc;n t&aacute;ch r&otilde; <strong>admin</strong> (<code>/admin/*</code>, y&ecirc;u cầu session đăng nhập) v&agrave; <strong>public</strong> (trang chủ, danh s&aacute;ch sự kiện, tin tức, tra cứu chứng nhận). Admin panel sử dụng partial rendering qua AJAX &mdash; c&aacute;c bước trong wizard quản l&yacute; sự kiện được load từng phần EJS, gi&uacute;p BTC thao t&aacute;c li&ecirc;n tục m&agrave; kh&ocirc;ng reload to&agrave;n trang. Trạng th&aacute;i sự kiện được điều phối bằng enum <strong>EventStatus</strong>: Khởi tạo &rarr; BIB &rarr; Gửi mail &rarr; Check-in &rarr; Ho&agrave;n tất.</p>\n<p><!-- IMAGE: Sơ đồ kiến trúc hoặc flowchart luồng import VĐV → gửi QR → check-in --></p>\n<h3>Bảo mật m&atilde; QR</h3>\n<p>Mỗi m&atilde; QR chứa payload gồm <code>athleteId</code>, <code>eventId</code> v&agrave; <code>expiryDate</code>, được m&atilde; h&oacute;a bằng <strong>AES-256-CBC</strong>, k&yacute; bằng <strong>HMAC-SHA256</strong>, rồi gh&eacute;p th&agrave;nh chuỗi <code>encrypted.signature</code>. Khi qu&eacute;t, hệ thống verify chữ k&yacute; trước, giải m&atilde; sau, v&agrave; từ chối m&atilde; đ&atilde; hết hạn hoặc đ&atilde; sử dụng. C&aacute;ch tiếp cận n&agrave;y ngăn việc giả mạo hoặc t&aacute;i sử dụng QR ngo&agrave;i &yacute; muốn &mdash; y&ecirc;u cầu quan trọng khi gần 1.000 người tập trung tại một điểm nhận bib trong khung giờ ngắn.</p>\n<h2>Stack c&ocirc;ng nghệ</h2>\n<p>Backend chạy tr&ecirc;n <strong>Node.js</strong> với <strong>Express 5</strong>, template engine <strong>EJS</strong> kết hợp <strong>express-ejs-layouts</strong> cho layout admin v&agrave; trang public. Dữ liệu lưu trữ tr&ecirc;n <strong>MongoDB</strong> th&ocirc;ng qua <strong>Mongoose 8</strong>, ph&ugrave; hợp với schema linh hoạt của sự kiện thể thao (nhiều trường t&ugrave;y chọn theo từng giải). X&aacute;c thực admin d&ugrave;ng <strong>express-session</strong> dạng cookie-based; upload file xử l&yacute; bằng <strong>Multer</strong>, lưu local tr&ecirc;n filesystem.</p>\n<p>Ph&iacute;a giao diện admin dựa tr&ecirc;n theme <strong>Mantis Bootstrap 5</strong>, bổ sung <strong>DataTables</strong> (server-side pagination, i18n tiếng Việt), <strong>SweetAlert2</strong> cho x&aacute;c nhận thao t&aacute;c, v&agrave; <strong>TinyMCE</strong> cho CMS tin tức. Module thiết kế chứng nhận t&iacute;ch hợp <strong>Konva.js</strong> &mdash; cho ph&eacute;p BTC k&eacute;o-thả vị tr&iacute; text tr&ecirc;n template ảnh &mdash; c&ograve;n render cuối c&ugrave;ng thực hiện server-side bằng <strong>node-canvas</strong>, <strong>sharp</strong> v&agrave; <strong>text-to-svg</strong>. Gửi email qua <strong>Nodemailer</strong> (Gmail SMTP v&agrave; AWS SES dự ph&ograve;ng); import/export Excel d&ugrave;ng thư viện <strong>xlsx (SheetJS)</strong>; sinh QR bằng <strong>qrcode</strong> kết hợp canvas.</p>\n<h2>Luồng nghiệp vụ ch&iacute;nh</h2>\n<h3>Flow 1: Chuẩn bị sự kiện &rarr; gửi QR check-in</h3>\n<p>Sau khi tạo sự kiện (t&ecirc;n, slug, địa điểm, ng&agrave;y, loại xếp hạng gun time/chip time), BTC import file Excel danh s&aacute;ch VĐV. Service layer map từng d&ograve;ng sang document MongoDB, hỗ trợ bulk write theo batch 1.000 bản ghi để tối ưu hiệu năng. Admin xem lại danh s&aacute;ch qua DataTable server-side &mdash; t&igrave;m kiếm, lọc, export lại Excel khi cần.</p>\n<p>Ở bước gửi mail, hệ thống lần lượt sinh QR cho từng VĐV, lưu token v&agrave;o collection <code>QrCode</code>, v&agrave; gửi email k&egrave;m ảnh QR inline. Để tr&aacute;nh bị SMTP rate-limit khi gửi ~1.000 email, logic gửi được chia th&agrave;nh <strong>batch 20 VĐV</strong>, d&ugrave;ng <code>Promise.allSettled</code> trong từng batch v&agrave; nghỉ <strong>1 gi&acirc;y</strong> giữa c&aacute;c batch. Một email lỗi kh&ocirc;ng l&agrave;m dừng to&agrave;n bộ tiến tr&igrave;nh &mdash; BTC c&oacute; thể theo d&otilde;i log v&agrave; gửi lại cho c&aacute;c trường hợp thất bại.</p>\n<p><!-- IMAGE: Screenshot wizard 5 bước hoặc màn hình gửi mail QR --></p>\n<h3>Flow 2: Check-in tại hiện trường</h3>\n<p>Ng&agrave;y race, nh&acirc;n vi&ecirc;n mở trang qu&eacute;t QR tr&ecirc;n admin panel. Camera hoặc input thủ c&ocirc;ng đọc chuỗi QR, gửi POST l&ecirc;n endpoint decode. Backend kiểm tra chữ k&yacute; HMAC, giải m&atilde; payload, so khớp sự kiện, kiểm tra expiry v&agrave; trạng th&aacute;i <code>is_used</code>. Nếu hợp lệ, cập nhật <code>Athlete.checkin = true</code> v&agrave; đ&aacute;nh dấu QR đ&atilde; d&ugrave;ng. Giao diện phản hồi tức th&igrave; (th&agrave;nh c&ocirc;ng / hết hạn / đ&atilde; check-in / chữ k&yacute; kh&ocirc;ng hợp lệ) gi&uacute;p quầy vận h&agrave;nh trơn tru ngay cả khi h&agrave;ng chờ d&agrave;i.</p>\n<p>Ngo&agrave;i hai flow tr&ecirc;n, hệ thống c&ograve;n hỗ trợ <strong>quản l&yacute; t&igrave;nh nguyện vi&ecirc;n</strong> (import Excel, upload template cert, render bằng Konva + canvas) v&agrave; <strong>e-certificate</strong> tra cứu c&ocirc;ng khai theo slug giải đấu &mdash; ph&ugrave; hợp cấp chứng nhận h&agrave;ng loạt sau sự kiện m&agrave; kh&ocirc;ng cần thiết kế từng file thủ c&ocirc;ng.</p>\n<p><!-- IMAGE: Giao diện quét QR check-in hoặc màn hình phản hồi sau khi quét thành công --></p>\n<h2>Th&aacute;ch thức &amp; c&aacute;ch xử l&yacute;</h2>\n<p><strong>Gửi email h&agrave;ng loạt trong thời gian ngắn.</strong> Với gần 1.000 VĐV, gửi tuần tự sẽ mất h&agrave;ng giờ; gửi song song kh&ocirc;ng kiểm so&aacute;t dễ bị nh&agrave; cung cấp SMTP chặn. Giải ph&aacute;p: batch 20 email/lần, delay 1 gi&acirc;y, v&agrave; <code>allSettled</code> để c&ocirc; lập lỗi từng email. Kết hợp AWS SES l&agrave;m k&ecirc;nh dự ph&ograve;ng khi Gmail SMTP gặp giới hạn.</p>\n<p><strong>Import Excel kh&ocirc;ng đồng nhất.</strong> Mỗi giải chạy c&oacute; format file kh&aacute;c nhau (t&ecirc;n cột, encoding, trường t&ugrave;y chọn). Layer mapping trong athlete service chuẩn h&oacute;a dữ liệu trước khi ghi DB; bulk write theo chunk giảm &aacute;p lực l&ecirc;n MongoDB khi import h&agrave;ng ngh&igrave;n d&ograve;ng.</p>\n<p><strong>Chứng nhận điện tử linh hoạt.</strong> Thay v&igrave; thiết kế cố định từng template trong Photoshop, Konva editor cho BTC tự định vị text (họ t&ecirc;n, cự ly, th&agrave;nh t&iacute;ch&hellip;) tr&ecirc;n ảnh nền. Server render bằng canvas/sharp đảm bảo output đồng nhất tr&ecirc;n mọi thiết bị tra cứu, kh&ocirc;ng phụ thuộc font hệ thống ph&iacute;a client.</p>\n<p><strong>Vận h&agrave;nh trong ng&agrave;y sự kiện.</strong> SSR + partial AJAX giảm tải so với SPA nặng; DataTable server-side giữ admin panel phản hồi nhanh d&ugrave; danh s&aacute;ch VĐV lớn. Enum trạng th&aacute;i sự kiện gi&uacute;p BTC biết r&otilde; đang ở bước n&agrave;o v&agrave; tr&aacute;nh thao t&aacute;c sai thứ tự.</p>\n<h2>Kết quả / b&agrave;i học</h2>\n<p>Access Race đ&atilde; được triển khai thực tế cho <strong>Anessa Run To Shine</strong>, hỗ trợ BTC vận h&agrave;nh trọn vẹn chu tr&igrave;nh từ import danh s&aacute;ch ~1.000 VĐV, ph&aacute;t QR qua email, đến check-in tại hiện trường khu đ&ocirc; thị Sala. Hệ thống gi&uacute;p giảm phụ thuộc v&agrave;o Excel rời rạc, r&uacute;t ngắn thời gian xử l&yacute; tại quầy nhận bib, v&agrave; tạo nền tảng t&aacute;i sử dụng cho c&aacute;c giải chạy/bơi lội/đạp xe tiếp theo dưới thương hiệu AccessRace Timing Systems.</p>\n<p>Một số hướng cải tiến đ&atilde; ghi nhận sau triển khai: n&acirc;ng cấp auth admin (thay hardcoded credential bằng ph&acirc;n quyền đa vai tr&ograve;), t&iacute;ch hợp cloud storage cho upload, v&agrave; hợp nhất ba phi&ecirc;n bản UI quản l&yacute; sự kiện (event / event2 / eventprocessing) th&agrave;nh một module thống nhất. Những b&agrave;i học quan trọng nhất l&agrave; <strong>thiết kế cho peak load ng&agrave;y race</strong> (batch processing, idempotent check-in), <strong>bảo mật QR ở tầng ứng dụng</strong> thay v&igrave; chỉ encode ID thuần, v&agrave; <strong>ưu ti&ecirc;n c&ocirc;ng cụ vận h&agrave;nh cho BTC</strong> hơn l&agrave; x&acirc;y feature c&ocirc;ng khai chưa thực sự cần thiết.</p>\n<p>&nbsp;</p>",
+      "thumbnail": null,
+      "status": "COMPLETED",
+      "isDisplay": true,
+      "finishedAt": null,
+      "demoUrl": null,
+      "repoUrl": null,
+      "featured": false,
+      "viewCount": 193,
+      "features": [],
+      "createdAt": "2026-08-09T05:30:49.874Z",
+      "updatedAt": "2026-08-09T05:35:21.736Z"
+    }
+  ],
+  "projectTags": [
+    {
+      "projectId": 6,
+      "tagId": 1
+    },
+    {
+      "projectId": 8,
+      "tagId": 1
+    },
+    {
+      "projectId": 9,
+      "tagId": 1
+    },
+    {
+      "projectId": 10,
+      "tagId": 1
+    },
+    {
+      "projectId": 9,
+      "tagId": 2
+    },
+    {
+      "projectId": 10,
+      "tagId": 2
+    },
+    {
+      "projectId": 6,
+      "tagId": 3
+    },
+    {
+      "projectId": 8,
+      "tagId": 3
+    },
+    {
+      "projectId": 6,
+      "tagId": 5
+    },
+    {
+      "projectId": 8,
+      "tagId": 5
+    },
+    {
+      "projectId": 9,
+      "tagId": 5
+    },
+    {
+      "projectId": 10,
+      "tagId": 5
+    },
+    {
+      "projectId": 6,
+      "tagId": 6
+    },
+    {
+      "projectId": 10,
+      "tagId": 6
+    },
+    {
+      "projectId": 10,
+      "tagId": 8
+    },
+    {
+      "projectId": 10,
+      "tagId": 9
+    },
+    {
+      "projectId": 8,
+      "tagId": 10
+    }
+  ],
+  "stories": [
+    {
+      "id": "09c78006-f73a-40d6-baa1-4519b8c6913c",
+      "userId": 1,
+      "mediaUrl": "https://picsum.photos/seed/story-admin/900/1600",
+      "thumbnailUrl": null,
+      "mediaType": "IMAGE",
+      "createdAt": "2026-08-08T06:37:43.882Z",
+      "expiresAt": "2026-08-15T06:37:43.882Z"
+    },
+    {
+      "id": "cafa6dd2-3c2b-4e4c-88b1-1cc5bd71d7ac",
+      "userId": 1,
+      "mediaUrl": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+      "thumbnailUrl": "https://picsum.photos/seed/story-user1-thumb/900/1600",
+      "mediaType": "VIDEO",
+      "createdAt": "2026-08-08T06:37:43.882Z",
+      "expiresAt": "2026-08-15T06:37:43.882Z"
+    }
+  ],
+  "storyViews": [],
+  "galleryAssets": [
+    {
+      "id": "6fcded9b-7c7f-4dd5-8da4-031ce9166176",
+      "title": "banner1.jpg",
+      "alt": null,
+      "mediaUrl": "https://res.cloudinary.com/dk5vnzify/image/upload/v1786249362/gallery/nzvz3ulq7xgvz1onqqjw.jpg",
+      "thumbnailUrl": "https://res.cloudinary.com/dk5vnzify/image/upload/v1786249362/gallery/nzvz3ulq7xgvz1onqqjw.jpg",
+      "publicId": "gallery/nzvz3ulq7xgvz1onqqjw",
+      "mediaType": "IMAGE",
+      "folder": null,
+      "fileSize": 1908230,
+      "width": 2944,
+      "height": 3926,
+      "createdAt": "2026-08-09T04:22:39.276Z",
+      "updatedAt": "2026-08-09T04:22:39.276Z"
+    },
+    {
+      "id": "6f35e0d1-ee0f-4a9e-89da-b574c64d7a53",
+      "title": "banner2.jpg",
+      "alt": null,
+      "mediaUrl": "https://res.cloudinary.com/dk5vnzify/image/upload/v1786249375/gallery/civ8xkvq4dzdbokou778.jpg",
+      "thumbnailUrl": "https://res.cloudinary.com/dk5vnzify/image/upload/v1786249375/gallery/civ8xkvq4dzdbokou778.jpg",
+      "publicId": "gallery/civ8xkvq4dzdbokou778",
+      "mediaType": "IMAGE",
+      "folder": null,
+      "fileSize": 5041613,
+      "width": 7721,
+      "height": 5150,
+      "createdAt": "2026-08-09T04:22:52.215Z",
+      "updatedAt": "2026-08-09T04:22:52.215Z"
+    },
+    {
+      "id": "d29c4b11-0f99-4a70-bf9f-d228fbfb85d8",
+      "title": "attractive_woman.mp4",
+      "alt": null,
+      "mediaUrl": "https://res.cloudinary.com/dk5vnzify/video/upload/v1786249422/gallery/mxg3qekguqcscze6rrx4.mp4",
+      "thumbnailUrl": "https://res.cloudinary.com/dk5vnzify/video/upload/v1786249422/gallery/mxg3qekguqcscze6rrx4.jpg",
+      "publicId": "gallery/mxg3qekguqcscze6rrx4",
+      "mediaType": "VIDEO",
+      "folder": null,
+      "fileSize": 7272968,
+      "width": 1920,
+      "height": 1080,
+      "createdAt": "2026-08-09T04:23:39.579Z",
+      "updatedAt": "2026-08-09T04:23:39.579Z"
+    },
+    {
+      "id": "4e436e98-6f7c-47cf-a7e4-078546b23840",
+      "title": "women_morning.mp4",
+      "alt": null,
+      "mediaUrl": "https://res.cloudinary.com/dk5vnzify/video/upload/v1786249469/gallery/uj0od1zrephrbwjfth5d.mp4",
+      "thumbnailUrl": "https://res.cloudinary.com/dk5vnzify/video/upload/v1786249469/gallery/uj0od1zrephrbwjfth5d.jpg",
+      "publicId": "gallery/uj0od1zrephrbwjfth5d",
+      "mediaType": "VIDEO",
+      "folder": null,
+      "fileSize": 11293678,
+      "width": 1920,
+      "height": 1080,
+      "createdAt": "2026-08-09T04:24:26.195Z",
+      "updatedAt": "2026-08-09T04:24:26.195Z"
+    },
+    {
+      "id": "789ce5a0-0981-4525-91df-0a8738910a6e",
+      "title": "banner3.jpg",
+      "alt": null,
+      "mediaUrl": "https://res.cloudinary.com/dk5vnzify/image/upload/v1786249500/gallery/kkwtunbjb1knnyxzwoit.jpg",
+      "thumbnailUrl": "https://res.cloudinary.com/dk5vnzify/image/upload/v1786249500/gallery/kkwtunbjb1knnyxzwoit.jpg",
+      "publicId": "gallery/kkwtunbjb1knnyxzwoit",
+      "mediaType": "IMAGE",
+      "folder": null,
+      "fileSize": 1821833,
+      "width": 2560,
+      "height": 3840,
+      "createdAt": "2026-08-09T04:24:57.381Z",
+      "updatedAt": "2026-08-09T04:24:57.381Z"
+    },
+    {
+      "id": "b21149c4-6042-4b20-837b-41d1634adc04",
+      "title": "photo-1520250497591-112f2f40a3f4.png",
+      "alt": null,
+      "mediaUrl": "https://res.cloudinary.com/dk5vnzify/image/upload/v1786249517/gallery/itxylsbqzal8yhbrtltv.avif",
+      "thumbnailUrl": "https://res.cloudinary.com/dk5vnzify/image/upload/v1786249517/gallery/itxylsbqzal8yhbrtltv.avif",
+      "publicId": "gallery/itxylsbqzal8yhbrtltv",
+      "mediaType": "IMAGE",
+      "folder": null,
+      "fileSize": 118551,
+      "width": 800,
+      "height": 533,
+      "createdAt": "2026-08-09T04:25:13.883Z",
+      "updatedAt": "2026-08-09T04:25:13.883Z"
+    },
+    {
+      "id": "3b5fe00c-881e-4796-a296-01b7c7268668",
+      "title": "Screenshot 2026-08-13 001030.png",
+      "alt": null,
+      "mediaUrl": "https://res.cloudinary.com/dk5vnzify/image/upload/v1786554664/gallery/uekldyzlm2r1nkmhw8xp.png",
+      "thumbnailUrl": "https://res.cloudinary.com/dk5vnzify/image/upload/v1786554664/gallery/uekldyzlm2r1nkmhw8xp.png",
+      "publicId": "gallery/uekldyzlm2r1nkmhw8xp",
+      "mediaType": "IMAGE",
+      "folder": "seo",
+      "fileSize": 143287,
+      "width": 1894,
+      "height": 915,
+      "createdAt": "2026-08-12T17:11:03.921Z",
+      "updatedAt": "2026-08-12T17:11:03.921Z"
+    },
+    {
+      "id": "a591464e-8c26-4793-87a1-f7293be25f70",
+      "title": "2aed5a728ce30dbd54f2.jpg",
+      "alt": null,
+      "mediaUrl": "https://res.cloudinary.com/dk5vnzify/image/upload/v1786556190/gallery/cxnbgytfu20e6dk5i8dl.jpg",
+      "thumbnailUrl": "https://res.cloudinary.com/dk5vnzify/image/upload/v1786556190/gallery/cxnbgytfu20e6dk5i8dl.jpg",
+      "publicId": "gallery/cxnbgytfu20e6dk5i8dl",
+      "mediaType": "IMAGE",
+      "folder": "resume",
+      "fileSize": 159665,
+      "width": 1284,
+      "height": 1712,
+      "createdAt": "2026-08-12T17:36:31.130Z",
+      "updatedAt": "2026-08-12T17:36:31.130Z"
+    }
+  ],
+  "seoGlobalSettings": [
+    {
+      "id": 1,
+      "siteName": "Kien's Space",
+      "siteUrl": "http://localhost:8080",
+      "tagline": "Portfolio Fullstack Developer",
+      "defaultTitle": "{{siteName}} — Portfolio & công cụ dev",
+      "defaultDescription": "Chia sẻ dự án, blog kỹ thuật và công cụ dev. Node.js, React, TypeScript — Vũ Văn Kiên.",
+      "defaultKeywords": "portfolio, fullstack, nodejs, react, typescript, kienvu",
+      "ogImageUrl": "https://res.cloudinary.com/dk5vnzify/image/upload/v1786554664/gallery/uekldyzlm2r1nkmhw8xp.png",
+      "twitterSite": "",
+      "themeColor": "#6366f1",
+      "ogLocale": "vi_VN",
+      "organizationName": "Kien's Space",
+      "organizationUrl": "http://localhost:8080",
+      "organizationLogoUrl": "http://localhost:8080/favicon.svg",
+      "allowIndexing": true,
+      "createdAt": "2026-08-12T13:54:54.931Z",
+      "updatedAt": "2026-08-12T17:14:21.724Z"
+    }
+  ],
+  "seoPageTemplates": [
+    {
+      "id": 1,
+      "pageKey": "home",
+      "label": "Trang chủ",
+      "titleTemplate": "{{siteName}} — {{tagline}}",
+      "descriptionTemplate": "Portfolio và blog kỹ thuật của {{siteName}}. Dự án fullstack Node.js, React, TypeScript và công cụ dev miễn phí.",
+      "keywordsTemplate": "portfolio, fullstack developer, nodejs, react, {{siteName}}",
+      "robots": "index, follow",
+      "ogImageUrl": null,
+      "isActive": true,
+      "sortOrder": 1,
+      "createdAt": "2026-08-12T13:54:55.057Z",
+      "updatedAt": "2026-08-12T17:36:46.848Z"
+    },
+    {
+      "id": 2,
+      "pageKey": "news",
+      "label": "Tin tức / Stories",
+      "titleTemplate": "Tin tức — {{siteName}}",
+      "descriptionTemplate": "Stories và cập nhật nhanh từ {{siteName}}.",
+      "keywordsTemplate": null,
+      "robots": "index, follow",
+      "ogImageUrl": null,
+      "isActive": true,
+      "sortOrder": 2,
+      "createdAt": "2026-08-12T13:54:55.104Z",
+      "updatedAt": "2026-08-12T17:36:46.882Z"
+    },
+    {
+      "id": 3,
+      "pageKey": "projects.index",
+      "label": "Danh sách dự án",
+      "titleTemplate": "Dự án — {{siteName}}",
+      "descriptionTemplate": "Các dự án web app, API và sản phẩm thực tế do {{siteName}} xây dựng.",
+      "keywordsTemplate": null,
+      "robots": "index, follow",
+      "ogImageUrl": null,
+      "isActive": true,
+      "sortOrder": 3,
+      "createdAt": "2026-08-12T13:54:55.134Z",
+      "updatedAt": "2026-08-12T17:36:46.897Z"
+    },
+    {
+      "id": 4,
+      "pageKey": "project.detail",
+      "label": "Chi tiết dự án",
+      "titleTemplate": "{{projectTitle}} — {{siteName}}",
+      "descriptionTemplate": "{{projectSummary}}",
+      "keywordsTemplate": "{{projectTitle}}, portfolio, {{siteName}}",
+      "robots": "index, follow",
+      "ogImageUrl": null,
+      "isActive": true,
+      "sortOrder": 4,
+      "createdAt": "2026-08-12T13:54:55.168Z",
+      "updatedAt": "2026-08-12T17:36:46.914Z"
+    },
+    {
+      "id": 5,
+      "pageKey": "resume",
+      "label": "Resume",
+      "titleTemplate": "Resume — {{authorName}} | {{siteName}}",
+      "descriptionTemplate": "Hồ sơ nghề nghiệp {{authorName}} — Fullstack Developer. Node.js, React, TypeScript.",
+      "keywordsTemplate": null,
+      "robots": "index, follow",
+      "ogImageUrl": null,
+      "isActive": true,
+      "sortOrder": 5,
+      "createdAt": "2026-08-12T13:54:55.193Z",
+      "updatedAt": "2026-08-12T17:36:46.932Z"
+    },
+    {
+      "id": 6,
+      "pageKey": "blog.index",
+      "label": "Blog",
+      "titleTemplate": "Blog kỹ thuật — {{siteName}}",
+      "descriptionTemplate": "Bài viết về Prisma, React, deploy production và kinh nghiệm dev thực tế.",
+      "keywordsTemplate": null,
+      "robots": "index, follow",
+      "ogImageUrl": null,
+      "isActive": true,
+      "sortOrder": 6,
+      "createdAt": "2026-08-12T13:54:55.215Z",
+      "updatedAt": "2026-08-12T17:36:46.955Z"
+    },
+    {
+      "id": 7,
+      "pageKey": "blog.post",
+      "label": "Bài viết blog",
+      "titleTemplate": "{{blogTitle}} — {{siteName}}",
+      "descriptionTemplate": "{{blogExcerpt}}",
+      "keywordsTemplate": "{{blogTitle}}, blog, {{siteName}}",
+      "robots": "index, follow",
+      "ogImageUrl": null,
+      "isActive": true,
+      "sortOrder": 7,
+      "createdAt": "2026-08-12T13:54:55.245Z",
+      "updatedAt": "2026-08-12T17:36:46.971Z"
+    },
+    {
+      "id": 8,
+      "pageKey": "tools.index",
+      "label": "Công cụ",
+      "titleTemplate": "Công cụ dev — {{siteName}}",
+      "descriptionTemplate": "Bộ công cụ online: Base64, tra IP, tạo mật khẩu, meta tag generator.",
+      "keywordsTemplate": null,
+      "robots": "index, follow",
+      "ogImageUrl": null,
+      "isActive": true,
+      "sortOrder": 8,
+      "createdAt": "2026-08-12T13:54:55.269Z",
+      "updatedAt": "2026-08-12T17:36:46.990Z"
+    },
+    {
+      "id": 9,
+      "pageKey": "tools.base64",
+      "label": "Base64",
+      "titleTemplate": "Mã hóa Base64 — {{siteName}}",
+      "descriptionTemplate": "Chuyển đổi văn bản sang Base64 và ngược lại trên trình duyệt.",
+      "keywordsTemplate": null,
+      "robots": "index, follow",
+      "ogImageUrl": null,
+      "isActive": true,
+      "sortOrder": 9,
+      "createdAt": "2026-08-12T13:54:55.292Z",
+      "updatedAt": "2026-08-12T17:36:47.035Z"
+    },
+    {
+      "id": 10,
+      "pageKey": "tools.ip",
+      "label": "Tra IP",
+      "titleTemplate": "IP của tôi là gì? — {{siteName}}",
+      "descriptionTemplate": "Kiểm tra IP công khai, nhà mạng và vị trí ước lượng kèm bản đồ.",
+      "keywordsTemplate": null,
+      "robots": "index, follow",
+      "ogImageUrl": null,
+      "isActive": true,
+      "sortOrder": 10,
+      "createdAt": "2026-08-12T13:54:55.315Z",
+      "updatedAt": "2026-08-12T17:36:47.056Z"
+    },
+    {
+      "id": 11,
+      "pageKey": "tools.password",
+      "label": "Tạo mật khẩu",
+      "titleTemplate": "Tạo mật khẩu mạnh — {{siteName}}",
+      "descriptionTemplate": "Sinh mật khẩu ngẫu nhiên với độ dài và ký tự tùy chỉnh.",
+      "keywordsTemplate": null,
+      "robots": "index, follow",
+      "ogImageUrl": null,
+      "isActive": true,
+      "sortOrder": 11,
+      "createdAt": "2026-08-12T13:54:55.332Z",
+      "updatedAt": "2026-08-12T17:36:47.072Z"
+    },
+    {
+      "id": 12,
+      "pageKey": "tools.meta-tag",
+      "label": "Meta Tag Generator",
+      "titleTemplate": "Meta Tag Generator — {{siteName}}",
+      "descriptionTemplate": "Crawl meta từ URL hoặc sinh thẻ SEO, Open Graph và X Card kèm preview.",
+      "keywordsTemplate": null,
+      "robots": "index, follow",
+      "ogImageUrl": null,
+      "isActive": true,
+      "sortOrder": 12,
+      "createdAt": "2026-08-12T13:54:55.345Z",
+      "updatedAt": "2026-08-12T17:36:47.100Z"
+    },
+    {
+      "id": 13,
+      "pageKey": "not-found",
+      "label": "404",
+      "titleTemplate": "Không tìm thấy trang — {{siteName}}",
+      "descriptionTemplate": "Trang bạn tìm không tồn tại.",
+      "keywordsTemplate": null,
+      "robots": "noindex, nofollow",
+      "ogImageUrl": null,
+      "isActive": true,
+      "sortOrder": 98,
+      "createdAt": "2026-08-12T13:54:55.361Z",
+      "updatedAt": "2026-08-12T17:36:47.126Z"
+    },
+    {
+      "id": 14,
+      "pageKey": "admin",
+      "label": "Admin",
+      "titleTemplate": "Admin — {{siteName}}",
+      "descriptionTemplate": "Khu vực quản trị.",
+      "keywordsTemplate": null,
+      "robots": "noindex, nofollow",
+      "ogImageUrl": null,
+      "isActive": true,
+      "sortOrder": 99,
+      "createdAt": "2026-08-12T13:54:55.376Z",
+      "updatedAt": "2026-08-12T17:36:47.143Z"
+    }
+  ],
+  "resumeSettings": [
+    {
+      "id": 1,
+      "content": {
+        "scope": [
+          {
+            "id": "api",
+            "area": "Backend & API",
+            "detail": "REST với Express, Prisma ORM, auth JWT (access/refresh), phân quyền cơ bản, upload media."
+          },
+          {
+            "id": "ui",
+            "area": "Frontend",
+            "detail": "React + TypeScript, routing, form admin, responsive mobile, tích hợp API qua axios."
+          },
+          {
+            "id": "data",
+            "area": "Database",
+            "detail": "MariaDB/MySQL — schema migration với Prisma, quy ước snake_case cho tương thích Linux."
+          },
+          {
+            "id": "ops",
+            "area": "Triển khai",
+            "detail": "Build SPA, serve static qua Express, cấu hình Nginx/PM2 trên VPS, env production."
+          }
+        ],
+        "contact": {
+          "email": "kienvu.dev@gmail.com",
+          "github": "https://github.com/kienspace-ak48",
+          "location": "Việt Nam · UTC+7",
+          "githubLabel": "kienspace-ak48",
+          "responseTime": "Thường phản hồi trong 1 ngày làm việc"
+        },
+        "profile": {
+          "name": "Vũ Văn Kiên",
+          "focus": "Node.js · React · TypeScript",
+          "intro": "Tôi làm web app end-to-end: thiết kế API và database, dựng giao diện React, rồi deploy lên môi trường thật. Quen làm việc một mình hoặc trong team nhỏ, ưu tiên deliverable rõ ràng hơn slide trình bày dài.",
+          "title": "Fullstack Developer",
+          "avatarUrl": "https://res.cloudinary.com/dk5vnzify/image/upload/v1786556190/gallery/cxnbgytfu20e6dk5i8dl.jpg",
+          "preferences": [
+            "Vị trí Fullstack hoặc Backend (Node.js, TypeScript)",
+            "Sản phẩm web B2B, SaaS hoặc nội bộ doanh nghiệp",
+            "Remote hoặc hybrid — base tại Việt Nam (UTC+7)",
+            "Team có spec/roadmap rõ, review code định kỳ"
+          ],
+          "availability": "Có thể trao đổi từ Q3/2026",
+          "preferencesIntro": "Nếu role của bạn gần với các mục dưới, bạn có thể gửi email kèm mô tả ngắn về team, stack và timeline."
+        },
+        "snapshot": [
+          {
+            "label": "dự án chính có demo",
+            "value": "3"
+          },
+          {
+            "label": "backend chính",
+            "value": "Node"
+          },
+          {
+            "label": "frontend chính",
+            "value": "React"
+          },
+          {
+            "label": "đã deploy production",
+            "value": "VPS"
+          }
+        ],
+        "experience": [
+          {
+            "id": "devmarket",
+            "role": "Fullstack Developer",
+            "tags": [
+              "Node.js",
+              "React",
+              "Prisma",
+              "MariaDB"
+            ],
+            "period": "2025 — nay",
+            "bullets": [
+              "API quản lý project, story, user; admin dashboard React.",
+              "Auth JWT, refresh token, CRUD có phân quyền admin.",
+              "Trang public: featured projects, story 24h, build deploy lên VPS."
+            ],
+            "company": "DevMarket",
+            "context": "Marketplace source code — portfolio cá nhân đang mở rộng thành sản phẩm.",
+            "projectHref": "/projects"
+          },
+          {
+            "id": "cherry",
+            "role": "Backend Developer",
+            "tags": [
+              "Express",
+              "MySQL",
+              "Payment"
+            ],
+            "period": "2024 — 2025",
+            "bullets": [
+              "Model Brand → Property → Branch → Room → Booking.",
+              "Tích hợp cổng thanh toán VNPay/MoMo.",
+              "Xử lý ví hoàn tiền — lock row khi cập nhật số dư."
+            ],
+            "company": "Cherry House",
+            "context": "Nền tảng đặt phòng đa chi nhánh cho chuỗi lưu trú."
+          },
+          {
+            "id": "accessrace",
+            "role": "Backend Developer",
+            "tags": [
+              "Node.js",
+              "BullMQ",
+              "SendGrid"
+            ],
+            "period": "2024",
+            "bullets": [
+              "JWT + RBAC theo vai trò organizer/staff/attendee.",
+              "Gửi email qua SendGrid, hàng đợi job với BullMQ."
+            ],
+            "company": "AccessRace",
+            "context": "Check-in sự kiện bằng QR cho ban tổ chức và khách tham dự."
+          }
+        ],
+        "quickFacts": [
+          {
+            "label": "Vai trò",
+            "value": "Fullstack Developer"
+          },
+          {
+            "label": "Kinh nghiệm",
+            "value": "~1 năm (dự án thực tế + cá nhân)"
+          },
+          {
+            "label": "Hình thức",
+            "value": "Full-time · Freelance dài hạn"
+          },
+          {
+            "label": "Ngôn ngữ",
+            "value": "Tiếng Việt · Tiếng Anh đọc tài liệu"
+          }
+        ],
+        "skillGroups": [
+          {
+            "id": "backend",
+            "items": [
+              "Node.js",
+              "Express",
+              "Prisma",
+              "MariaDB",
+              "JWT",
+              "REST"
+            ],
+            "label": "Backend"
+          },
+          {
+            "id": "frontend",
+            "items": [
+              "React",
+              "TypeScript",
+              "Vite",
+              "Tailwind",
+              "React Router"
+            ],
+            "label": "Frontend"
+          },
+          {
+            "id": "tools",
+            "items": [
+              "Git",
+              "Linux VPS",
+              "Nginx",
+              "PM2",
+              "Cloudinary",
+              "pnpm"
+            ],
+            "label": "Khác"
+          }
+        ]
+      },
+      "cvPdfUrl": "/uploads/resume/VuVanKien_NodeJS_Fullstack-1786556229828.pdf",
+      "cvPdfFileName": "VuVanKien_NodeJS_Fullstack.pdf",
+      "cvPdfPublicId": "VuVanKien_NodeJS_Fullstack-1786556229828.pdf",
+      "createdAt": "2026-08-12T17:32:59.195Z",
+      "updatedAt": "2026-08-12T17:42:39.865Z"
+    }
+  ]
+}

@@ -1,8 +1,8 @@
 /**
- * Export toàn bộ dữ liệu DB hiện tại → migration/data/db-export.json
- * Dùng làm snapshot để seed lại y hệt (dev/VPS mới).
+ * Export snapshot DB → migration/data/db-export.json
+ * Chạy local sau khi chỉnh data xong, commit file export lên repo, rồi trên VPS: pnpm seed
  *
- * Usage: node migration/export-db.js
+ * Usage: pnpm db:export
  */
 require("dotenv").config();
 const fs = require("fs");
@@ -23,6 +23,9 @@ async function main() {
     stories,
     storyViews,
     galleryAssets,
+    seoGlobalSettings,
+    seoPageTemplates,
+    resumeSettings,
   ] = await Promise.all([
     prisma.user.findMany({ orderBy: { id: "asc" } }),
     prisma.tag.findMany({ orderBy: { id: "asc" } }),
@@ -31,9 +34,13 @@ async function main() {
     prisma.story.findMany({ orderBy: { createdAt: "asc" } }),
     prisma.storyView.findMany({ orderBy: { viewedAt: "asc" } }),
     prisma.galleryAsset.findMany({ orderBy: { createdAt: "asc" } }),
+    prisma.seoGlobalSettings.findMany(),
+    prisma.seoPageTemplate.findMany({ orderBy: [{ sortOrder: "asc" }, { id: "asc" }] }),
+    prisma.resumeSettings.findMany(),
   ]);
 
   const payload = {
+    version: 1,
     exportedAt: new Date().toISOString(),
     users,
     tags,
@@ -42,6 +49,9 @@ async function main() {
     stories,
     storyViews,
     galleryAssets,
+    seoGlobalSettings,
+    seoPageTemplates,
+    resumeSettings,
   };
 
   fs.mkdirSync(OUT_DIR, { recursive: true });
@@ -49,8 +59,17 @@ async function main() {
 
   console.log(`✅ Export xong: ${OUT_FILE}`);
   console.log(
-    `   users=${users.length}, projects=${projects.length}, tags=${tags.length}, stories=${stories.length}, gallery=${galleryAssets.length}`,
+    [
+      `users=${users.length}`,
+      `projects=${projects.length}`,
+      `tags=${tags.length}`,
+      `stories=${stories.length}`,
+      `gallery=${galleryAssets.length}`,
+      `seoPages=${seoPageTemplates.length}`,
+      `resume=${resumeSettings.length}`,
+    ].join(", "),
   );
+  console.log("   Commit file này rồi trên VPS: pnpm exec prisma migrate deploy && pnpm seed");
 }
 
 main()

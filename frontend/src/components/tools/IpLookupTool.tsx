@@ -1,5 +1,12 @@
-import { useCallback, useEffect, useState } from "react";
-import { Copy, Globe, MapPin, RefreshCw } from "lucide-react";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import {
+  Copy,
+  ExternalLink,
+  Globe,
+  LocateFixed,
+  MapPin,
+  RefreshCw,
+} from "lucide-react";
 import { InlineLoading } from "../LoadingKit";
 import { copyText } from "../../utils/copyText";
 
@@ -32,6 +39,146 @@ type IpWhoResponse = {
   longitude?: number;
   message?: string;
 };
+
+function buildMapLinks(latitude: number, longitude: number) {
+  const coords = `${latitude},${longitude}`;
+  const label = encodeURIComponent(coords);
+
+  return {
+    googleMaps: `https://www.google.com/maps/search/?api=1&query=${label}`,
+    openStreetMap: `https://www.openstreetmap.org/?mlat=${latitude}&mlon=${longitude}#map=14/${latitude}/${longitude}`,
+  };
+}
+
+function buildMapEmbedUrl(
+  latitude: number,
+  longitude: number,
+  zoom: "overview" | "location",
+) {
+  const delta = zoom === "location" ? 0.012 : 0.07;
+  const bbox = [
+    longitude - delta,
+    latitude - delta,
+    longitude + delta,
+    latitude + delta,
+  ].join(",");
+
+  return `https://www.openstreetmap.org/export/embed.html?bbox=${encodeURIComponent(bbox)}&layer=mapnik&marker=${latitude}%2C${longitude}`;
+}
+
+function IpLocationMap({
+  latitude,
+  longitude,
+  city,
+  region,
+  country,
+}: {
+  latitude: number;
+  longitude: number;
+  city?: string;
+  region?: string;
+  country?: string;
+}) {
+  const links = useMemo(
+    () => buildMapLinks(latitude, longitude),
+    [latitude, longitude],
+  );
+  const [mapZoom, setMapZoom] = useState<"overview" | "location">("location");
+  const [mapRefreshKey, setMapRefreshKey] = useState(0);
+
+  useEffect(() => {
+    setMapZoom("location");
+    setMapRefreshKey((key) => key + 1);
+  }, [latitude, longitude]);
+
+  const embedUrl = useMemo(
+    () => buildMapEmbedUrl(latitude, longitude, mapZoom),
+    [latitude, longitude, mapZoom],
+  );
+
+  function focusMyLocation() {
+    setMapZoom("location");
+    setMapRefreshKey((key) => key + 1);
+  }
+
+  const locationLabel = [city, region, country].filter(Boolean).join(", ");
+
+  return (
+    <section className="rounded-2xl border border-border bg-surface p-5 sm:p-6">
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <div>
+          <div className="flex items-center gap-2">
+            <MapPin size={20} className="text-brand" aria-hidden />
+            <h2 className="text-lg font-bold text-ink">Bản đồ vị trí</h2>
+          </div>
+          {locationLabel ? (
+            <p className="mt-1 text-sm text-muted">{locationLabel}</p>
+          ) : null}
+        </div>
+
+        <div className="flex flex-wrap gap-2">
+          <button
+            type="button"
+            onClick={focusMyLocation}
+            className="inline-flex items-center gap-1.5 rounded-xl border border-brand-border bg-brand-soft px-3.5 py-2 text-sm font-semibold text-brand transition hover:bg-brand hover:text-white"
+          >
+            <LocateFixed size={15} aria-hidden />
+            Vị trí của tôi
+          </button>
+          <a
+            href={links.googleMaps}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-1.5 rounded-xl bg-brand px-3.5 py-2 text-sm font-semibold text-white transition hover:bg-brand-hover"
+          >
+            <ExternalLink size={15} aria-hidden />
+            Mở Google Maps
+          </a>
+          <a
+            href={links.openStreetMap}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-1.5 rounded-xl border border-border px-3.5 py-2 text-sm font-medium text-muted transition hover:bg-hover hover:text-brand"
+          >
+            <ExternalLink size={15} aria-hidden />
+            OpenStreetMap
+          </a>
+        </div>
+      </div>
+
+      <div className="relative mt-4 overflow-hidden rounded-xl border border-border bg-app">
+        <iframe
+          key={mapRefreshKey}
+          title={
+            locationLabel
+              ? `Bản đồ vị trí ước lượng: ${locationLabel}`
+              : "Bản đồ vị trí ước lượng từ IP"
+          }
+          src={embedUrl}
+          className="h-[280px] w-full sm:h-[320px]"
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+        />
+
+        <button
+          type="button"
+          onClick={focusMyLocation}
+          className="absolute bottom-3 right-3 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-white text-brand shadow-md transition hover:bg-brand hover:text-white"
+          aria-label="Zoom về vị trí của tôi"
+          title="Vị trí của tôi"
+        >
+          <LocateFixed size={18} aria-hidden />
+        </button>
+      </div>
+
+      <p className="mt-3 text-xs text-muted">
+        Vị trí trên bản đồ là ước lượng theo IP, có thể lệch vài km so với vị trí
+        thực tế. Bấm <strong>Vị trí của tôi</strong> để zoom lại về tọa độ IP
+        hoặc mở Google Maps để xem chi tiết hơn.
+      </p>
+    </section>
+  );
+}
 
 function InfoRow({
   label,
@@ -149,6 +296,8 @@ function IpLookupTool() {
       ? `${info.latitude}, ${info.longitude}`
       : "";
 
+  const hasCoords = info.latitude != null && info.longitude != null;
+
   return (
     <div className="space-y-4">
       <section className="rounded-2xl border border-border bg-surface p-5 sm:p-6">
@@ -229,9 +378,29 @@ function IpLookupTool() {
         <InfoRow
           label="Tọa độ"
           value={coords}
-          onCopy={() => copyText(coords)}
+          onCopy={() => copyText(coords.replace(/\s/g, ""))}
         />
       </section>
+
+      {hasCoords ? (
+        <IpLocationMap
+          latitude={info.latitude!}
+          longitude={info.longitude!}
+          city={info.city}
+          region={info.region}
+          country={info.country}
+        />
+      ) : (
+        <section className="rounded-2xl border border-dashed border-border bg-surface px-5 py-8 text-center sm:px-6">
+          <MapPin size={28} className="mx-auto text-subtle" aria-hidden />
+          <p className="mt-3 text-sm font-medium text-ink">
+            Không có tọa độ để hiển thị bản đồ
+          </p>
+          <p className="mt-1 text-sm text-muted">
+            Dịch vụ tra cứu không trả về latitude/longitude cho IP này.
+          </p>
+        </section>
+      )}
 
       <p className="text-sm text-muted">
         Thông tin vị trí được ước lượng từ dịch vụ tra cứu IP bên thứ ba và có

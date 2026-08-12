@@ -101,6 +101,7 @@ model Story {
   mediaUrl     String    @map("media_url")
   thumbnailUrl String?   @map("thumbnail_url")
   mediaType    MediaType @default(IMAGE) @map("media_type")
+  isPinned     Boolean   @default(false) @map("is_pinned")
   createdAt    DateTime  @default(now()) @map("created_at")
   expiresAt    DateTime  @map("expires_at")
 
@@ -108,6 +109,7 @@ model Story {
   views StoryView[]
 
   @@index([userId, expiresAt])
+  @@index([isPinned, createdAt])
   @@map("story")
 }
 
@@ -145,4 +147,55 @@ model GalleryAsset {
 
   @@index([mediaType, createdAt])
   @@map("gallery_asset")
+}
+
+model SeoGlobalSettings {
+  id                  Int      @id @default(1)
+  siteName            String   @map("site_name")
+  siteUrl             String   @map("site_url")
+  tagline             String?  @db.VarChar(500)
+  defaultTitle        String   @map("default_title")
+  defaultDescription  String   @map("default_description") @db.Text
+  defaultKeywords     String?  @map("default_keywords") @db.Text
+  ogImageUrl          String?  @map("og_image_url")
+  twitterSite         String?  @map("twitter_site")
+  themeColor          String?  @default("#6366f1") @map("theme_color")
+  ogLocale            String?  @default("vi_VN") @map("og_locale")
+  organizationName    String?  @map("organization_name")
+  organizationUrl     String?  @map("organization_url")
+  organizationLogoUrl String?  @map("organization_logo_url")
+  allowIndexing       Boolean  @default(true) @map("allow_indexing")
+  createdAt           DateTime @default(now()) @map("created_at")
+  updatedAt           DateTime @updatedAt @map("updated_at")
+
+  @@map("seo_global_settings")
+}
+
+model SeoPageTemplate {
+  id                  Int      @id @default(autoincrement())
+  pageKey             String   @unique @map("page_key")
+  label               String
+  titleTemplate       String   @map("title_template")
+  descriptionTemplate String   @map("description_template") @db.Text
+  keywordsTemplate    String?  @map("keywords_template") @db.Text
+  robots              String   @default("index, follow")
+  ogImageUrl          String?  @map("og_image_url")
+  isActive            Boolean  @default(true) @map("is_active")
+  sortOrder           Int      @default(0) @map("sort_order")
+  createdAt           DateTime @default(now()) @map("created_at")
+  updatedAt           DateTime @updatedAt @map("updated_at")
+
+  @@map("seo_page_template")
+}
+
+model ResumeSettings {
+  id            Int      @id @default(1)
+  content       Json?
+  cvPdfUrl      String?  @map("cv_pdf_url")
+  cvPdfFileName String?  @map("cv_pdf_file_name")
+  cvPdfPublicId String?  @map("cv_pdf_public_id")
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  @@map("resume_settings")
 }

@@ -11,8 +11,8 @@ build/
 .env.*
 !.env.example
 
-# DB export snapshot (có password hash — không commit)
-backend/migration/data/db-export.json
+# DB export snapshot — bcrypt hash only, safe to commit for VPS seed
+# Regenerate: cd backend && pnpm db:export
 
 # Logs
 logs/

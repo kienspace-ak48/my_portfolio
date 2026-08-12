@@ -1,58 +1,26 @@
-export type ResumeContact = {
-  email: string;
-  github: string;
-  githubLabel: string;
-  location: string;
-  responseTime: string;
-};
+import type {
+  ResumeContact,
+  ResumeExperience,
+  ResumeProfile,
+  ResumeQuickFact,
+  ResumeScope,
+  ResumeSkillGroup,
+  ResumeSnapshot,
+} from "../types/resume";
 
-export type ResumeQuickFact = {
-  label: string;
-  value: string;
-};
+export type {
+  ResumeContact,
+  ResumeExperience,
+  ResumeProfile,
+  ResumeQuickFact,
+  ResumeScope,
+  ResumeSkillGroup,
+  ResumeSnapshot,
+} from "../types/resume";
 
-export type ResumeSnapshot = {
-  value: string;
-  label: string;
-};
+export { RESUME_SECTIONS } from "../types/resume";
 
-export type ResumeScope = {
-  id: string;
-  area: string;
-  detail: string;
-};
-
-export type ResumeExperience = {
-  id: string;
-  period: string;
-  role: string;
-  company: string;
-  context: string;
-  bullets: string[];
-  tags: string[];
-  projectHref?: string;
-};
-
-export type ResumeSkillGroup = {
-  id: string;
-  label: string;
-  items: string[];
-};
-
-export type ResumeSectionLink = {
-  id: string;
-  label: string;
-};
-
-export const RESUME_SECTIONS: ResumeSectionLink[] = [
-  { id: "intro", label: "Giới thiệu" },
-  { id: "scope", label: "Phạm vi làm việc" },
-  { id: "experience", label: "Dự án & kinh nghiệm" },
-  { id: "skills", label: "Công nghệ" },
-  { id: "preferences", label: "Mong muốn" },
-];
-
-export const RESUME_PROFILE = {
+export const RESUME_PROFILE: ResumeProfile = {
   name: "Vũ Văn Kiên",
   title: "Fullstack Developer",
   focus: "Node.js · React · TypeScript",

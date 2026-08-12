@@ -12,3 +12,6 @@ export const createStory = (formData: FormData) =>
   });
 
 export const deleteStory = (id: string) => api.delete(`/stories/${id}`);
+
+export const updateStoryPin = (id: string, isPinned: boolean) =>
+  api.patch<{ data: Story }>(`/stories/${id}/pin`, { isPinned });

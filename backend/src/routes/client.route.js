@@ -6,6 +6,9 @@ const projectController = require("../controller/project.controller")();
 const galleryController = require("../controller/gallery.controller")();
 const userController = require("../controller/user.controller")();
 const metaCrawlController = require("../controller/meta-crawl.controller")();
+const seoController = require("../controller/seo.controller");
+const adminSeoController = require("../controller/adminSeo.controller");
+const resumeController = require("../controller/resume.controller");
 const upload = require("../configs/multer.config");
 const authenticateToken = require("../middleware/auth.middleware");
 const requireRole = require("../middleware/role.middleware");
@@ -32,6 +35,7 @@ router.post(
   StoryController.Add,
 );
 router.delete("/api/stories/:id", ...admin, StoryController.Delete);
+router.patch("/api/stories/:id/pin", ...admin, StoryController.UpdatePin);
 
 // [gallery] — Cloudinary upload + DB path storage
 router.get("/api/gallery", galleryController.Index);
@@ -50,5 +54,25 @@ router.get("/api/users", ...admin, userController.Index);
 
 // [tools] — public meta crawl proxy (SSR fetch)
 router.get("/api/tools/meta-crawl", metaCrawlController.Crawl);
+
+// [seo]
+router.get("/api/seo/config", seoController.getConfig);
+router.get("/robots.txt", seoController.robots);
+router.get("/sitemap.xml", seoController.sitemap);
+router.get("/api/admin/seo", ...admin, adminSeoController.show);
+router.put("/api/admin/seo/global", ...admin, adminSeoController.updateGlobal);
+router.put("/api/admin/seo/pages/:pageKey", ...admin, adminSeoController.updatePage);
+
+// [resume]
+router.get("/api/resume", resumeController.getPublic);
+router.get("/api/admin/resume", ...admin, resumeController.getAdmin);
+router.put("/api/admin/resume", ...admin, resumeController.update);
+router.post(
+  "/api/admin/resume/cv",
+  ...admin,
+  upload.single("cv"),
+  resumeController.uploadCv,
+);
+router.delete("/api/admin/resume/cv", ...admin, resumeController.removeCv);
 
 module.exports = router;

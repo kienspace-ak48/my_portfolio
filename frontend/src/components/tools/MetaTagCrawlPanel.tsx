@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useLocation, useSearchParams } from "react-router-dom";
 import {
   AlertCircle,
   ArrowDownToLine,
@@ -29,6 +30,8 @@ type Props = {
 type ResultTab = "analysis" | "preview";
 
 function MetaTagCrawlPanel({ onApply }: Props) {
+  const location = useLocation();
+  const [searchParams] = useSearchParams();
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -38,6 +41,13 @@ function MetaTagCrawlPanel({ onApply }: Props) {
   const [missing, setMissing] = useState<
     ReturnType<typeof listMissingTags>
   >([]);
+
+  useEffect(() => {
+    const fromQuery = searchParams.get("url");
+    const fromState = (location.state as { crawlUrl?: string } | null)?.crawlUrl;
+    const next = fromQuery || fromState;
+    if (next) setUrl(next);
+  }, [location.state, searchParams]);
 
   async function handleCrawl() {
     if (!url.trim()) {

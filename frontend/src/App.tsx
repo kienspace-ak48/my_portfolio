@@ -19,15 +19,21 @@ import ProjectsPage from "./pages/admin/ProjectsPage";
 import StoriesPage from "./pages/admin/StoriesPage";
 import GalleryPage from "./pages/admin/GalleryPage";
 import UsersPage from "./pages/admin/UsersPage";
+import AdminSeoPage from "./pages/admin/AdminSeoPage";
+import AdminResumePage from "./pages/admin/AdminResumePage";
 import ProjectForm from "./components/admin/ProjectFormData";
 import LoginPage from "./pages/admin/LoginPage";
 import NotFound from "./pages/NotFound";
 import { AuthGuard } from "./pages/admin/LoginPage";
+import PageSeo from "./seo/PageSeo";
+import { SeoProvider } from "./seo/SeoContext";
 
 function App() {
   return (
     <Router>
-      <Routes>
+      <SeoProvider>
+        <PageSeo />
+        <Routes>
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/news" element={<News />} />
@@ -59,10 +65,14 @@ function App() {
           <Route path="stories" element={<StoriesPage />} />
           <Route path="gallery" element={<GalleryPage />} />
           <Route path="users" element={<UsersPage />} />
+          <Route path="seo" element={<AdminSeoPage />} />
+          <Route path="resume" element={<AdminResumePage />} />
+          <Route path="*" element={<NotFound embedded />} />
         </Route>
 
         <Route path="*" element={<NotFound />} />
-      </Routes>
+        </Routes>
+      </SeoProvider>
     </Router>
   );
 }

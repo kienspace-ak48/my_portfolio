@@ -1,6 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import type { ResumeExperience } from "../../data/resumeContent";
+import type { ResumeExperience } from "../../types/resume";
 
 function ResumeTimeline({ items }: { items: ResumeExperience[] }) {
   return (
