@@ -7,7 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "pnpm exec prisma generate && nodemon --inspect server.js",
     "start": "node server.js",
-    "seed": "node migration/seed.js",
+    "postinstall": "pnpm exec prisma generate",
+    "seed": "pnpm exec prisma generate && node migration/seed.js",
+    "db:setup": "pnpm exec prisma migrate deploy && pnpm exec prisma generate && node migration/seed.js",
     "db:export": "node migration/export-db.js",
     "build:frontend": "pnpm install --dir ../frontend && pnpm --dir ../frontend run build"
   },

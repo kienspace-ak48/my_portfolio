@@ -11,6 +11,36 @@ const prisma = require("../src/configs/prisma.config");
 
 const IN_FILE = path.join(__dirname, "data", "db-export.json");
 
+const REQUIRED_MODELS = [
+  "storyView",
+  "story",
+  "projectTag",
+  "project",
+  "tag",
+  "galleryAsset",
+  "refreshToken",
+  "seoPageTemplate",
+  "seoGlobalSettings",
+  "resumeSettings",
+  "user",
+];
+
+function assertPrismaClient() {
+  const missing = REQUIRED_MODELS.filter((name) => typeof prisma[name]?.deleteMany !== "function");
+  if (missing.length === 0) return;
+
+  throw new Error(
+    [
+      `Prisma client thiếu model: ${missing.join(", ")}`,
+      "Trên VPS chạy theo thứ tự:",
+      "  1. pnpm install",
+      "  2. pnpm exec prisma migrate deploy",
+      "  3. pnpm seed",
+      "(src/generated/prisma không commit git — cần prisma generate sau mỗi lần pull)",
+    ].join("\n"),
+  );
+}
+
 async function clearAll() {
   await prisma.storyView.deleteMany();
   await prisma.story.deleteMany();
@@ -35,6 +65,7 @@ async function main() {
   const data = JSON.parse(fs.readFileSync(IN_FILE, "utf8"));
   console.log(`🌱 Seed từ export (${data.exportedAt})…`);
 
+  assertPrismaClient();
   await clearAll();
 
   if (data.users?.length) {
