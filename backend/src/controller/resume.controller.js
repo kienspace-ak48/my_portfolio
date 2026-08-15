@@ -1,7 +1,13 @@
 const resumeRepository = require("../repositories/resume.repository");
 const resumeService = require("../services/resume.service");
 const response = require("../utils/response.util");
-const { saveResumeCv, deleteResumeCv } = require("../utils/localUpload.util");
+const fs = require("fs");
+const {
+  saveResumeCv,
+  deleteResumeCv,
+  buildCvDownloadFileName,
+  getResumeCvAbsolutePath,
+} = require("../utils/localUpload.util");
 
 const resumeController = {
   async getPublic(req, res) {
@@ -68,6 +74,43 @@ const resumeController = {
       });
     } catch (error) {
       console.error("resume.controller.uploadCv", error);
+      return response.fail(res, error.message, 500);
+    }
+  },
+
+  async downloadCv(req, res) {
+    try {
+      const existing = await resumeRepository.find();
+      const storedFileName = resumeService.getStoredCvFileName(existing);
+
+      if (!storedFileName) {
+        return response.fail(res, "Chưa có file CV", 404);
+      }
+
+      const absolutePath = getResumeCvAbsolutePath(storedFileName);
+
+      try {
+        await fs.promises.access(absolutePath, fs.constants.R_OK);
+      } catch {
+        return response.fail(res, "Không tìm thấy file CV", 404);
+      }
+
+      const downloadName = buildCvDownloadFileName(existing?.cvPdfFileName);
+      res.setHeader("Content-Type", "application/pdf");
+      res.setHeader("Content-Disposition", `attachment; filename="${downloadName}"`);
+
+      const stream = fs.createReadStream(absolutePath);
+      stream.on("error", (error) => {
+        console.error("resume.controller.downloadCv.stream", error);
+        if (!res.headersSent) {
+          response.fail(res, "Không thể tải file CV", 500);
+        } else {
+          res.end();
+        }
+      });
+      stream.pipe(res);
+    } catch (error) {
+      console.error("resume.controller.downloadCv", error);
       return response.fail(res, error.message, 500);
     }
   },

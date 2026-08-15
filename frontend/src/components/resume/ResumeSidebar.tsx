@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Code2, FileText, Mail } from "lucide-react";
+import { Code2, FileText, Loader2, Mail } from "lucide-react";
+import { downloadResumeCv } from "../../api/resume.api";
 import type {
   ResumeContact,
   ResumeProfile,
@@ -7,7 +9,6 @@ import type {
   ResumeSnapshot,
 } from "../../types/resume";
 import { RESUME_SECTIONS } from "../../types/resume";
-import { resolveBackendAssetUrl } from "../../utils/backendAssetUrl";
 
 type Props = {
   profile: ResumeProfile;
@@ -24,7 +25,20 @@ function ResumeSidebar({
   snapshot,
   cvPdfUrl,
 }: Props) {
-  const cvHref = cvPdfUrl ? resolveBackendAssetUrl(cvPdfUrl) : "";
+  const [downloadingCv, setDownloadingCv] = useState(false);
+
+  async function handleDownloadCv() {
+    if (downloadingCv) return;
+
+    setDownloadingCv(true);
+    try {
+      await downloadResumeCv();
+    } catch {
+      window.alert("Không thể tải CV. Vui lòng thử lại sau.");
+    } finally {
+      setDownloadingCv(false);
+    }
+  }
 
   return (
     <aside className="lg:sticky lg:top-20 lg:self-start">
@@ -78,17 +92,20 @@ function ResumeSidebar({
               <Mail size={15} aria-hidden />
               Gửi email
             </a>
-            {cvHref ? (
-              <a
-                href={cvHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                download="Resume.pdf"
-                className="flex w-full items-center justify-center gap-2 rounded-xl border border-brand-border bg-brand-soft px-4 py-2.5 text-sm font-semibold text-brand transition hover:bg-brand hover:text-white"
+            {cvPdfUrl ? (
+              <button
+                type="button"
+                disabled={downloadingCv}
+                onClick={handleDownloadCv}
+                className="flex w-full items-center justify-center gap-2 rounded-xl border border-brand-border bg-brand-soft px-4 py-2.5 text-sm font-semibold text-brand transition hover:bg-brand hover:text-white disabled:cursor-wait disabled:opacity-70"
               >
-                <FileText size={15} aria-hidden />
-                Resume
-              </a>
+                {downloadingCv ? (
+                  <Loader2 size={15} className="animate-spin" aria-hidden />
+                ) : (
+                  <FileText size={15} aria-hidden />
+                )}
+                {downloadingCv ? "Đang tải..." : "Tải CV"}
+              </button>
             ) : null}
             <a
               href={contact.github}

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import type { BlogPost } from "../../types/blog";
-import { BLOG_CATEGORY_LABELS } from "../../types/blog";
+import { blogCategoryLabel } from "../../types/blog";
 import { formatBlogDate } from "../../utils/blogUtils";
 
 type BlogCardProps = {
@@ -15,15 +15,22 @@ function BlogCard({ post, variant = "default" }: BlogCardProps) {
         to={`/blog/${post.slug}`}
         className="group flex gap-4 rounded-2xl border border-border bg-surface p-3 transition hover:border-brand-border hover:shadow-sm sm:gap-5 sm:p-4"
       >
-        <img
-          src={post.coverUrl}
-          alt=""
-          className="h-24 w-28 shrink-0 rounded-xl object-cover sm:h-28 sm:w-36"
-          loading="lazy"
-        />
+        {post.coverUrl ? (
+          <img
+            src={post.coverUrl}
+            alt=""
+            className="h-24 w-28 shrink-0 rounded-xl object-cover sm:h-28 sm:w-36"
+            loading="lazy"
+          />
+        ) : (
+          <div
+            className="h-24 w-28 shrink-0 rounded-xl bg-hover sm:h-28 sm:w-36"
+            aria-hidden
+          />
+        )}
         <div className="min-w-0 flex-1 py-0.5">
           <span className="text-[11px] font-semibold uppercase tracking-wide text-brand">
-            {BLOG_CATEGORY_LABELS[post.category]}
+            {blogCategoryLabel(post)}
           </span>
           <h3 className="mt-1 line-clamp-2 font-bold text-ink group-hover:text-brand">
             {post.title}
@@ -59,14 +66,16 @@ function BlogCard({ post, variant = "default" }: BlogCardProps) {
       className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-surface transition hover:-translate-y-0.5 hover:border-brand-border hover:shadow-md"
     >
       <div className="relative aspect-[16/10] overflow-hidden bg-hover">
-        <img
-          src={post.coverUrl}
-          alt=""
-          className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
-          loading="lazy"
-        />
+        {post.coverUrl ? (
+          <img
+            src={post.coverUrl}
+            alt=""
+            className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+            loading="lazy"
+          />
+        ) : null}
         <span className="absolute left-3 top-3 rounded-lg bg-surface/95 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-brand shadow-sm backdrop-blur-sm">
-          {BLOG_CATEGORY_LABELS[post.category]}
+          {blogCategoryLabel(post)}
         </span>
       </div>
       <div className="flex flex-1 flex-col p-4 sm:p-5">

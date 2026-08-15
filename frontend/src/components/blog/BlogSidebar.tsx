@@ -1,6 +1,6 @@
 import { Tag } from "lucide-react";
 import type { BlogPost } from "../../types/blog";
-import { BLOG_CATEGORY_LABELS } from "../../types/blog";
+import { blogCategoryLabel } from "../../types/blog";
 import { getAllTags } from "../../utils/blogUtils";
 import BlogCard from "./BlogCard";
 import BlogNewsletter from "./BlogNewsletter";
@@ -9,9 +9,10 @@ type BlogSidebarProps = {
   posts: BlogPost[];
   activeTag: string | null;
   onTagSelect: (tag: string | null) => void;
+  categoryLabels?: Record<string, string>;
 };
 
-function BlogSidebar({ posts, activeTag, onTagSelect }: BlogSidebarProps) {
+function BlogSidebar({ posts, activeTag, onTagSelect, categoryLabels }: BlogSidebarProps) {
   const popular = [...posts]
     .sort((a, b) => b.readMinutes - a.readMinutes)
     .slice(0, 4);
@@ -41,7 +42,7 @@ function BlogSidebar({ posts, activeTag, onTagSelect }: BlogSidebarProps) {
           {Object.entries(categoryCounts).map(([cat, count]) => (
             <li key={cat}>
               <span className="flex justify-between py-1.5 text-sm text-body">
-                <span>{BLOG_CATEGORY_LABELS[cat as keyof typeof BLOG_CATEGORY_LABELS]}</span>
+                <span>{blogCategoryLabel({ category: cat, categoryLabel: categoryLabels?.[cat] }, categoryLabels)}</span>
                 <span className="font-mono-ui text-xs text-subtle">{count}</span>
               </span>
             </li>

@@ -219,10 +219,14 @@ export function PageLoading({
 
 export function InlineLoading({ message = "Đang tải…" }: InlineLoadingProps) {
   return (
-    <p className="inline-flex items-center gap-3 rounded-xl border border-primary/15 bg-primary/5 px-4 py-3 text-sm text-on-surface-variant">
+    <div
+      role="status"
+      aria-live="polite"
+      className="inline-flex items-center gap-3 rounded-xl border border-primary/15 bg-primary/5 px-4 py-3 text-sm text-on-surface-variant"
+    >
       <LoadingRing size="sm" />
       <span>{message}</span>
-    </p>
+    </div>
   );
 }
 

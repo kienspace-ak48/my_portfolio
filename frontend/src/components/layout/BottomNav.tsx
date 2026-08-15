@@ -1,5 +1,5 @@
 import { NavLink, useLocation } from "react-router-dom";
-import { CLIENT_NAV } from "../../constants/clientNav";
+import { BOTTOM_NAV } from "../../constants/clientNav";
 
 function isNavActive(pathname: string, to: string, end?: boolean) {
   if (end) return pathname === to;
@@ -11,12 +11,12 @@ export default function BottomNav() {
 
   return (
     <nav
-      className="fixed right-0 bottom-0 left-0 z-40 border-t border-slate-200 bg-white/95 shadow-[0_-4px_24px_rgba(15,23,42,0.08)] backdrop-blur-md md:hidden"
+      className="fixed right-0 bottom-0 left-0 z-40 border-t border-slate-200 bg-white/95 shadow-[0_-4px_24px_rgba(15,23,42,0.08)] backdrop-blur-md lg:hidden"
       style={{ paddingBottom: "env(safe-area-inset-bottom, 0px)" }}
       aria-label="Điều hướng chính"
     >
       <div className="flex h-16 items-stretch">
-        {CLIENT_NAV.map((item) => {
+        {BOTTOM_NAV.map((item) => {
           const Icon = item.icon;
           const isActive = isNavActive(pathname, item.to, item.end);
 

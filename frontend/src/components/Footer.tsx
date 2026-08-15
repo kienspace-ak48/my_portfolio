@@ -61,7 +61,7 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-footer pb-[calc(4rem+env(safe-area-inset-bottom,0px))] text-footer-muted md:pb-0 md:pl-30">
+    <footer className="bg-footer pb-[calc(4rem+env(safe-area-inset-bottom,0px))] text-footer-muted lg:pb-0 lg:pl-30">
       <div className="page-content footer-content">
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-[repeat(4,minmax(0,1fr))_minmax(0,1.5fr)] lg:gap-x-8 lg:gap-y-10">
           {/* Brand & contact */}

@@ -1,9 +1,9 @@
 import axios from "axios";
 import { handleAuthFailure, isAuthErrorStatus } from "../utils/authSession";
+import { BASE_API } from "./publicApi";
 
-const BASE_API = import.meta.env.VITE_API_URL ?? "http://localhost:8080/api";
-
-const api = axios.create({
+/** Admin / authenticated endpoints — attaches token + auto refresh. */
+const adminApi = axios.create({
   baseURL: BASE_API,
   timeout: 10000,
 });
@@ -26,7 +26,7 @@ export function clearAuthTokens() {
   localStorage.removeItem("refreshToken");
 }
 
-api.interceptors.request.use((config) => {
+adminApi.interceptors.request.use((config) => {
   const token = getAccessToken();
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
@@ -55,7 +55,7 @@ async function refreshAccessToken(): Promise<string> {
   return accessToken;
 }
 
-api.interceptors.response.use(
+adminApi.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
@@ -82,7 +82,7 @@ api.interceptors.response.use(
 
       const newToken = await refreshPromise;
       originalRequest.headers.Authorization = `Bearer ${newToken}`;
-      return api(originalRequest);
+      return adminApi(originalRequest);
     } catch {
       clearAuthTokens();
       handleAuthFailure();
@@ -91,4 +91,5 @@ api.interceptors.response.use(
   },
 );
 
-export default api;
+export { adminApi };
+export default adminApi;

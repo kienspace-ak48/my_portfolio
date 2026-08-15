@@ -2,8 +2,7 @@ import {
   handleAuthFailure,
   isAuthErrorStatus,
 } from "../utils/authSession";
-
-const BASE_API = import.meta.env.VITE_API_URL ?? "http://localhost:8080/api";
+import { BASE_API } from "./publicApi";
 
 type ApiEnvelope<T> = {
   success: boolean;
@@ -11,6 +10,13 @@ type ApiEnvelope<T> = {
   message?: string;
 };
 
+/**
+ * Lightweight fetch wrapper with explicit auth flag.
+ * - Public routes: omit `auth` or pass `{ auth: false }`
+ * - Admin routes: pass `{ auth: true }`
+ *
+ * Prefer `publicApi` / `adminApi` (axios) for new code.
+ */
 export async function apiFetch<T>(
   path: string,
   init?: RequestInit,

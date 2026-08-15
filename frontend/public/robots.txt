@@ -1,0 +1,11 @@
+# Chỉnh SITE_URL khi deploy (phải khớp domain production)
+# File tĩnh — copy vào dist khi build frontend
+
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /admin/
+Disallow: /api
+Disallow: /api/
+
+Sitemap: https://kienvu.id.vn/sitemap.xml

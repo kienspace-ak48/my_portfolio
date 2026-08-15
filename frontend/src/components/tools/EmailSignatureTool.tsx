@@ -270,7 +270,7 @@ export default function EmailSignatureTool() {
               onChange={(v) => update("name", v)}
               placeholder="Họ và tên"
             />
-            <Field label="Chức danh" hint="Hiển thị đúng như bạn nhập — không tự thêm chữ «at»">
+            <Field label="Chức danh" hint="">
               <IconInput
                 icon={Briefcase}
                 value={form.title}
@@ -278,7 +278,7 @@ export default function EmailSignatureTool() {
                 placeholder="Fullstack Developer"
               />
             </Field>
-            <Field label="Công ty / dòng phụ" hint="Tuỳ chọn. Có thể gõ «tại Kien's Space» nếu muốn">
+            <Field label="Công ty / dòng phụ" hint="">
               <IconInput
                 icon={Briefcase}
                 value={form.company}

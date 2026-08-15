@@ -9,6 +9,7 @@
     "start": "node server.js",
     "postinstall": "pnpm exec prisma generate",
     "seed": "pnpm exec prisma generate && node migration/seed.js",
+    "seed:blog": "pnpm exec prisma generate && node migration/seed-blog.js",
     "db:setup": "pnpm exec prisma migrate deploy && pnpm exec prisma generate && node migration/seed.js",
     "db:export": "node migration/export-db.js",
     "build:frontend": "pnpm install --dir ../frontend && pnpm --dir ../frontend run build"

@@ -40,6 +40,14 @@ const seoRepository = {
       orderBy: { updatedAt: "desc" },
     });
   },
+
+  findPublicBlogPostsForSitemap() {
+    return prisma.blogPost.findMany({
+      where: { isDisplay: true, status: "PUBLISHED" },
+      select: { slug: true, updatedAt: true },
+      orderBy: { publishedAt: "desc" },
+    });
+  },
 };
 
 module.exports = seoRepository;

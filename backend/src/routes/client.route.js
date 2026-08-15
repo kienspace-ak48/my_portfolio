@@ -9,6 +9,9 @@ const metaCrawlController = require("../controller/meta-crawl.controller")();
 const seoController = require("../controller/seo.controller");
 const adminSeoController = require("../controller/adminSeo.controller");
 const resumeController = require("../controller/resume.controller");
+const blogController = require("../controller/blog.controller")();
+const backupController = require("../controller/backup.controller");
+const taxonomyController = require("../controller/taxonomy.controller");
 const upload = require("../configs/multer.config");
 const authenticateToken = require("../middleware/auth.middleware");
 const requireRole = require("../middleware/role.middleware");
@@ -57,14 +60,13 @@ router.get("/api/tools/meta-crawl", metaCrawlController.Crawl);
 
 // [seo]
 router.get("/api/seo/config", seoController.getConfig);
-router.get("/robots.txt", seoController.robots);
-router.get("/sitemap.xml", seoController.sitemap);
 router.get("/api/admin/seo", ...admin, adminSeoController.show);
 router.put("/api/admin/seo/global", ...admin, adminSeoController.updateGlobal);
 router.put("/api/admin/seo/pages/:pageKey", ...admin, adminSeoController.updatePage);
 
 // [resume]
 router.get("/api/resume", resumeController.getPublic);
+router.get("/api/resume/cv/download", resumeController.downloadCv);
 router.get("/api/admin/resume", ...admin, resumeController.getAdmin);
 router.put("/api/admin/resume", ...admin, resumeController.update);
 router.post(
@@ -74,5 +76,33 @@ router.post(
   resumeController.uploadCv,
 );
 router.delete("/api/admin/resume/cv", ...admin, resumeController.removeCv);
+
+// [blog]
+router.get("/api/blog/admin", ...admin, blogController.AdminIndex);
+router.get("/api/blog/categories", taxonomyController.ListCategoriesPublic);
+router.get("/api/blog/tags", blogController.Tags);
+router.get("/api/blog/slug/:slug", blogController.ShowBySlug);
+router.get("/api/blog", blogController.Index);
+router.get("/api/blog/:id", ...admin, blogController.Show);
+router.post("/api/blog", ...admin, blogController.Add);
+router.put("/api/blog/:id", ...admin, blogController.Update);
+router.delete("/api/blog/:id", ...admin, blogController.Remove);
+
+// [backup & seed demo]
+router.get("/api/admin/backup/stats", ...admin, backupController.Stats);
+router.get("/api/admin/backup/export", ...admin, backupController.ExportDownload);
+router.post("/api/admin/backup/save", ...admin, backupController.ExportSave);
+router.get("/api/admin/backup/files/:filename", ...admin, backupController.DownloadSaved);
+router.post("/api/admin/backup/seed-blog-demo", ...admin, backupController.SeedBlogDemo);
+
+// [taxonomy — tags & blog categories]
+router.get("/api/admin/tags", ...admin, taxonomyController.ListTags);
+router.post("/api/admin/tags", ...admin, taxonomyController.CreateTag);
+router.put("/api/admin/tags/:id", ...admin, taxonomyController.UpdateTag);
+router.delete("/api/admin/tags/:id", ...admin, taxonomyController.RemoveTag);
+router.get("/api/admin/blog/categories", ...admin, taxonomyController.ListCategoriesAdmin);
+router.post("/api/admin/blog/categories", ...admin, taxonomyController.CreateCategory);
+router.put("/api/admin/blog/categories/:id", ...admin, taxonomyController.UpdateCategory);
+router.delete("/api/admin/blog/categories/:id", ...admin, taxonomyController.RemoveCategory);
 
 module.exports = router;

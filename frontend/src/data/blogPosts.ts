@@ -1,4 +1,7 @@
-import type { BlogAuthor, BlogPost } from "../types/blog";
+import type { BlogAuthor, BlogPost, ContentBlock } from "../types/blog";
+
+/** Legacy mock shape — API dùng HTML string thay vì ContentBlock[] */
+type LegacyMockBlogPost = Omit<BlogPost, "content"> & { content: ContentBlock[] };
 
 export const BLOG_AUTHORS: Record<string, BlogAuthor> = {
   kien: {
@@ -10,7 +13,7 @@ export const BLOG_AUTHORS: Record<string, BlogAuthor> = {
   },
 };
 
-const prismaSnakeCaseContent: BlogPost["content"] = [
+const prismaSnakeCaseContent: ContentBlock[] = [
   {
     type: "paragraph",
     text: "Khi deploy Prisma lên VPS Linux, tôi từng gặp migration chạy OK trên Windows nhưng fail trên production vì tên bảng phân biệt hoa thường. Bài này ghi lại cách mình chuẩn hóa schema và tránh lỗi tương tự.",
@@ -82,7 +85,7 @@ const prismaSnakeCaseContent: BlogPost["content"] = [
   },
 ];
 
-export const BLOG_POSTS: BlogPost[] = [
+export const BLOG_POSTS: LegacyMockBlogPost[] = [
   {
     id: "1",
     slug: "prisma-snake-case-mariadb-linux",

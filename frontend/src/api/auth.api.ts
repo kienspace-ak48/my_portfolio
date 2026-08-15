@@ -1,4 +1,5 @@
-import api, { clearAuthTokens, setAuthTokens } from "./axios";
+import adminApi, { clearAuthTokens, setAuthTokens } from "./axios";
+import publicApi from "./publicApi";
 import { isAccessTokenValid } from "../utils/authSession";
 
 export type AuthUser = {
@@ -17,7 +18,7 @@ export type LoginResponse = {
 };
 
 export const login = async (email: string, password: string) => {
-  const res = await api.post<{ data: LoginResponse }>("/auth/login", {
+  const res = await publicApi.post<{ data: LoginResponse }>("/auth/login", {
     email,
     password,
   });
@@ -30,13 +31,13 @@ export const logout = async () => {
   const refreshToken = localStorage.getItem("refreshToken");
   try {
     if (refreshToken) {
-      await api.post("/auth/logout", { refreshToken });
+      await publicApi.post("/auth/logout", { refreshToken });
     }
   } finally {
     clearAuthTokens();
   }
 };
 
-export const getMe = () => api.get<{ data: AuthUser }>("/auth/me");
+export const getMe = () => adminApi.get<{ data: AuthUser }>("/auth/me");
 
 export const isAuthenticated = () => isAccessTokenValid();

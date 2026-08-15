@@ -1,6 +1,5 @@
 import { Clock, Search, SlidersHorizontal, X } from "lucide-react";
-import type { BlogCategory } from "../../types/blog";
-import { BLOG_CATEGORY_LABELS } from "../../types/blog";
+import type { BlogCategoryDef } from "../../types/taxonomy";
 
 type BlogToolbarProps = {
   query: string;
@@ -10,16 +9,8 @@ type BlogToolbarProps = {
   sort: "newest" | "popular";
   onSortChange: (value: "newest" | "popular") => void;
   resultCount: number;
+  categories: BlogCategoryDef[];
 };
-
-const CATEGORIES: (BlogCategory | "all")[] = [
-  "all",
-  "backend",
-  "frontend",
-  "devops",
-  "tutorial",
-  "career",
-];
 
 function BlogToolbar({
   query,
@@ -29,6 +20,7 @@ function BlogToolbar({
   sort,
   onSortChange,
   resultCount,
+  categories,
 }: BlogToolbarProps) {
   const hasFilters = Boolean(query || category);
 
@@ -65,24 +57,31 @@ function BlogToolbar({
       </div>
 
       <div className="flex flex-wrap items-center gap-2">
-        {CATEGORIES.map((cat) => {
-          const active =
-            cat === "all" ? category === null : category === cat;
-          const label =
-            cat === "all" ? "Tất cả" : BLOG_CATEGORY_LABELS[cat];
-
+        <button
+          type="button"
+          onClick={() => onCategoryChange(null)}
+          className={`rounded-full px-3.5 py-1.5 text-sm font-medium transition ${
+            category === null
+              ? "bg-ink text-white"
+              : "bg-app text-muted hover:bg-hover hover:text-ink"
+          }`}
+        >
+          Tất cả
+        </button>
+        {categories.map((cat) => {
+          const active = category === cat.slug;
           return (
             <button
-              key={cat}
+              key={cat.slug}
               type="button"
-              onClick={() => onCategoryChange(cat === "all" ? null : cat)}
+              onClick={() => onCategoryChange(cat.slug)}
               className={`rounded-full px-3.5 py-1.5 text-sm font-medium transition ${
                 active
                   ? "bg-ink text-white"
                   : "bg-app text-muted hover:bg-hover hover:text-ink"
               }`}
             >
-              {label}
+              {cat.label}
             </button>
           );
         })}

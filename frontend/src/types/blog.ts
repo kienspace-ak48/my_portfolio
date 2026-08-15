@@ -12,12 +12,9 @@ export type BlogComment = {
 
 export type BlogCommentSort = "newest" | "oldest" | "popular";
 
-export type BlogCategory =
-  | "backend"
-  | "frontend"
-  | "devops"
-  | "career"
-  | "tutorial";
+export type BlogCategory = string;
+
+export type BlogPostStatus = "DRAFT" | "PUBLISHED" | "ARCHIVED";
 
 export type BlogAuthor = {
   id: string;
@@ -27,6 +24,7 @@ export type BlogAuthor = {
   bio: string;
 };
 
+/** @deprecated Mock-only block format — API stores HTML from TinyMCE */
 export type ContentBlock =
   | { type: "paragraph"; text: string }
   | { type: "heading"; level: 2 | 3; text: string; id: string }
@@ -42,19 +40,77 @@ export type BlogPost = {
   excerpt: string;
   coverUrl: string;
   category: BlogCategory;
+  categoryLabel?: string;
   tags: string[];
   authorId: string;
+  author?: BlogAuthor | null;
+  authorName?: string;
   publishedAt: string;
   updatedAt?: string;
   readMinutes: number;
   featured?: boolean;
-  content: ContentBlock[];
+  featuredOrder?: number;
+  viewCount?: number;
+  status?: BlogPostStatus;
+  isDisplay?: boolean;
+  content?: string;
 };
 
-export const BLOG_CATEGORY_LABELS: Record<BlogCategory, string> = {
-  backend: "Backend",
-  frontend: "Frontend",
-  devops: "DevOps",
-  career: "Career",
-  tutorial: "Tutorial",
+export type BlogPostForm = {
+  title: string;
+  slug: string;
+  excerpt: string;
+  content: string;
+  coverUrl: string;
+  category: BlogCategory;
+  status: BlogPostStatus;
+  isDisplay: boolean;
+  featured: boolean;
+  featuredOrder: number;
+  readMinutes: number;
+  publishedAt: string;
+  tags: string[];
 };
+
+export type BlogQuery = {
+  q?: string;
+  category?: string;
+  tag?: string;
+  sort?: "newest" | "popular";
+  featured?: string;
+};
+
+export function blogCategoryLabel(
+  post: Pick<BlogPost, "category" | "categoryLabel">,
+  map?: Record<string, string>,
+): string {
+  return post.categoryLabel ?? map?.[post.category] ?? post.category;
+}
+
+export const BLOG_STATUS_OPTIONS: { value: BlogPostStatus; label: string }[] = [
+  { value: "DRAFT", label: "Nháp" },
+  { value: "PUBLISHED", label: "Đã xuất bản" },
+  { value: "ARCHIVED", label: "Lưu trữ" },
+];
+
+export function blogStatusLabel(status: BlogPostStatus): string {
+  return BLOG_STATUS_OPTIONS.find((o) => o.value === status)?.label ?? status;
+}
+
+export function toBlogPayload(form: BlogPostForm) {
+  return {
+    title: form.title.trim(),
+    slug: form.slug.trim(),
+    excerpt: form.excerpt.trim(),
+    content: form.content,
+    coverUrl: form.coverUrl.trim() || null,
+    category: form.category,
+    status: form.status,
+    isDisplay: form.isDisplay,
+    featured: form.featured,
+    featuredOrder: form.featured ? form.featuredOrder : 0,
+    readMinutes: form.readMinutes,
+    publishedAt: form.publishedAt || null,
+    tags: form.tags,
+  };
+}

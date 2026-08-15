@@ -1,6 +1,6 @@
 const seoRepository = require("../repositories/seo.repository");
 const projectRepository = require("../repositories/project.repository");
-const { findBlogSeoBySlug, listBlogSeoSlugs } = require("../data/blogSeo.data");
+const blogRepository = require("../repositories/blog.repository");
 const {
   getPublicSiteUrl,
   buildCanonicalUrl,
@@ -280,7 +280,7 @@ async function resolveDynamicVars(pageKey, pathname) {
   if (pageKey === "blog.post") {
     const slug = extractSlug(pathname, "/blog");
     if (!slug) return {};
-    const post = findBlogSeoBySlug(slug);
+    const post = await blogRepository.findSeoBySlug(slug);
     if (!post) return {};
     return {
       blogTitle: post.title,
@@ -360,68 +360,6 @@ async function resolveSpaMeta(req) {
   return resolvePageMeta(req, req.path);
 }
 
-async function buildRobotsTxt(req) {
-  const global = await getGlobalSettings(req);
-  const siteUrl = global.siteUrl || getPublicSiteUrl(req);
-
-  if (!global.allowIndexing) {
-    return "User-agent: *\nDisallow: /\n";
-  }
-
-  return [
-    "User-agent: *",
-    "Allow: /",
-    "Disallow: /admin",
-    "Disallow: /api",
-    "",
-    `Sitemap: ${siteUrl}/sitemap.xml`,
-    "",
-  ].join("\n");
-}
-
-async function buildSitemapXml(req) {
-  const global = await getGlobalSettings(req);
-  const siteUrl = global.siteUrl || getPublicSiteUrl(req);
-  const projects = await seoRepository.findPublicProjectsForSitemap();
-  const blogSlugs = listBlogSeoSlugs();
-
-  const staticPaths = [
-    "/",
-    "/news",
-    "/projects",
-    "/resume",
-    "/blog",
-    "/tools",
-    "/tools/base64",
-    "/tools/ip",
-    "/tools/password",
-    "/tools/meta-tag",
-    "/tools/email-signature",
-  ];
-
-  const urls = [
-    ...staticPaths.map((path) => ({ loc: buildCanonicalUrl(siteUrl, path) })),
-    ...projects.map((project) => ({
-      loc: buildCanonicalUrl(siteUrl, `/projects/${project.slug}`),
-      lastmod: project.updatedAt?.toISOString?.() ?? undefined,
-    })),
-    ...blogSlugs.map((slug) => ({
-      loc: buildCanonicalUrl(siteUrl, `/blog/${slug}`),
-    })),
-  ];
-
-  const body = urls
-    .map((item) => {
-      const lastmod = item.lastmod
-        ? `\n    <lastmod>${item.lastmod}</lastmod>`
-        : "";
-      return `  <url>\n    <loc>${item.loc}</loc>${lastmod}\n  </url>`;
-    })
-    .join("\n");
-
-  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${body}\n</urlset>\n`;
-}
-
 async function updateGlobalSettings(data) {
   const payload = {
     siteName: data.siteName,
@@ -464,8 +402,6 @@ module.exports = {
   getPublicConfig,
   resolveSpaMeta,
   resolvePageMeta,
-  buildRobotsTxt,
-  buildSitemapXml,
   updateGlobalSettings,
   updatePageTemplate,
   serializeGlobal,

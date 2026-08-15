@@ -22,6 +22,10 @@ import GalleryPage from "./pages/admin/GalleryPage";
 import UsersPage from "./pages/admin/UsersPage";
 import AdminSeoPage from "./pages/admin/AdminSeoPage";
 import AdminResumePage from "./pages/admin/AdminResumePage";
+import AdminBackupPage from "./pages/admin/AdminBackupPage";
+import AdminTaxonomyPage from "./pages/admin/AdminTaxonomyPage";
+import BlogPostsPage from "./pages/admin/BlogPostsPage";
+import BlogPostForm from "./components/admin/BlogPostForm";
 import ProjectForm from "./components/admin/ProjectFormData";
 import LoginPage from "./pages/admin/LoginPage";
 import NotFound from "./pages/NotFound";
@@ -65,9 +69,14 @@ function App() {
           <Route path="projects/new" element={<ProjectForm />} />
           <Route path="projects/edit/:id" element={<ProjectForm />} />
           <Route path="stories" element={<StoriesPage />} />
+          <Route path="blog" element={<BlogPostsPage />} />
+          <Route path="blog/new" element={<BlogPostForm />} />
+          <Route path="blog/edit/:id" element={<BlogPostForm />} />
+          <Route path="taxonomy" element={<AdminTaxonomyPage />} />
           <Route path="gallery" element={<GalleryPage />} />
           <Route path="users" element={<UsersPage />} />
           <Route path="seo" element={<AdminSeoPage />} />
+          <Route path="backup" element={<AdminBackupPage />} />
           <Route path="resume" element={<AdminResumePage />} />
           <Route path="*" element={<NotFound embedded />} />
         </Route>

@@ -29,6 +29,21 @@ async function saveResumeCv(buffer, originalName) {
   };
 }
 
+function buildCvDownloadFileName(originalFileName) {
+  const date = new Date().toISOString().slice(0, 10);
+  const stem =
+    path
+      .basename(originalFileName || "CV.pdf", path.extname(originalFileName || ".pdf"))
+      .replace(/[^a-zA-Z0-9._-]/g, "_")
+      .slice(0, 80) || "CV";
+  return `${date}_${stem}.pdf`;
+}
+
+function getResumeCvAbsolutePath(storedFileName) {
+  const safeName = path.basename(storedFileName);
+  return path.join(RESUME_CV_DIR, safeName);
+}
+
 async function deleteResumeCv(storedFileName) {
   if (!storedFileName) return;
 
@@ -48,4 +63,6 @@ module.exports = {
   RESUME_CV_DIR,
   saveResumeCv,
   deleteResumeCv,
+  buildCvDownloadFileName,
+  getResumeCvAbsolutePath,
 };

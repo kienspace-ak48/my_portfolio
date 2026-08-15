@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { FileText, FileUser, Plus, RotateCcw, Trash2, Upload } from "lucide-react";
 import {
+  downloadResumeCv,
   fetchAdminResume,
   removeResumeCv,
   updateAdminResume,
@@ -16,7 +17,6 @@ import {
   adminSectionTitleClass,
 } from "../../components/admin/adminFormStyles";
 import type { ResumeContent, ResumeExperience } from "../../types/resume";
-import { resolveBackendAssetUrl } from "../../utils/backendAssetUrl";
 
 const panelClass =
   "flex max-h-[calc(100vh-11rem)] flex-col rounded-2xl border border-border bg-white";
@@ -259,14 +259,13 @@ function AdminResumePage() {
                     <p className="truncate text-sm font-medium text-ink">
                       {cvPdfFileName || "CV.pdf"}
                     </p>
-                    <a
-                      href={resolveBackendAssetUrl(cvPdfUrl)}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    <button
+                      type="button"
+                      onClick={() => downloadResumeCv().catch(() => window.alert("Không thể tải CV."))}
                       className="text-xs text-brand hover:underline"
                     >
-                      Xem / tải file
-                    </a>
+                      Tải file
+                    </button>
                   </div>
                   <button
                     type="button"

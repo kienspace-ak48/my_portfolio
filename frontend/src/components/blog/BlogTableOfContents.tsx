@@ -1,12 +1,11 @@
-import type { ContentBlock } from "../../types/blog";
-import { getHeadings } from "../../utils/blogUtils";
+import { getHeadingsFromHtml } from "../../utils/blogUtils";
 
 type BlogTableOfContentsProps = {
-  content: ContentBlock[];
+  contentHtml: string;
 };
 
-function BlogTableOfContents({ content }: BlogTableOfContentsProps) {
-  const headings = getHeadings(content);
+function BlogTableOfContents({ contentHtml }: BlogTableOfContentsProps) {
+  const headings = getHeadingsFromHtml(contentHtml);
 
   if (headings.length === 0) return null;
 

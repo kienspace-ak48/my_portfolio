@@ -8,18 +8,16 @@ import BlogReadingProgress from "../components/blog/BlogReadingProgress";
 import BlogRelatedPosts from "../components/blog/BlogRelatedPosts";
 import BlogShareBar from "../components/blog/BlogShareBar";
 import BlogTableOfContents from "../components/blog/BlogTableOfContents";
-import { BLOG_POSTS, getBlogAuthor } from "../data/blogPosts";
+import { PageLoading } from "../components/LoadingKit";
+import { useBlogPostBySlug, useBlogPosts } from "../hooks/useBlogPosts";
 import usePageSeo from "../hooks/usePageSeo";
-import { BLOG_CATEGORY_LABELS } from "../types/blog";
-import {
-  formatBlogDate,
-  getPostBySlug,
-  getRelatedPosts,
-} from "../utils/blogUtils";
+import { blogCategoryLabel } from "../types/blog";
+import { formatBlogDate, getRelatedPosts } from "../utils/blogUtils";
 
 function BlogPostPage() {
   const { slug } = useParams<{ slug: string }>();
-  const post = slug ? getPostBySlug(BLOG_POSTS, slug) : undefined;
+  const { post, loading, error } = useBlogPostBySlug(slug);
+  const { posts: allPosts } = useBlogPosts();
 
   const seoVars = useMemo(
     () =>
@@ -27,7 +25,7 @@ function BlogPostPage() {
         ? {
             blogTitle: post.title,
             blogExcerpt: post.excerpt,
-            blogAuthor: getBlogAuthor(post.authorId)?.name,
+            blogAuthor: post.author?.name ?? post.authorName,
             ogImage: post.coverUrl,
           }
         : {},
@@ -47,12 +45,23 @@ function BlogPostPage() {
 
   usePageSeo(seoVars, seoBreadcrumbs);
 
-  if (!post) {
+  if (loading) {
+    return (
+      <PageLoading
+        variant="embedded"
+        title="Đang tải bài viết"
+        message="Đang lấy nội dung từ server…"
+      />
+    );
+  }
+
+  if (error || !post) {
     return <Navigate to="/blog" replace />;
   }
 
-  const author = getBlogAuthor(post.authorId);
-  const related = getRelatedPosts(BLOG_POSTS, post);
+  const author = post.author ?? null;
+  const related = getRelatedPosts(allPosts, post);
+  const contentHtml = post.content ?? "";
 
   return (
     <>
@@ -68,22 +77,33 @@ function BlogPostPage() {
         </Link>
 
         <header className="mb-8 overflow-hidden rounded-3xl border border-border bg-surface">
-          <div className="relative aspect-[2/1] max-h-[420px] w-full sm:aspect-[21/9]">
-            <img
-              src={post.coverUrl}
-              alt=""
-              className="h-full w-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/20 to-transparent" />
-            <div className="absolute right-0 bottom-0 left-0 p-6 sm:p-10">
-              <span className="rounded-lg bg-brand px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-white">
-                {BLOG_CATEGORY_LABELS[post.category]}
+          {post.coverUrl ? (
+            <div className="relative aspect-[2/1] max-h-[420px] w-full sm:aspect-[21/9]">
+              <img
+                src={post.coverUrl}
+                alt=""
+                className="h-full w-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/20 to-transparent" />
+              <div className="absolute right-0 bottom-0 left-0 p-6 sm:p-10">
+                <span className="rounded-lg bg-brand px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-white">
+                  {blogCategoryLabel(post)}
+                </span>
+                <h1 className="mt-4 max-w-4xl text-2xl font-extrabold leading-tight tracking-tight text-white sm:text-4xl">
+                  {post.title}
+                </h1>
+              </div>
+            </div>
+          ) : (
+            <div className="border-b border-border px-6 py-8 sm:px-10">
+              <span className="rounded-lg bg-brand/10 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-brand">
+                {blogCategoryLabel(post)}
               </span>
-              <h1 className="mt-4 max-w-4xl text-2xl font-extrabold leading-tight tracking-tight text-white sm:text-4xl">
+              <h1 className="mt-4 max-w-4xl text-2xl font-extrabold leading-tight tracking-tight text-ink sm:text-4xl">
                 {post.title}
               </h1>
             </div>
-          </div>
+          )}
 
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-border px-6 py-4 text-sm text-muted sm:px-10">
             {author ? (
@@ -95,6 +115,8 @@ function BlogPostPage() {
                 />
                 <span className="font-medium text-ink">{author.name}</span>
               </div>
+            ) : post.authorName ? (
+              <span className="font-medium text-ink">{post.authorName}</span>
             ) : null}
             <span className="text-subtle">·</span>
             <time dateTime={post.publishedAt}>
@@ -120,12 +142,12 @@ function BlogPostPage() {
             </p>
 
             <div className="xl:hidden">
-              <BlogTableOfContents content={post.content} />
+              <BlogTableOfContents contentHtml={contentHtml} />
             </div>
 
             <BlogShareBar title={post.title} slug={post.slug} />
 
-            <BlogPostContent blocks={post.content} />
+            <BlogPostContent html={contentHtml} />
 
             <div className="flex flex-wrap gap-2 border-t border-border pt-6">
               {post.tags.map((tag) => (
@@ -148,7 +170,7 @@ function BlogPostPage() {
 
           <aside className="hidden xl:block">
             <div className="sticky top-24">
-              <BlogTableOfContents content={post.content} />
+              <BlogTableOfContents contentHtml={contentHtml} />
             </div>
           </aside>
         </div>

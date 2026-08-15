@@ -1,19 +1,29 @@
-import { apiFetch, BASE_API } from "./fetchApi";
+import adminApi from "./axios";
+import publicApi from "./publicApi";
 import type { GalleryAsset, GalleryUpdatePayload } from "../types/gallery";
 
-export const getGalleryAdmin = () =>
-  apiFetch<GalleryAsset[]>("/gallery/admin", undefined, { auth: true });
+export async function getGallery() {
+  const res = await publicApi.get<{ success: boolean; data: GalleryAsset[] }>("/gallery");
+  return { success: res.data.success, data: res.data.data };
+}
 
-export const getGallery = () => apiFetch<GalleryAsset[]>("/gallery");
+export async function getGalleryAdmin() {
+  const res = await adminApi.get<{ success: boolean; data: GalleryAsset[] }>("/gallery/admin");
+  return { success: res.data.success, data: res.data.data };
+}
 
-export const updateGalleryAsset = (id: string, payload: GalleryUpdatePayload) =>
-  apiFetch<GalleryAsset>(`/gallery/${id}`, {
-    method: "PUT",
-    body: JSON.stringify(payload),
-  }, { auth: true });
+export async function updateGalleryAsset(id: string, payload: GalleryUpdatePayload) {
+  const res = await adminApi.put<{ success: boolean; data: GalleryAsset }>(
+    `/gallery/${id}`,
+    payload,
+  );
+  return { success: res.data.success, data: res.data.data };
+}
 
-export const deleteGalleryAsset = (id: string) =>
-  apiFetch<null>(`/gallery/${id}`, { method: "DELETE" }, { auth: true });
+export async function deleteGalleryAsset(id: string) {
+  const res = await adminApi.delete<{ success: boolean; data: null }>(`/gallery/${id}`);
+  return { success: res.data.success, data: res.data.data };
+}
 
 export async function uploadGalleryAsset(
   file: File,
@@ -26,26 +36,14 @@ export async function uploadGalleryAsset(
   if (meta?.folder) formData.append("folder", meta.folder);
   if (meta?.mediaType) formData.append("mediaType", meta.mediaType);
 
-  const headers = new Headers();
-  const token =
-    typeof window !== "undefined" ? localStorage.getItem("accessToken") : null;
-  if (token) headers.set("Authorization", `Bearer ${token}`);
+  const res = await adminApi.post<{ success: boolean; data: GalleryAsset }>(
+    "/gallery",
+    formData,
+    {
+      headers: { "Content-Type": "multipart/form-data" },
+      timeout: 120000,
+    },
+  );
 
-  const res = await fetch(`${BASE_API}/gallery`, {
-    method: "POST",
-    headers,
-    body: formData,
-  });
-
-  const json = (await res.json().catch(() => ({}))) as {
-    success: boolean;
-    data: GalleryAsset;
-    message?: string;
-  };
-
-  if (!res.ok) {
-    throw new Error(json.message ?? `HTTP ${res.status}`);
-  }
-
-  return json;
+  return { success: res.data.success, data: res.data.data };
 }

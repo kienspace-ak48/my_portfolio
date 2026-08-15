@@ -6,7 +6,7 @@ function Sidebar() {
   const { pathname } = useLocation();
 
   return (
-    <aside className="fixed top-0 left-0 z-40 hidden h-screen w-30 flex-col overflow-x-hidden border-r border-slate-200 bg-white md:flex">
+    <aside className="fixed top-0 left-0 z-40 hidden h-screen w-30 flex-col overflow-x-hidden border-r border-slate-200 bg-white lg:flex">
       <div className="flex h-16 shrink-0 items-center justify-center overflow-hidden border-b border-slate-200">
         <BrandIcon size={16} boxClassName="h-8 w-8 rounded-lg" />
       </div>

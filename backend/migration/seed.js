@@ -14,6 +14,9 @@ const IN_FILE = path.join(__dirname, "data", "db-export.json");
 const REQUIRED_MODELS = [
   "storyView",
   "story",
+  "blogPostTag",
+  "blogPost",
+  "blogCategoryDef",
   "projectTag",
   "project",
   "tag",
@@ -44,6 +47,9 @@ function assertPrismaClient() {
 async function clearAll() {
   await prisma.storyView.deleteMany();
   await prisma.story.deleteMany();
+  await prisma.blogPostTag.deleteMany();
+  await prisma.blogPost.deleteMany();
+  await prisma.blogCategoryDef.deleteMany();
   await prisma.projectTag.deleteMany();
   await prisma.project.deleteMany();
   await prisma.tag.deleteMany();
@@ -84,6 +90,18 @@ async function main() {
 
   if (data.projectTags?.length) {
     await prisma.projectTag.createMany({ data: data.projectTags });
+  }
+
+  if (data.blogCategories?.length) {
+    await prisma.blogCategoryDef.createMany({ data: data.blogCategories });
+  }
+
+  if (data.blogPosts?.length) {
+    await prisma.blogPost.createMany({ data: data.blogPosts });
+  }
+
+  if (data.blogPostTags?.length) {
+    await prisma.blogPostTag.createMany({ data: data.blogPostTags });
   }
 
   if (data.stories?.length) {

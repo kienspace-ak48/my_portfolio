@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useState } from "react";
-import { apiFetch } from "../api/fetchApi";
 import * as projectApi from "../api/project.api";
 import type { Project } from "../types/project";
 
@@ -12,10 +11,9 @@ function useProjects() {
     try {
       setLoading(true);
       setError(null);
-      const json = await apiFetch<Project[]>("/projects/admin", undefined, {
-        auth: true,
-      });
-      setProjects(Array.isArray(json.data) ? json.data : []);
+      const res = await projectApi.getAdminProjects();
+      const data = res.data?.data;
+      setProjects(Array.isArray(data) ? data : []);
     } catch (err) {
       const message =
         err instanceof Error ? err.message : "Không tải được danh sách dự án";

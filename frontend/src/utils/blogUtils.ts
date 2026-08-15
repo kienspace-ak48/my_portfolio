@@ -1,10 +1,26 @@
-import type { BlogPost, ContentBlock } from "../types/blog";
+import type { BlogPost } from "../types/blog";
 
-export function getHeadings(content: ContentBlock[]) {
-  return content.filter(
-    (block): block is Extract<ContentBlock, { type: "heading" }> =>
-      block.type === "heading" && block.level === 2,
-  );
+export type BlogHeading = {
+  id: string;
+  text: string;
+};
+
+export function getHeadingsFromHtml(html: string): BlogHeading[] {
+  if (!html?.trim()) return [];
+
+  if (typeof DOMParser !== "undefined") {
+    const doc = new DOMParser().parseFromString(html, "text/html");
+    return [...doc.querySelectorAll("h2")].map((el, index) => ({
+      id: el.id || `heading-${index}`,
+      text: el.textContent?.trim() ?? "",
+    }));
+  }
+
+  const matches = [...html.matchAll(/<h2[^>]*(?:id=["']([^"']+)["'])?[^>]*>([\s\S]*?)<\/h2>/gi)];
+  return matches.map((match, index) => ({
+    id: match[1] || `heading-${index}`,
+    text: match[2].replace(/<[^>]+>/g, "").trim(),
+  }));
 }
 
 export function filterPosts(
@@ -37,7 +53,7 @@ export function filterPosts(
   }
 
   if (opts.sort === "popular") {
-    result.sort((a, b) => b.readMinutes * 10 - a.readMinutes * 10);
+    result.sort((a, b) => (b.viewCount ?? b.readMinutes) - (a.viewCount ?? a.readMinutes));
   } else {
     result.sort(
       (a, b) =>
@@ -46,6 +62,18 @@ export function filterPosts(
   }
 
   return result;
+}
+
+/** Bài ghim slider — featured + sắp theo featuredOrder rồi ngày đăng */
+export function getFeaturedPosts(posts: BlogPost[]) {
+  return posts
+    .filter((p) => p.featured)
+    .sort((a, b) => {
+      const orderA = a.featuredOrder ?? 0;
+      const orderB = b.featuredOrder ?? 0;
+      if (orderA !== orderB) return orderA - orderB;
+      return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
+    });
 }
 
 export function getPostBySlug(posts: BlogPost[], slug: string) {
@@ -85,4 +113,9 @@ export function getAllTags(posts: BlogPost[]) {
   return [...counts.entries()]
     .sort((a, b) => b[1] - a[1])
     .map(([tag, count]) => ({ tag, count }));
+}
+
+/** @deprecated Use getHeadingsFromHtml */
+export function getHeadings(_content: unknown) {
+  return [] as BlogHeading[];
 }

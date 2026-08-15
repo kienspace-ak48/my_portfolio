@@ -1,22 +1,23 @@
 import type { ProjectPayload, ProjectQuery, UpdateProjectDto } from "../types/project";
-import api from "./axios";
+import adminApi from "./axios";
+import publicApi from "./publicApi";
 
 export const getProjects = (params?: ProjectQuery) =>
-  api.get("/projects", { params });
+  publicApi.get("/projects", { params });
 
-export const getAdminProjects = () => api.get("/projects/admin");
-
-export const getProjectTags = () => api.get("/projects/tags");
+export const getProjectTags = () => publicApi.get("/projects/tags");
 
 export const getProjectBySlug = (slug: string) =>
-  api.get(`/projects/slug/${slug}`);
+  publicApi.get(`/projects/slug/${slug}`);
 
-export const getProject = (id: number) => api.get(`/projects/${id}`);
+export const getAdminProjects = () => adminApi.get("/projects/admin");
+
+export const getProject = (id: number) => adminApi.get(`/projects/${id}`);
 
 export const createProject = (data: ProjectPayload) =>
-  api.post("/projects", data);
+  adminApi.post("/projects", data);
 
 export const updateProject = (id: number, data: ProjectPayload | UpdateProjectDto) =>
-  api.put(`/projects/${id}`, data);
+  adminApi.put(`/projects/${id}`, data);
 
-export const deleteProject = (id: number) => api.delete(`/projects/${id}`);
+export const deleteProject = (id: number) => adminApi.delete(`/projects/${id}`);

@@ -1,4 +1,4 @@
-import api from "./axios";
+import adminApi from "./axios";
 import type { User } from "../types/user";
 
-export const getUsers = () => api.get<{ data: User[] }>("/users");
+export const getUsers = () => adminApi.get<{ data: User[] }>("/users");
