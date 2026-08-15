@@ -46,6 +46,7 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
       { label: "IP của tôi là gì?", to: "/tools/ip" },
       { label: "Tạo mật khẩu", to: "/tools/password" },
       { label: "Meta Tag Generator", to: "/tools/meta-tag" },
+      { label: "Tạo chữ ký email", to: "/tools/email-signature" },
     ],
   },
 ];

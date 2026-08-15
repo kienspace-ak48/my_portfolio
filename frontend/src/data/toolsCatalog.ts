@@ -1,4 +1,4 @@
-import { Binary, Globe, KeyRound, Tags } from "lucide-react";
+import { Binary, Globe, KeyRound, Mail, Tags } from "lucide-react";
 import type { ToolMeta } from "../types/tool";
 
 export const TOOLS_CATALOG: ToolMeta[] = [
@@ -31,6 +31,14 @@ export const TOOLS_CATALOG: ToolMeta[] = [
     description:
       "Sinh meta SEO, Open Graph (Facebook, LinkedIn) và Twitter/X Card kèm preview.",
     icon: Tags,
+    clientSide: true,
+  },
+  {
+    slug: "email-signature",
+    title: "Tạo chữ ký email",
+    description:
+      "Tạo chữ ký email HTML chuyên nghiệp — preview trực tiếp, copy dán vào Gmail hoặc Outlook.",
+    icon: Mail,
     clientSide: true,
   },
 ];

@@ -127,6 +127,15 @@ const DEFAULT_PAGE_TEMPLATES = [
     sortOrder: 12,
   },
   {
+    pageKey: "tools.email-signature",
+    label: "Tạo chữ ký email",
+    titleTemplate: "Tạo chữ ký email — {{siteName}}",
+    descriptionTemplate:
+      "Tạo chữ ký email HTML chuyên nghiệp cho Gmail, Outlook, Apple Mail — preview và copy nhanh.",
+    robots: "index, follow",
+    sortOrder: 13,
+  },
+  {
     pageKey: "not-found",
     label: "404",
     titleTemplate: "Không tìm thấy trang — {{siteName}}",
@@ -387,6 +396,7 @@ async function buildSitemapXml(req) {
     "/tools/ip",
     "/tools/password",
     "/tools/meta-tag",
+    "/tools/email-signature",
   ];
 
   const urls = [

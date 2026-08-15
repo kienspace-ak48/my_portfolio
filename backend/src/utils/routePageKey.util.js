@@ -13,6 +13,7 @@ function resolvePageKey(pathname) {
   if (path === "/tools/ip") return "tools.ip";
   if (path === "/tools/password") return "tools.password";
   if (path === "/tools/meta-tag") return "tools.meta-tag";
+  if (path === "/tools/email-signature") return "tools.email-signature";
   if (path === "/admin" || path === "/admin/login") return "admin";
   if (path.startsWith("/admin/")) return "not-found";
   return "not-found";

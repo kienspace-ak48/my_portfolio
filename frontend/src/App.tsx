@@ -13,6 +13,7 @@ import Base64ToolPage from "./pages/tools/Base64ToolPage";
 import IpLookupToolPage from "./pages/tools/IpLookupToolPage";
 import PasswordGeneratorToolPage from "./pages/tools/PasswordGeneratorToolPage";
 import MetaTagToolPage from "./pages/tools/MetaTagToolPage";
+import EmailSignatureToolPage from "./pages/tools/EmailSignatureToolPage";
 import AdminLayout from "./layouts/AdminLayout";
 import AdminDashboard from "./pages/admin/Dashboard";
 import ProjectsPage from "./pages/admin/ProjectsPage";
@@ -47,6 +48,7 @@ function App() {
           <Route path="/tools/ip" element={<IpLookupToolPage />} />
           <Route path="/tools/password" element={<PasswordGeneratorToolPage />} />
           <Route path="/tools/meta-tag" element={<MetaTagToolPage />} />
+          <Route path="/tools/email-signature" element={<EmailSignatureToolPage />} />
         </Route>
 
         <Route path="/admin/login" element={<LoginPage />} />
